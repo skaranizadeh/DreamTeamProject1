@@ -4,17 +4,25 @@ import java.util.List;
 public class Subcategory implements InventoryComponent {
 
     private static int subcategoryCounter = 1;
-    private String  subcategoryName;
     private String subcategoryId;
-    private List<InventoryComponent> components = new ArrayList<>();
+    private String  subcategoryName;
+    private List<InventoryComponent> products = new ArrayList<>();
     private InventoryComponent category;
 
-    // Constructor
+    // Constructors
     public Subcategory(String subcategoryName, InventoryComponent category) {
         this.subcategoryName = subcategoryName;
         this.subcategoryId = category.getId() + String.format("%03d", subcategoryCounter++);
         this.category = category;
         category.getComponents().add(this);
+    }
+
+    public Subcategory(String subcategoryId, String subcategoryName, InventoryComponent category) {
+        this.subcategoryId = subcategoryId;
+        this.subcategoryName = subcategoryName;
+        this.category = category;
+        category.getComponents().add(this);
+        subcategoryCounter++;
     }
 
     public static int getSubcategoryCounter() {
@@ -49,13 +57,32 @@ public class Subcategory implements InventoryComponent {
     @Override
     public boolean edit(String subcategoryName) {
         // change category name in all subcategories under itself
-        for (InventoryComponent inventoryComponent : this.components) {
+        for (InventoryComponent inventoryComponent : this.products) {
             inventoryComponent.setName(subcategoryName);
         }
         this.subcategoryName = subcategoryName;
         return true;
     }
 
+    @Override
+    public InventoryComponent getSubcategory() {
+        return null;
+    }
+
+    @Override
+    public String getDescription() {
+        return null;
+    }
+
+    @Override
+    public double getPurchasePrice() {
+        return 0;
+    }
+
+    @Override
+    public String getPurchaseDate() {
+        return null;
+    }
 
 
     public String getSubcategoryId() {
@@ -67,7 +94,7 @@ public class Subcategory implements InventoryComponent {
     }
 
     public void setComponents(List<InventoryComponent> components) {
-        this.components = components;
+        this.products = components;
     }
 
     public InventoryComponent getCategory() {
@@ -81,7 +108,7 @@ public class Subcategory implements InventoryComponent {
     @Override
     public void display() {
         System.out.println("Subcategory: " + subcategoryName + " (ID: " + subcategoryId + ")\n");
-        for (InventoryComponent component : components) {
+        for (InventoryComponent component : products) {
             component.display();
         }
     }
@@ -93,10 +120,10 @@ public class Subcategory implements InventoryComponent {
 
     @Override
     public List<InventoryComponent> getComponents() {
-        return components;
+        return products;
     }
 
     public void add(InventoryComponent product) {
-        components.add(product);
+        products.add(product);
      }
 }

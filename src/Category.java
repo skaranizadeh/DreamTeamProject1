@@ -3,17 +3,22 @@ import java.util.List;
 
 public class Category implements InventoryComponent{
     private static int categoryCounter = 1;
-    private String categoryName;
     private String categoryId;
+    private String categoryName;
     private List<InventoryComponent> components = new ArrayList<>();
 
-    // Constructor
+    // Constructors
     public Category(String categoryName) {
         this.categoryName = categoryName;
         this.categoryId = String.format("%03d", categoryCounter++);
 
     }
 
+    public Category(String categoryId, String categoryName) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        categoryCounter++;
+    }
 
     @Override
     public void display() {
@@ -73,6 +78,26 @@ public class Category implements InventoryComponent{
         this.categoryName = categoryName;
         return true;
 
+    }
+
+    @Override
+    public InventoryComponent getSubcategory() {
+        return null;
+    }
+
+    @Override
+    public String getDescription() {
+        return null;
+    }
+
+    @Override
+    public double getPurchasePrice() {
+        return 0;
+    }
+
+    @Override
+    public String getPurchaseDate() {
+        return null;
     }
 
 }

@@ -11,4 +11,12 @@ public interface InventoryComponent {
     void setName(String componentName);
     boolean remove(InventoryComponent component);
     boolean edit(String componentName);
+
+    InventoryComponent getSubcategory();
+
+    String getDescription();
+
+    double getPurchasePrice();
+
+    String getPurchaseDate();
 }

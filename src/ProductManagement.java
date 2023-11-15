@@ -1,63 +1,129 @@
+/*
+   Dream team project 1
+   code version 2.0 all view parts tested
+ */
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ProductManagement {
-    HashMap<String, Category> categories = new HashMap<>();
-    HashMap<String, Subcategory> subcategories = new HashMap<>();
-    HashMap<String, Product> products = new HashMap<>();
+    private HashMap<String, Category> categories = new HashMap<>();
+    private HashMap<String, Subcategory> subcategories = new HashMap<>();
+    private HashMap<String, Product> products = new HashMap<>();
 
-    private void initializeDate() {
-        String csvFile = "your_file.csv";
-        String line;
-        String csvSplitBy = ",";
-
+    // Method to read data from the category CSV file
+    private void readCategoryData(String csvFile, String csvSplitBy) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            br.readLine();// skip the first line
+            br.readLine(); // skip the first line
 
-            while ((line = br.readLine()) != null){
+            String line;
+            while ((line = br.readLine()) != null) {
                 String[] data = line.split(csvSplitBy);
-
-                // Extracting data from CSV file
-                String categoryID = data[0];
+                String categoryId = data[0];
                 String categoryName = data[1];
-                String subcategoryID = data[2];
-                String subcategoryName = data[3];
-                String productID = data[4];
-                String productName = data[5];
-                String description = data[6];
-                double price = Double.parseDouble(data[7]);
-                String purchaseDate = data[8];
 
-                // Create Category, Subcategory, and Product instances and put them in the respective maps
+                // Create Category instance and put it in the respective HashMap
                 Category category;
-                Subcategory subcategory;
-                Product product;
 
-                if (!categories.containsKey(categoryID)) {
-                    category = new Category(categoryID, categoryName);
-                    categories.put(categoryID, category);
-                } else {
-                    category = categories.get(categoryID);
+                // Check to make sure the category does not exist in the HashMap, then add it
+                if (!categories.containsKey(categoryId)) {
+                    category = new Category(categoryId, categoryName);
+                    categories.put(categoryId, category);
                 }
-
-                if (!subcategories.containsKey(subcategoryID)) {
-                    subcategory = new Subcategory(subcategoryID, subcategoryName, category);
-                    subcategories.put(subcategoryID, subcategory);
-                } else {
-                    subcategory = subcategories.get(subcategoryID);
-                }
-
-
-                product = new Product(productID, productName, description, price, purchaseDate, category, subcategory);
-                products.put(productID, product);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public HashMap<String, Category> getCategories() {
+        return categories;
+    }
+
+    // Method to read data from the subcategory CSV file
+    private void readSubcategoryData(String csvFile, String csvSplitBy) {
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            br.readLine(); // skip the first line
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(csvSplitBy);
+                String categoryId = data[0].substring(0, 3);
+                String subcategoryId = data[0];
+                String subcategoryName = data[1];
+
+                // Get the category object above the subcategory from the category HashMap
+                InventoryComponent category = categories.get(categoryId);
+
+                // Create Subcategory instance
+                Subcategory subcategory;
+
+                // Check to make sure the subcategory does not exist in the HashMap, then add it
+                if (!subcategories.containsKey(subcategoryId)) {
+                    subcategory = new Subcategory(subcategoryId, subcategoryName, category);
+                    subcategories.put(subcategoryId, subcategory);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to read data from the product CSV file
+    private void readProductData(String csvFile, String csvSplitBy) {
+        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+            br.readLine(); // skip the first line
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(csvSplitBy);
+                String subcategoryId = data[0].substring(0, 6);
+                String productId = data[0];
+                String productName = data[1];
+                String description = data[2];
+                double purchasePrice = Double.parseDouble(data[3]);
+                String purchaseDate = data[4];
+
+                // Get the subcategory object to which this product belongs from the subcategory HashMap
+                InventoryComponent subcategory = subcategories.get(subcategoryId);
+
+
+                // Create Product instance
+                Product product;
+
+                 //Check to make sure the product does not exist in the HashMap, then add it
+                if (!products.containsKey(productId)) {
+                    product = new Product(productId, productName, description, purchasePrice, purchaseDate, subcategory);
+                    products.put(productId, product);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to initialize data from CSV files
+    private void initializeData() {
+        String categoryFile = "categoryData.csv";
+        String subcategoryFile = "subcategoryData.csv";
+        String productFile = "productData.csv";
+        String csvSplitBy = ",";
+
+        // Read data from the category CSV file
+        readCategoryData(categoryFile, csvSplitBy);
+
+        // Read data from the subcategory CSV file
+        readSubcategoryData(subcategoryFile, csvSplitBy);
+
+        // Read data from the product CSV file
+        readProductData(productFile, csvSplitBy);
+    }
+
+
+
     private void menu() {
         Scanner sc = new Scanner(System.in);
         String input;
@@ -68,11 +134,11 @@ public class ProductManagement {
 
         while (!exit) {
             if (isCategoriesMenu) {
-                System.out.println("*********** List of product Categories **********");
+                System.out.println("*********** List of Product Categories **********");
                 System.out.println("Select a number from the list to see subcategories");
                 int i = 1;
-                for (Category category : categories.values()) {
-                    System.out.println(i++ + "- " + category.getCategoryName());
+                for (InventoryComponent category : categories.values()) {
+                    System.out.println(i++ + "- " + category.getName());
                 }
                 System.out.print("Enter your category number (q to quit): ");
                 input = sc.nextLine();
@@ -94,12 +160,12 @@ public class ProductManagement {
 
             if (!isCategoriesMenu) {
                 if (selectedCategory != null) {
-                    System.out.println("*********** List of subcategories **********");
+                    System.out.println("*********** List of Subcategories **********");
                     System.out.println("Select a number from the list to see the items");
                     int j = 1;
-                    for (Subcategory subcategory : subcategories.values()) {
+                    for (InventoryComponent subcategory : subcategories.values()) {
                         if (subcategory.getCategory().equals(selectedCategory)) {
-                            System.out.println(j++ + "- " + subcategory.getSubcategoryName());
+                            System.out.println(j++ + "- " + subcategory.getName());
                         }
                     }
                     System.out.print("Enter your subcategory number (p to go back, q to quit): ");
@@ -114,45 +180,50 @@ public class ProductManagement {
                         int subcategoryIndex = Integer.parseInt(input) - 1;
                         int currentSubcategory = 0;
 
-                        for (Subcategory subcategory : subcategories.values()) {
+                        for (InventoryComponent subcategory : subcategories.values()) {
                             if (subcategory.getCategory().equals(selectedCategory)) {
                                 if (currentSubcategory == subcategoryIndex) {
-                                    selectedSubcategory = subcategory;
-                                    System.out.println("*********** List of items **********");
-                                    int k = 1;
-                                    for (Product product : products.values()) {
-                                        if (product.getSubcategory().equals(selectedSubcategory)) {
-                                            System.out.println(k++ + "- " + product.getProductName());
-                                        }
-                                    }
-                                    System.out.print("Enter your item number (p to go back, q to quit): ");
-                                    input = sc.nextLine();
+                                    selectedSubcategory = (Subcategory) subcategory;
 
-                                    if (input.equalsIgnoreCase("q")) {
-                                        exit = true;
-                                        break;
-                                    } else if (input.equalsIgnoreCase("p")) {
-                                        isCategoriesMenu = false;
-                                    } else {
-                                        int productIndex = Integer.parseInt(input) - 1;
-                                        int currentProduct = 0;
-
-                                        for (Product product : products.values()) {
+                                    while (true) {
+                                        System.out.println("*********** List of Products **********");
+                                        int k = 1;
+                                        for (InventoryComponent product : products.values()) {
                                             if (product.getSubcategory().equals(selectedSubcategory)) {
-                                                if (currentProduct == productIndex) {
+                                                System.out.println(k++ + "- " + product.getName());
+                                            }
+                                        }
+                                        System.out.print("Enter your item number (p to go back, q to quit): ");
+                                        input = sc.nextLine();
+
+                                        if (input.equalsIgnoreCase("q")) {
+                                            exit = true;
+                                            break;
+                                        } else if (input.equalsIgnoreCase("p")) {
+                                            break;
+                                        } else {
+                                            int productIndex = Integer.parseInt(input) - 1;
+                                            int currentProduct = 0;
+
+                                            for (InventoryComponent product : products.values()) {
+                                                if (product.getSubcategory().equals(selectedSubcategory)) {
+                                                    if (currentProduct == productIndex) {
+                                                        currentProduct++;
+                                                        System.out.println("You've selected: " + product.getName());
+                                                        System.out.println("Product Info:");
+                                                        System.out.println("Description: " + product.getDescription());
+                                                        System.out.println("Price: " + product.getPurchasePrice());
+                                                        System.out.println("Purchase Date: " + product.getPurchaseDate());
+                                                        break;
+                                                    }
                                                     currentProduct++;
-                                                    System.out.println("You've selected: " + product.getProductName());
-                                                    System.out.println("Product Info:");
-                                                    System.out.println("Description: " + product.getDescription());
-                                                    System.out.println("Price: " + product.getPurchasePrice());
-                                                    System.out.println("Purchase Date: " + product.getPurchaseDate());
-                                                    isCategoriesMenu = false;
-                                                    break;
                                                 }
-                                                currentProduct++;
                                             }
                                         }
                                     }
+
+                                    isCategoriesMenu = false;
+                                    break;
                                 }
                                 currentSubcategory++;
                             }
@@ -162,18 +233,22 @@ public class ProductManagement {
             }
         }
 
-        System.out.println("Exiting the Product Manager. Goodbye!");
+        System.out.println("Exiting the Product Management System. Goodbye!");
         sc.close();
     }
+
 
 
 
     public static void main(String[] args)  {
         //System.out.println("Current Directory: " + System.getProperty("user.dir"));
         ProductManagement productManagement = new ProductManagement();
-        productManagement.initializeDate();
+        productManagement.initializeData();
 
         productManagement.menu();
 
     }
+
+
+
 }
