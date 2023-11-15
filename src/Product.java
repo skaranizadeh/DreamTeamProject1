@@ -1,31 +1,50 @@
-public class Product {
+import java.util.List;
+
+public class Product implements InventoryComponent{
+
+    private static int productCounter = 1;
     private String productId;
     private String productName;
     private String description;
     private double purchasePrice;
     private String purchaseDate;
-    private Category category;
-    private Subcategory subcategory;
+    private InventoryComponent subcategory;
 
-    public Product(String productId, String productName, String description, double purchasePrice, String purchaseDate) {
-        this.productId = productId;
+    // Constructor
+    public Product(String productName, InventoryComponent subcategory) {
         this.productName = productName;
-        this.description = description;
-        this.purchasePrice = purchasePrice;
-        this.purchaseDate = purchaseDate;
+        this.productId = subcategory.getId() + String.format("%05d", productCounter++);
+        this.subcategory = subcategory;
+        subcategory.getComponents().add(this);
+
     }
 
-    public Product(String productId, String productName, String description, double purchasePrice, String purchaseDate, Category category, Subcategory subcategory) {
+    // Constructor
+    public Product(String productId, String productName, String description, double purchasePrice, String purchaseDate, InventoryComponent subcategory) {
         this.productId = productId;
         this.productName = productName;
         this.description = description;
         this.purchasePrice = purchasePrice;
         this.purchaseDate = purchaseDate;
-        this.category = category;
+        this.productId = subcategory.getId() + String.format("%05d", productCounter++);
+        subcategory.getComponents().add(this);
+    }
+
+    public InventoryComponent getSubcategory() {
+        return subcategory;
+    }
+
+    public void setSubcategory(InventoryComponent subcategory) {
         this.subcategory = subcategory;
     }
 
-    // Getters and Setters
+    public static int getProductCounter() {
+        return productCounter;
+    }
+
+    public static void setProductCounter(int productCounter) {
+        Product.productCounter = productCounter;
+    }
 
     public String getProductId() {
         return productId;
@@ -35,13 +54,29 @@ public class Product {
         this.productId = productId;
     }
 
-    public String getProductName() {
+    public String getName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
+    @Override
+    public void setName(String productName) {
         this.productName = productName;
     }
+
+    @Override
+    public boolean remove(InventoryComponent product) {
+        this.subcategory.getComponents().remove(product);
+        product = null;
+        return true;
+    }
+
+    @Override
+    public boolean edit(String productName) {
+        this.productName = productName;
+        return true;
+
+    }
+
 
     public String getDescription() {
         return description;
@@ -67,20 +102,31 @@ public class Product {
         this.purchaseDate = purchaseDate;
     }
 
-    public Category getCategory() {
-        return category;
+    @Override
+    public void display() {
+        System.out.println("********* Product Details *************");
+        System.out.println("Category: "+ subcategory.getCategory().getName() +"\nSubcategory: " + subcategory.getName() + "\nProduct: " + productName + " (ID: " + productId + ")"
+        +"\nDescription: " + description + "\nPurchasePrice: " + purchasePrice
+        +"\nPurchaseDate: " + purchaseDate);
+        System.out.println();
+
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    @Override
+    public String getId() {
+        return productId;
     }
 
-    public Subcategory getSubcategory() {
-        return subcategory;
+    @Override
+    public List<InventoryComponent> getComponents() {
+
+        // Not applicable for product
+        throw new UnsupportedOperationException("Cannot edit a Product directly.");
     }
 
-    public void setSubcategory(Subcategory subcategory) {
-        this.subcategory = subcategory;
+    @Override
+    public InventoryComponent getCategory() {
+        // Not applicable for product
+        throw new UnsupportedOperationException("Cannot edit a Product directly.");
     }
-
 }
