@@ -72,7 +72,7 @@ public class ProductManagement {
                 System.out.println("Select a number from the list to see subcategories");
                 int i = 1;
                 for (Category category : categories.values()) {
-                    System.out.println(i++ + "- " + category.getCategoryName());
+                    System.out.println(i++ + "- " + category.getName());
                 }
                 System.out.print("Enter your category number (q to quit): ");
                 input = sc.nextLine();
@@ -99,7 +99,7 @@ public class ProductManagement {
                     int j = 1;
                     for (Subcategory subcategory : subcategories.values()) {
                         if (subcategory.getCategory().equals(selectedCategory)) {
-                            System.out.println(j++ + "- " + subcategory.getSubcategoryName());
+                            System.out.println(j++ + "- " + subcategory.getName());
                         }
                     }
                     System.out.print("Enter your subcategory number (p to go back, q to quit): ");
@@ -122,7 +122,7 @@ public class ProductManagement {
                                     int k = 1;
                                     for (Product product : products.values()) {
                                         if (product.getSubcategory().equals(selectedSubcategory)) {
-                                            System.out.println(k++ + "- " + product.getProductName());
+                                            System.out.println(k++ + "- " + product.getName());
                                         }
                                     }
                                     System.out.print("Enter your item number (p to go back, q to quit): ");
@@ -141,7 +141,7 @@ public class ProductManagement {
                                             if (product.getSubcategory().equals(selectedSubcategory)) {
                                                 if (currentProduct == productIndex) {
                                                     currentProduct++;
-                                                    System.out.println("You've selected: " + product.getProductName());
+                                                    System.out.println("You've selected: " + product.getName());
                                                     System.out.println("Product Info:");
                                                     System.out.println("Description: " + product.getDescription());
                                                     System.out.println("Price: " + product.getPurchasePrice());

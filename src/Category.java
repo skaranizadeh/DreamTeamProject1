@@ -13,6 +13,11 @@ public class Category implements InventoryComponent{
         this.categoryId = String.format("%03d", categoryCounter++);
 
     }
+    // Constructor
+    public Category(String categoryId, String categoryName) {
+        this.categoryName = categoryName;
+        this.categoryId = categoryId;
+    }
 
 
     @Override

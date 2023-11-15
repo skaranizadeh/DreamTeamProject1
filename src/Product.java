@@ -29,6 +29,17 @@ public class Product implements InventoryComponent{
         this.productId = subcategory.getId() + String.format("%05d", productCounter++);
         subcategory.getComponents().add(this);
     }
+    // Constructor
+    public Product(String productId, String productName, String description, double purchasePrice, String purchaseDate, InventoryComponent category, InventoryComponent subcategory) {
+        this.productId = productId;
+        this.productName = productName;
+        this.description = description;
+        this.purchasePrice = purchasePrice;
+        this.purchaseDate = purchaseDate;
+        this.productId = subcategory.getId() + String.format("%05d", productCounter++);
+        category.getComponents().add((this));
+        subcategory.getComponents().add(this);
+    }
 
     public InventoryComponent getSubcategory() {
         return subcategory;

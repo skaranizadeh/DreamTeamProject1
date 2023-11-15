@@ -16,6 +16,13 @@ public class Subcategory implements InventoryComponent {
         this.category = category;
         category.getComponents().add(this);
     }
+    // Constructor
+    public Subcategory(String subcategoryName, String subcategoryId, InventoryComponent category) {
+        this.subcategoryName = subcategoryName;
+        this.subcategoryId = subcategoryId;
+        this.category = category;
+        category.getComponents().add(this);
+    }
 
     public static int getSubcategoryCounter() {
         return subcategoryCounter;
