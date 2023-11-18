@@ -134,6 +134,7 @@ public class ProductManagement {
 
         while (!exit) {
             if (isCategoriesMenu) {
+                // Display categories menu
                 System.out.println("*********** List of Product Categories **********");
                 System.out.println("Select a number from the list to see subcategories");
                 int i = 1;
@@ -144,21 +145,31 @@ public class ProductManagement {
                 input = sc.nextLine();
 
                 if (input.equalsIgnoreCase("q")) {
+                    // User wants to quit
                     exit = true;
                     break;
                 }
 
-                int categoryIndex = Integer.parseInt(input) - 1;
+                try {
+                    // Attempt to parse the user input as an integer
+                    int categoryIndex = Integer.parseInt(input) - 1;
 
-                if (categoryIndex >= 0 && categoryIndex < categories.size()) {
-                    selectedCategory = (Category) categories.values().toArray()[categoryIndex];
-                    isCategoriesMenu = false;
-                } else {
-                    System.out.println("Invalid input. Please select a number from the list.");
+                    if (categoryIndex >= 0 && categoryIndex < categories.size()) {
+                        // Valid category selection
+                        selectedCategory = (Category) categories.values().toArray()[categoryIndex];
+                        isCategoriesMenu = false;
+                    } else {
+                        // Invalid category selection
+                        System.out.println("Invalid input. Please select a number from the list.");
+                    }
+                } catch (NumberFormatException e) {
+                    // User entered non-numeric input
+                    System.out.println("Invalid input. Please enter a valid number or 'q' to quit.");
                 }
             }
 
             if (!isCategoriesMenu) {
+                // Display subcategories menu
                 if (selectedCategory != null) {
                     System.out.println("*********** List of Subcategories **********");
                     System.out.println("Select a number from the list to see the items");
@@ -172,61 +183,80 @@ public class ProductManagement {
                     input = sc.nextLine();
 
                     if (input.equalsIgnoreCase("q")) {
+                        // User wants to quit
                         exit = true;
                         break;
                     } else if (input.equalsIgnoreCase("p")) {
+                        // User wants to go back to categories menu
                         isCategoriesMenu = true;
                     } else {
-                        int subcategoryIndex = Integer.parseInt(input) - 1;
-                        int currentSubcategory = 0;
+                        try {
+                            // Attempt to parse the user input as an integer
+                            int subcategoryIndex = Integer.parseInt(input) - 1;
+                            int currentSubcategory = 0;
 
-                        for (InventoryComponent subcategory : subcategories.values()) {
-                            if (subcategory.getCategory().equals(selectedCategory)) {
-                                if (currentSubcategory == subcategoryIndex) {
-                                    selectedSubcategory = (Subcategory) subcategory;
+                            for (InventoryComponent subcategory : subcategories.values()) {
+                                if (subcategory.getCategory().equals(selectedCategory)) {
+                                    if (currentSubcategory == subcategoryIndex) {
+                                        // Valid subcategory selection
+                                        selectedSubcategory = (Subcategory) subcategory;
 
-                                    while (true) {
-                                        System.out.println("*********** List of Products **********");
-                                        int k = 1;
-                                        for (InventoryComponent product : products.values()) {
-                                            if (product.getSubcategory().equals(selectedSubcategory)) {
-                                                System.out.println(k++ + "- " + product.getName());
-                                            }
-                                        }
-                                        System.out.print("Enter your item number (p to go back, q to quit): ");
-                                        input = sc.nextLine();
-
-                                        if (input.equalsIgnoreCase("q")) {
-                                            exit = true;
-                                            break;
-                                        } else if (input.equalsIgnoreCase("p")) {
-                                            break;
-                                        } else {
-                                            int productIndex = Integer.parseInt(input) - 1;
-                                            int currentProduct = 0;
-
+                                        // Display products menu
+                                        while (true) {
+                                            System.out.println("*********** List of Products **********");
+                                            int k = 1;
                                             for (InventoryComponent product : products.values()) {
                                                 if (product.getSubcategory().equals(selectedSubcategory)) {
-                                                    if (currentProduct == productIndex) {
-                                                        currentProduct++;
-                                                        System.out.println("You've selected: " + product.getName());
-                                                        System.out.println("Product Info:");
-                                                        System.out.println("Description: " + product.getDescription());
-                                                        System.out.println("Price: " + product.getPurchasePrice());
-                                                        System.out.println("Purchase Date: " + product.getPurchaseDate());
-                                                        break;
+                                                    System.out.println(k++ + "- " + product.getName());
+                                                }
+                                            }
+                                            System.out.print("Enter your item number (p to go back, q to quit): ");
+                                            input = sc.nextLine();
+
+                                            if (input.equalsIgnoreCase("q")) {
+                                                // User wants to quit
+                                                exit = true;
+                                                break;
+                                            } else if (input.equalsIgnoreCase("p")) {
+                                                // User wants to go back to subcategories menu
+                                                break;
+                                            } else {
+                                                try {
+                                                    // Attempt to parse the user input as an integer
+                                                    int productIndex = Integer.parseInt(input) - 1;
+                                                    int currentProduct = 0;
+
+                                                    for (InventoryComponent product : products.values()) {
+                                                        if (product.getSubcategory().equals(selectedSubcategory)) {
+                                                            if (currentProduct == productIndex) {
+                                                                // Valid product selection
+                                                                currentProduct++;
+                                                                System.out.println("You've selected: " + product.getName());
+                                                                System.out.println("Product Info:");
+                                                                System.out.println("Description: " + product.getDescription());
+                                                                System.out.println("Price: " + product.getPurchasePrice());
+                                                                System.out.println("Purchase Date: " + product.getPurchaseDate());
+                                                                break;
+                                                            }
+                                                            currentProduct++;
+                                                        }
                                                     }
-                                                    currentProduct++;
+                                                } catch (NumberFormatException e) {
+                                                    // User entered non-numeric input for product selection
+                                                    System.out.println("Invalid input. Please enter a valid number, 'p' to go back, or 'q' to quit.");
                                                 }
                                             }
                                         }
-                                    }
 
-                                    isCategoriesMenu = false;
-                                    break;
+                                        isCategoriesMenu = false;
+                                        break;
+                                    }
+                                    currentSubcategory++;
                                 }
-                                currentSubcategory++;
                             }
+                        } catch (NumberFormatException e) {
+                            // User entered non-numeric input for subcategory selection
+                            System.out.println("Invalid input. Please enter a valid number, 'p' to go back, or 'q' to quit.");
                         }
                     }
                 }
@@ -236,6 +266,7 @@ public class ProductManagement {
         System.out.println("Exiting the Product Management System. Goodbye!");
         sc.close();
     }
+
 
 
 
