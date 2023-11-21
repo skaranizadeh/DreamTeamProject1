@@ -160,7 +160,8 @@ public class ProductManagement {
 
                     if (input.equalsIgnoreCase("q")) {
                         // User wants to quit
-                        exit = true;
+                    	
+                    	exit = true;
                         break;
                     }
 
@@ -198,6 +199,7 @@ public class ProductManagement {
 
                         if (input.equalsIgnoreCase("q")) {
                             // User wants to quit
+                        	
                             exit = true;
                             break;
                         } else if (input.equalsIgnoreCase("p")) {
@@ -246,7 +248,7 @@ public class ProductManagement {
                                                                     // Valid product selection
                                                                     currentProduct++;
                                                                     System.out.println("You've selected: " + product.getName());
-                                                                    System.out.println("Product Info:");
+                                                                    System.out.println("Product ID: " + product.getId());
                                                                     System.out.println("Description: " + product.getDescription());
                                                                     System.out.println("Price: " + product.getPurchasePrice());
                                                                     System.out.println("Purchase Date: " + product.getPurchaseDate());
