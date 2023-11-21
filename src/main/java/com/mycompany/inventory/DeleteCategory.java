@@ -14,7 +14,7 @@ import javax.swing.text.*;
  */
 public class DeleteCategory extends javax.swing.JFrame {
     
-    private String catType = "subcategory";
+    private String catType = "Subcategory";
     private String catName = "Shoes";
     /**
      * Creates new form DeleteCategory
@@ -48,7 +48,6 @@ public class DeleteCategory extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setIconImages(null);
         setLocation(new java.awt.Point(0, 0));
-        setMaximumSize(new java.awt.Dimension(640, 480));
         setUndecorated(true);
         setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
