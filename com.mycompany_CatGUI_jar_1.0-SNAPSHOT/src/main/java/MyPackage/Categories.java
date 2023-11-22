@@ -7,6 +7,7 @@ package MyPackage;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.CardLayout;
 import javax.swing.UnsupportedLookAndFeelException;
+import PopUps.DeleteCategory;
 
 /**
  *
@@ -20,6 +21,10 @@ public class Categories extends javax.swing.JFrame {
     public Categories() {
         initComponents();
     }
+        
+
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,6 +35,7 @@ public class Categories extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         CatMenu = new javax.swing.JScrollPane();
         CatList = new javax.swing.JList<>();
         SubMenu = new javax.swing.JLayeredPane();
@@ -58,8 +64,9 @@ public class Categories extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setSize(new java.awt.Dimension(800, 600));
+
+        jDesktopPane1.setPreferredSize(new java.awt.Dimension(800, 600));
 
         CatMenu.setBorder(null);
 
@@ -231,60 +238,90 @@ public class Categories extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(AddCat)
-                        .addGap(26, 26, 26)
-                        .addComponent(DeleteCat))
-                    .addComponent(CatMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(SubMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(AddSub)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(DeleteSub)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton5)))
-                .addGap(102, 102, 102))
+        jDesktopPane1.setLayer(CatMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(SubMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(AddCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(DeleteCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(AddSub, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(DeleteSub, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton3))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(AddCat)
+                                .addGap(26, 26, 26)
+                                .addComponent(DeleteCat))
+                            .addComponent(CatMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 690, Short.MAX_VALUE)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(SubMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                    .addComponent(AddSub)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(DeleteSub)))
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton5)))
+                        .addGap(102, 102, 102)))
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(SubMenu)
-                    .addComponent(CatMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                    .addComponent(CatMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddCat)
                     .addComponent(DeleteCat)
                     .addComponent(AddSub)
                     .addComponent(DeleteSub))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton4)
                         .addComponent(jButton5))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
                         .addComponent(jButton3)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1261, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 175, Short.MAX_VALUE))
         );
 
         pack();
@@ -298,6 +335,7 @@ public class Categories extends javax.swing.JFrame {
 
     private void DeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCatActionPerformed
         // TODO add your handling code here:
+        new DeleteCategory().setVisible(true);
     }//GEN-LAST:event_DeleteCatActionPerformed
 
     private void DeleteSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteSubActionPerformed
@@ -392,6 +430,7 @@ public class Categories extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
