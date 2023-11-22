@@ -12,15 +12,12 @@ import javax.swing.JOptionPane;
  * @author yahir
  */
 public class ProductGUI extends javax.swing.JFrame {
-    DefaultListMode1 listModel = new DefaultListModel();
+    
     /**
      * Creates new form ProductGUI
      */
     public ProductGUI() {
         initComponents();
-        JList1.setModel(ListModel);
-        buttonAdd.setEnabled(false);
-        buttonDelete.setEnabled(false);
         
         
     }
@@ -140,26 +137,11 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        if(JTextField1.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"field must not be empty");
-            else
-            {
-                    listModel.addElement(jTextField1.getText().trim());
-                    JOptionPane.showMessageDialog(null,"Product Added");
-                    JTextField1.setText(null)
-                            clearall();
-                    }
+        
             
-        }
+   
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    private void JListMouseClicked(java.awt.event.MouseEvent evt){
-        if(JList1.getSelectedIndex()>-1){
-            buttonAdd.setEnabled(true);
-            buttonDelete.setEnabled(True);
-        }
-    }
-    
     
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
