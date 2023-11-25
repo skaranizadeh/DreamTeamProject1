@@ -122,6 +122,7 @@ public class PopupBase extends javax.swing.JFrame {
         });
 
         jLayeredPane1.setBackground(new java.awt.Color(76, 76, 76));
+        jLayeredPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(50, 50, 50), 1, true));
         jLayeredPane1.setFocusable(false);
         jLayeredPane1.setOpaque(true);
 
