@@ -4,26 +4,26 @@
  */
 package frontend;
 
-import com.formdev.flatlaf.*;
-import javax.swing.*;
-import javax.swing.text.*;
+import com.formdev.flatlaf.FlatDarkLaf;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author mrswi
+ * @author lemon
  */
-public class AddCategories extends javax.swing.JFrame {
-    
-    private String catType = "Category";
+public class ErrorPopup extends javax.swing.JFrame {
+
+    String errorMessage = "Placeholder error message.";
     /**
-     * Creates new form AddCategories
+     * Creates new form ErrorPopup
      */
-    public AddCategories() {
+    public ErrorPopup() {
         initComponents();
     }
-    public AddCategories(String type) {
-        catType = type;
+    
+    public ErrorPopup(String error) {
         initComponents();
+        errorMessage = error;
     }
 
     /**
@@ -38,34 +38,17 @@ public class AddCategories extends javax.swing.JFrame {
         internalFrameAddCats = new javax.swing.JInternalFrame();
         textFieldAddCatsHeader = new javax.swing.JTextField();
         buttonAddCat = new javax.swing.JButton();
-        buttonCancelAddCat = new javax.swing.JButton();
         formattedTextFieldCatName = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
-        setIconImages(null);
-        setLocation(new java.awt.Point(0, 0));
         setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(480, 300));
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         internalFrameAddCats.setBorder(null);
         internalFrameAddCats.setClosable(true);
-        internalFrameAddCats.setTitle("Add " + catType);
+        internalFrameAddCats.setTitle("Error");
         internalFrameAddCats.setFrameIcon(null);
         internalFrameAddCats.setMaximumSize(new java.awt.Dimension(480, 300));
         internalFrameAddCats.setOpaque(true);
@@ -92,7 +75,7 @@ public class AddCategories extends javax.swing.JFrame {
         textFieldAddCatsHeader.setEditable(false);
         textFieldAddCatsHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         textFieldAddCatsHeader.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textFieldAddCatsHeader.setText("Add " + catType);
+        textFieldAddCatsHeader.setText("Error:");
         textFieldAddCatsHeader.setBorder(null);
         textFieldAddCatsHeader.setFocusable(false);
         textFieldAddCatsHeader.setName("popupTitle"); // NOI18N
@@ -102,10 +85,9 @@ public class AddCategories extends javax.swing.JFrame {
             }
         });
 
-        buttonAddCat.setBackground(new java.awt.Color(78, 110, 82));
+        buttonAddCat.setBackground(new java.awt.Color(78, 80, 82));
         buttonAddCat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        buttonAddCat.setText("Add");
-        buttonAddCat.setToolTipText("Add a new " + catType);
+        buttonAddCat.setText("Okay");
         buttonAddCat.setBorderPainted(false);
         buttonAddCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonAddCat.setFocusPainted(false);
@@ -117,36 +99,18 @@ public class AddCategories extends javax.swing.JFrame {
             }
         });
 
-        buttonCancelAddCat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        buttonCancelAddCat.setText("Cancel");
-        buttonCancelAddCat.setToolTipText("Cancel the addition of a new " + catType);
-        buttonCancelAddCat.setBorderPainted(false);
-        buttonCancelAddCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonCancelAddCat.setFocusPainted(false);
-        buttonCancelAddCat.setFocusable(false);
-        buttonCancelAddCat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonCancelAddCat.setPreferredSize(new java.awt.Dimension(85, 32));
-        buttonCancelAddCat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonCancelAddCatMouseClicked(evt);
-            }
-        });
-        buttonCancelAddCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCancelAddCatActionPerformed(evt);
-            }
-        });
-
+        formattedTextFieldCatName.setEditable(false);
         formattedTextFieldCatName.setBorder(null);
         formattedTextFieldCatName.setForeground(new java.awt.Color(190, 120, 120));
         formattedTextFieldCatName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        formattedTextFieldCatName.setText(catType + " Name");
+        formattedTextFieldCatName.setText(errorMessage);
         formattedTextFieldCatName.setToolTipText("Insert name here");
         formattedTextFieldCatName.setActionCommand("<Not Set>");
         formattedTextFieldCatName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         formattedTextFieldCatName.setDisabledTextColor(new java.awt.Color(120, 120, 120));
         formattedTextFieldCatName.setFocusLostBehavior(javax.swing.JFormattedTextField.REVERT);
         formattedTextFieldCatName.setFocusTraversalPolicyProvider(true);
+        formattedTextFieldCatName.setFocusable(false);
         formattedTextFieldCatName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         formattedTextFieldCatName.setMargin(new java.awt.Insets(6, 6, 6, 6));
         formattedTextFieldCatName.setName(""); // NOI18N
@@ -165,43 +129,51 @@ public class AddCategories extends javax.swing.JFrame {
             internalFrameAddCatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(textFieldAddCatsHeader, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(buttonAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(buttonCancelAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, internalFrameAddCatsLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(formattedTextFieldCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addGroup(internalFrameAddCatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(buttonAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(formattedTextFieldCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         internalFrameAddCatsLayout.setVerticalGroup(
             internalFrameAddCatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addComponent(textFieldAddCatsHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(formattedTextFieldCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(internalFrameAddCatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonCancelAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(formattedTextFieldCatName, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
-        getContentPane().add(internalFrameAddCats);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(internalFrameAddCats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(internalFrameAddCats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        // TODO add your handling code here:;
-    }//GEN-LAST:event_formWindowLostFocus
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
 
     private void textFieldAddCatsHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAddCatsHeaderActionPerformed
         // TODO add your handling code here:
@@ -209,27 +181,19 @@ public class AddCategories extends javax.swing.JFrame {
 
     private void buttonAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCatActionPerformed
         // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_buttonAddCatActionPerformed
-
-    private void buttonCancelAddCatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelAddCatMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_buttonCancelAddCatMouseClicked
-
-    private void buttonCancelAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelAddCatActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonCancelAddCatActionPerformed
-
-    private void internalFrameAddCatsInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_internalFrameAddCatsInternalFrameClosed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_internalFrameAddCatsInternalFrameClosed
 
     private void formattedTextFieldCatNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formattedTextFieldCatNameFocusLost
         // TODO add your handling code here:
         // if not empty, and focus lost, replace with default text. otherwise,
         // it has user entered text, so dont delete it and keep the text there. (do nothing)
     }//GEN-LAST:event_formattedTextFieldCatNameFocusLost
+
+    private void internalFrameAddCatsInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_internalFrameAddCatsInternalFrameClosed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_internalFrameAddCatsInternalFrameClosed
 
     /**
      * @param args the command line arguments
@@ -240,18 +204,16 @@ public class AddCategories extends javax.swing.JFrame {
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new AddCategories().setVisible(true);
+                    new ErrorPopup().setVisible(true);
                 }
             });
         } catch (UnsupportedLookAndFeelException ex) {
-             java.util.logging.Logger.getLogger(AddCategories.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ErrorPopup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddCat;
-    private javax.swing.JButton buttonCancelAddCat;
     private javax.swing.JFormattedTextField formattedTextFieldCatName;
     private javax.swing.JInternalFrame internalFrameAddCats;
     private javax.swing.JTextField textFieldAddCatsHeader;

@@ -15,6 +15,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class ProductGUI extends javax.swing.JFrame {
     
+    public static boolean popupOpen = false;
     /**
      * Creates new form ProductGUI
      */
@@ -33,6 +34,7 @@ public class ProductGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         labelDetailsTitle = new javax.swing.JLabel();
         buttonAdd = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
@@ -50,12 +52,16 @@ public class ProductGUI extends javax.swing.JFrame {
         labelDescriptionTitle = new javax.swing.JLabel();
         scrollPaneDescription = new javax.swing.JScrollPane();
         textAreaDescription = new javax.swing.JTextArea();
-        textFieldProductsPageTitle = new javax.swing.JTextField();
         labelItemsTitle = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        textFieldProductsPageTitle = new javax.swing.JTextField();
+        buttonEdit1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setLocationByPlatform(true);
         setResizable(false);
+        setSize(new java.awt.Dimension(800, 600));
 
         labelDetailsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         labelDetailsTitle.setText("Details");
@@ -63,7 +69,9 @@ public class ProductGUI extends javax.swing.JFrame {
         buttonAdd.setBackground(new java.awt.Color(78, 110, 82));
         buttonAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonAdd.setText("Add");
+        buttonAdd.setToolTipText("Add an product");
         buttonAdd.setBorderPainted(false);
+        buttonAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonAdd.setFocusPainted(false);
         buttonAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonAdd.setMaximumSize(new java.awt.Dimension(98, 32));
@@ -79,7 +87,9 @@ public class ProductGUI extends javax.swing.JFrame {
         buttonDelete.setBackground(new java.awt.Color(150, 80, 82));
         buttonDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonDelete.setText("Delete");
+        buttonDelete.setToolTipText("Delete the selected product");
         buttonDelete.setBorderPainted(false);
+        buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonDelete.setFocusPainted(false);
         buttonDelete.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonDelete.setMaximumSize(new java.awt.Dimension(98, 32));
@@ -94,7 +104,9 @@ public class ProductGUI extends javax.swing.JFrame {
 
         buttonEdit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonEdit.setText("Edit");
+        buttonEdit.setToolTipText("Edit the product details");
         buttonEdit.setBorderPainted(false);
+        buttonEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonEdit.setFocusPainted(false);
         buttonEdit.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonEdit.setMaximumSize(new java.awt.Dimension(98, 32));
@@ -120,6 +132,7 @@ public class ProductGUI extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         listItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listItems.setToolTipText("List of products contained within the previously selected subcategory");
         listItems.setFocusable(false);
         listItems.setRequestFocusEnabled(false);
         scrollPaneItems.setViewportView(listItems);
@@ -136,6 +149,7 @@ public class ProductGUI extends javax.swing.JFrame {
         textFieldProductName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         textFieldProductName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         textFieldProductName.setText("[product name]");
+        textFieldProductName.setToolTipText("Product name");
         textFieldProductName.setBorder(null);
         textFieldProductName.setFocusable(false);
         textFieldProductName.setOpaque(true);
@@ -175,6 +189,7 @@ public class ProductGUI extends javax.swing.JFrame {
         textAreaDescription.setLineWrap(true);
         textAreaDescription.setRows(5);
         textAreaDescription.setText("[product description]");
+        textAreaDescription.setToolTipText("Product description");
         textAreaDescription.setFocusable(false);
         textAreaDescription.setRequestFocusEnabled(false);
         scrollPaneDescription.setViewportView(textAreaDescription);
@@ -242,9 +257,14 @@ public class ProductGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(labelDescriptionTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollPaneDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addComponent(scrollPaneDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        labelItemsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        labelItemsTitle.setText("Items");
+
+        jPanel1.setBackground(new java.awt.Color(30, 140, 170));
 
         textFieldProductsPageTitle.setEditable(false);
         textFieldProductsPageTitle.setBackground(new java.awt.Color(30, 140, 170));
@@ -257,14 +277,49 @@ public class ProductGUI extends javax.swing.JFrame {
         textFieldProductsPageTitle.setOpaque(true);
         textFieldProductsPageTitle.setRequestFocusEnabled(false);
 
-        labelItemsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
-        labelItemsTitle.setText("Items");
+        buttonEdit1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonEdit1.setText("<<");
+        buttonEdit1.setBorderPainted(false);
+        buttonEdit1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonEdit1.setFocusPainted(false);
+        buttonEdit1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonEdit1.setMaximumSize(new java.awt.Dimension(98, 32));
+        buttonEdit1.setMinimumSize(new java.awt.Dimension(98, 32));
+        buttonEdit1.setOpaque(true);
+        buttonEdit1.setRequestFocusEnabled(false);
+        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEdit1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(buttonEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textFieldProductsPageTitle)
+                .addGap(88, 88, 88))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFieldProductsPageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(buttonEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textFieldProductsPageTitle)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -278,7 +333,7 @@ public class ProductGUI extends javax.swing.JFrame {
                         .addGap(69, 69, 69)
                         .addComponent(layeredPaneDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(117, 117, 117)))
                 .addGap(0, 40, Short.MAX_VALUE))
@@ -288,11 +343,12 @@ public class ProductGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelDetailsTitle)
                 .addGap(171, 171, 171))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(textFieldProductsPageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelDetailsTitle)
@@ -300,7 +356,7 @@ public class ProductGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollPaneItems)
-                    .addComponent(layeredPaneDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+                    .addComponent(layeredPaneDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,6 +372,7 @@ public class ProductGUI extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
         
+        new AddProduct().setVisible(true);
             
    
     }//GEN-LAST:event_buttonAddActionPerformed
@@ -328,7 +385,12 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
+        new DeleteCategory("Product", listItems.getSelectedValue()).setVisible(true);
     }//GEN-LAST:event_buttonDeleteActionPerformed
+
+    private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonEdit1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,6 +420,9 @@ public class ProductGUI extends javax.swing.JFrame {
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
+    private javax.swing.JButton buttonEdit1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelDate;
     private javax.swing.JLabel labelDateTitle;
     private javax.swing.JLabel labelDescriptionTitle;
