@@ -131,8 +131,8 @@ public class Product implements InventoryComponent{
     }
 
 
-    public void setCounterId(String maxId) {
-        productCounter = Integer.parseInt(maxId.trim());
+    private static void setCounterId(int maxId) {
+        productCounter = maxId + 1;
     }
 
     @Override
@@ -140,6 +140,11 @@ public class Product implements InventoryComponent{
 
         // Not applicable for product
         throw new UnsupportedOperationException("Cannot edit a Product directly.");
+    }
+
+    public static Product addProduct(String productName, String description, double purchasePrice, String purchaseDate, InventoryComponent subcategory, int maxId) {
+        setCounterId(maxId);
+        return new Product(productName, description, purchasePrice, purchaseDate, subcategory);
     }
 
 //    @Override

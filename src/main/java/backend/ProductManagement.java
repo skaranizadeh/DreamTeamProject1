@@ -456,7 +456,7 @@ public class ProductManagement {
                 case "3":
                     // Add product
                     // list categories and subcategories to select and create product under selected category and subcategory
-                    // first list categories
+                    // first list categories and ask to select a category
                     System.out.println("To create a new product select a category from the list below: ");
                     i = 1;
                     for (InventoryComponent category : categories.values()) {
@@ -487,7 +487,7 @@ public class ProductManagement {
                         System.out.println("Invalid input. Please enter a valid input (q to quit).");
                         break;
                     }
-                    // second select a subcategory from the listed available subcategories
+                    // second list subcategories and ask to select a subcategory from the list
                     System.out.println("You have selected category " + selectedCategory.getName());
                     System.out.println("Select a subcategory from the list below: ");
                     i = 1;
@@ -519,6 +519,7 @@ public class ProductManagement {
                         System.out.println("Invalid input. Please enter a valid input (q to quit).");
                         break;
                     }
+                    // Third ask for a new product name and then start product adding
                     System.out.println("The new product will be added under category "+ selectedCategory.getName()
                             + " and subcategory " + selectedSubcategory.getName());
                     boolean isNewName = false;
@@ -557,7 +558,10 @@ public class ProductManagement {
                                 String confirm = sc.nextLine().trim();
                                 switch (confirm) {
                                     case "y":
-                                        InventoryComponent newProduct = new Product(productName, description, purchasePrice, purchaseDate, selectedSubcategory);
+                                        // To add a new product first check and update the maxId of the products in the subcategory and then add it
+                                        //InventoryComponent newProduct = new Product(productName, description, purchasePrice, purchaseDate, selectedSubcategory);
+                                        Product newProduct = Product.addProduct(productName, description, purchasePrice, purchaseDate,
+                                                                                selectedSubcategory, findMaxId(selectedSubcategory.getComponents(), 6, 9));
                                         String filePath = "productData.csv";
                                         String newData = String.format("%s,%s,%s,%s,%s", newProduct.getId(), newProduct.getName(),
                                                 newProduct.getDescription(), newProduct.getPurchasePrice(), newProduct.getPurchaseDate());
