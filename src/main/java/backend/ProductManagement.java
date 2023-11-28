@@ -4,10 +4,7 @@ package backend;/*
  */
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class ProductManagement {
     private HashMap<String, Category> categories = new HashMap<>();
@@ -437,7 +434,9 @@ public class ProductManagement {
                         String confirm = sc.nextLine().trim();
                         switch (confirm) {
                             case "y":
-                                InventoryComponent newSubcategory = new Subcategory(input, selectedCategory);
+                                //get the component Arraylist in the Category and use find max to find the max id then construct the new subcategory with correct id
+                                Subcategory newSubcategory = Subcategory.addSubcategory(input, selectedCategory, findMaxId(selectedCategory.getComponents(), 3, 6));
+                                //InventoryComponent newSubcategory = new Subcategory(input, selectedCategory);
                                 String filePath = "subcategoryData.csv";
                                 String newData = String.format("%s,%s", newSubcategory.getId(), newSubcategory.getName());
                                 subcategories.put(newSubcategory.getId(), (Subcategory) newSubcategory);
@@ -640,11 +639,14 @@ public class ProductManagement {
 
     // check the id of components and return the biggest id number. start is starting the digit index
     // in the id string and end is the ending digit index
-    private int findMacId(ArrayList<InventoryComponent> arrayList, int start, int end) {
-        if (arrayList == null || arrayList.isEmpty())
-            throw new IllegalArgumentException("List is empty");
+    private int findMaxId(List<InventoryComponent> arrayList, int start, int end) {
         int max = 0;
-        for (InventoryComponent component: arrayList) {
+
+        if (arrayList == null || arrayList.isEmpty())
+            //throw new IllegalArgumentException("List is empty");
+            return max;
+
+        for (InventoryComponent component: (ArrayList<InventoryComponent>)arrayList) {
             int num = Integer.parseInt(component.getId().trim().substring(start, end));
             if (num > max)
                 max = num;

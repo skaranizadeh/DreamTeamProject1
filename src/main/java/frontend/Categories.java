@@ -34,9 +34,8 @@ public class Categories extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        CatMenu = new javax.swing.JScrollPane();
-        CatList = new javax.swing.JList<>();
+        scrollPaneCategories = new javax.swing.JScrollPane();
+        listCategories = new javax.swing.JList<>();
         SubMenu = new javax.swing.JLayeredPane();
         SM0 = new javax.swing.JScrollPane();
         jList4 = new javax.swing.JList<>();
@@ -50,9 +49,6 @@ public class Categories extends javax.swing.JFrame {
         jList2 = new javax.swing.JList<>();
         SM5 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         AddCat = new javax.swing.JButton();
         DeleteCat = new javax.swing.JButton();
         AddSub = new javax.swing.JButton();
@@ -61,31 +57,37 @@ public class Categories extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        textFieldProductsPageTitle = new javax.swing.JTextField();
+        labelItemsTitle = new javax.swing.JLabel();
+        labelDetailsTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(800, 600));
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                formFocusLost(evt);
+            }
+        });
 
-        jDesktopPane1.setPreferredSize(new java.awt.Dimension(800, 600));
+        scrollPaneCategories.setBorder(null);
 
-        CatMenu.setBorder(null);
-
-        CatList.setBorder(null);
-        CatList.setModel(new javax.swing.AbstractListModel<String>() {
+        listCategories.setBorder(null);
+        listCategories.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Electronics", "Food", "Clothes", "Furniture", "Jewelry" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        CatList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        CatList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        listCategories.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listCategories.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                CatListValueChanged(evt);
+                listCategoriesValueChanged(evt);
             }
         });
-        CatMenu.setViewportView(CatList);
+        scrollPaneCategories.setViewportView(listCategories);
 
         SubMenu.setBackground(new java.awt.Color(0, 0, 0));
         SubMenu.setOpaque(true);
-        SubMenu.setLayout(new CardLayout());
+        SubMenu.setLayout(new java.awt.CardLayout());
 
         SM0.setBorder(null);
 
@@ -155,37 +157,6 @@ public class Categories extends javax.swing.JFrame {
 
         SubMenu.add(SM5, "c5");
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Categories");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Sub - Categories");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(112, 112, 112))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
         AddCat.setText("Add");
         AddCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,100 +208,100 @@ public class Categories extends javax.swing.JFrame {
             }
         });
 
-        jDesktopPane1.setLayer(CatMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(SubMenu, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(AddCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(DeleteCat, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(AddSub, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(DeleteSub, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        textFieldProductsPageTitle.setEditable(false);
+        textFieldProductsPageTitle.setBackground(new java.awt.Color(30, 140, 170));
+        textFieldProductsPageTitle.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        textFieldProductsPageTitle.setForeground(new java.awt.Color(220, 220, 220));
+        textFieldProductsPageTitle.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textFieldProductsPageTitle.setText("Inventory");
+        textFieldProductsPageTitle.setBorder(null);
+        textFieldProductsPageTitle.setFocusable(false);
+        textFieldProductsPageTitle.setOpaque(true);
+        textFieldProductsPageTitle.setRequestFocusEnabled(false);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton3))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(AddCat)
-                                .addGap(26, 26, 26)
-                                .addComponent(DeleteCat))
-                            .addComponent(CatMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 690, Short.MAX_VALUE)
-                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(SubMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                    .addComponent(AddSub)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(DeleteSub)))
-                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addGap(26, 26, 26)
-                                .addComponent(jButton5)))
-                        .addGap(102, 102, 102)))
-                .addContainerGap())
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SubMenu)
-                    .addComponent(CatMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddCat)
-                    .addComponent(DeleteCat)
-                    .addComponent(AddSub)
-                    .addComponent(DeleteSub))
-                .addGap(18, 18, 18)
-                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4)
-                        .addComponent(jButton5))
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3)))
-                .addContainerGap(120, Short.MAX_VALUE))
-        );
+        labelItemsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        labelItemsTitle.setText("Categories");
+
+        labelDetailsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
+        labelDetailsTitle.setText("Subcategories");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1261, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(AddCat)
+                                .addGap(26, 26, 26)
+                                .addComponent(DeleteCat))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labelItemsTitle)
+                                .addComponent(scrollPaneCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(SubMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(AddSub)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(DeleteSub)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButton5))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelDetailsTitle)
+                        .addGap(8, 8, 8)))
+                .addGap(108, 108, 108))
+            .addComponent(textFieldProductsPageTitle)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 175, Short.MAX_VALUE))
+                .addComponent(textFieldProductsPageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelDetailsTitle)
+                    .addComponent(labelItemsTitle))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(SubMenu)
+                    .addComponent(scrollPaneCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddCat)
+                    .addComponent(DeleteCat)
+                    .addComponent(AddSub)
+                    .addComponent(DeleteSub))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton4)
+                        .addComponent(jButton5))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jButton3)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CatListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_CatListValueChanged
+    private void listCategoriesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCategoriesValueChanged
         // TODO add your handling code here:
         CardLayout cl = (CardLayout) (SubMenu.getLayout());
-        cl.show(SubMenu, "c" + (CatList.getSelectedIndex() + 1));
-    }//GEN-LAST:event_CatListValueChanged
+        cl.show(SubMenu, "c" + (listCategories.getSelectedIndex() + 1));
+    }//GEN-LAST:event_listCategoriesValueChanged
 
     private void DeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCatActionPerformed
         // TODO add your handling code here:
@@ -342,51 +313,34 @@ public class Categories extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteSubActionPerformed
 
     private void AddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCatActionPerformed
-        CatList.setSelectedIndex(4);
+        listCategories.setSelectedIndex(4);
     }//GEN-LAST:event_AddCatActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formFocusLost
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Categories.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Categories.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Categories.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Categories.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+
      
 
 
@@ -412,8 +366,6 @@ public class Categories extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCat;
     private javax.swing.JButton AddSub;
-    private javax.swing.JList<String> CatList;
-    private javax.swing.JScrollPane CatMenu;
     private javax.swing.JButton DeleteCat;
     private javax.swing.JButton DeleteSub;
     private javax.swing.JScrollPane SM0;
@@ -429,13 +381,14 @@ public class Categories extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JList<String> jList4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelDetailsTitle;
+    private javax.swing.JLabel labelItemsTitle;
+    private javax.swing.JList<String> listCategories;
+    private javax.swing.JScrollPane scrollPaneCategories;
+    private javax.swing.JTextField textFieldProductsPageTitle;
     // End of variables declaration//GEN-END:variables
 }

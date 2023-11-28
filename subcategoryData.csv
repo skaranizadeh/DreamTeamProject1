@@ -6,6 +6,7 @@ Subcategory ID,Subcategory Name
 004001,Living Room
 005001,Fitness
 002002,Women's
-006008,Fiction
-006009,Non-fiction
-006010,Science Fiction
+006001,Fiction
+006002,Non-fiction
+006003,Science Fiction
+006004,Mystery

@@ -12,7 +12,7 @@ import javax.swing.text.*;
  *
  * @author mrswi
  */
-public class PopupBase extends JFrame {
+public class PopupBase extends javax.swing.JFrame {
     
     /**
      * Creates new form PopupBase
@@ -30,19 +30,21 @@ public class PopupBase extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new JInternalFrame();
-        jTextField1 = new JTextField();
-        jButton1 = new JButton();
-        jButton2 = new JButton();
-        jLayeredPane1 = new JLayeredPane();
-        jLabel1 = new JLabel();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        textFieldPopupHeader = new javax.swing.JTextField();
+        buttonConfirm = new javax.swing.JButton();
+        buttonCancel = new javax.swing.JButton();
+        layeredPaneContent = new javax.swing.JLayeredPane();
+        labelMainContent = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
         setIconImages(null);
         setLocation(new java.awt.Point(0, 0));
+        setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
+        setSize(new java.awt.Dimension(640, 480));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
@@ -50,7 +52,7 @@ public class PopupBase extends JFrame {
                 formWindowLostFocus(evt);
             }
         });
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.LINE_AXIS));
+        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jInternalFrame1.setBorder(null);
         jInternalFrame1.setClosable(true);
@@ -78,113 +80,116 @@ public class PopupBase extends JFrame {
             }
         });
 
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jTextField1.setHorizontalAlignment(JTextField.CENTER);
-        jTextField1.setText("Popup Title Goes Here");
-        jTextField1.setBorder(null);
-        jTextField1.setFocusable(false);
-        jTextField1.setName("popupTitle"); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        textFieldPopupHeader.setEditable(false);
+        textFieldPopupHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        textFieldPopupHeader.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textFieldPopupHeader.setText("Popup Title Goes Here");
+        textFieldPopupHeader.setBorder(null);
+        textFieldPopupHeader.setFocusable(false);
+        textFieldPopupHeader.setName("popupTitle"); // NOI18N
+        textFieldPopupHeader.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                textFieldPopupHeaderActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Confirm");
-        jButton1.setBorderPainted(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(SwingConstants.CENTER);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonConfirm.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonConfirm.setText("Confirm");
+        buttonConfirm.setBorderPainted(false);
+        buttonConfirm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonConfirm.setFocusPainted(false);
+        buttonConfirm.setFocusable(false);
+        buttonConfirm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonConfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonConfirmActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Cancel");
-        jButton2.setBorderPainted(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(SwingConstants.CENTER);
-        jButton2.setPreferredSize(new java.awt.Dimension(85, 32));
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonCancel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonCancel.setText("Cancel");
+        buttonCancel.setBorderPainted(false);
+        buttonCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonCancel.setFocusPainted(false);
+        buttonCancel.setFocusable(false);
+        buttonCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonCancel.setPreferredSize(new java.awt.Dimension(85, 32));
+        buttonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                buttonCancelMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                buttonCancelActionPerformed(evt);
             }
         });
 
-        jLayeredPane1.setBackground(new java.awt.Color(76, 76, 76));
-        jLayeredPane1.setFocusable(false);
-        jLayeredPane1.setOpaque(true);
+        layeredPaneContent.setBackground(new java.awt.Color(76, 76, 76));
+        layeredPaneContent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(50, 50, 50), 1, true));
+        layeredPaneContent.setFocusable(false);
+        layeredPaneContent.setOpaque(true);
 
-        jLabel1.setBackground(new java.awt.Color(76, 76, 76));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(SwingConstants.CENTER);
-        jLabel1.setText("<html>Main popup text or editable text forms here");
-        jLabel1.setAlignmentX(0.5F);
-        jLabel1.setFocusable(false);
-        jLabel1.setHorizontalTextPosition(SwingConstants.CENTER);
-        jLabel1.setIconTextGap(10);
-        jLabel1.setInheritsPopupMenu(false);
-        jLabel1.setOpaque(true);
-        jLabel1.setPreferredSize(new java.awt.Dimension(520, 270));
+        labelMainContent.setBackground(new java.awt.Color(76, 76, 76));
+        labelMainContent.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelMainContent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelMainContent.setText("<html>Main popup text or editable text forms here");
+        labelMainContent.setAlignmentX(0.5F);
+        labelMainContent.setFocusable(false);
+        labelMainContent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        labelMainContent.setIconTextGap(10);
+        labelMainContent.setInheritsPopupMenu(false);
+        labelMainContent.setOpaque(true);
+        labelMainContent.setPreferredSize(new java.awt.Dimension(520, 270));
 
-        jLayeredPane1.setLayer(jLabel1, JLayeredPane.DEFAULT_LAYER);
+        layeredPaneContent.setLayer(labelMainContent, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        GroupLayout jLayeredPane1Layout = new GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+        javax.swing.GroupLayout layeredPaneContentLayout = new javax.swing.GroupLayout(layeredPaneContent);
+        layeredPaneContent.setLayout(layeredPaneContentLayout);
+        layeredPaneContentLayout.setHorizontalGroup(
+            layeredPaneContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layeredPaneContentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(labelMainContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+        layeredPaneContentLayout.setVerticalGroup(
+            layeredPaneContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layeredPaneContentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelMainContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        GroupLayout jInternalFrame1Layout = new GroupLayout(jInternalFrame1.getContentPane());
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 640, GroupLayout.PREFERRED_SIZE)
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addComponent(textFieldPopupHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGap(169, 169, 169)
-                .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
-                .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(layeredPaneContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
         );
         jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(textFieldPopupHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
-                .addComponent(jLayeredPane1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(layeredPaneContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addGroup(jInternalFrame1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -203,53 +208,46 @@ public class PopupBase extends JFrame {
         System.exit(0);
     }//GEN-LAST:event_jInternalFrame1InternalFrameClosed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void textFieldPopupHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPopupHeaderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_textFieldPopupHeaderActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonConfirmActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_buttonCancelMouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+            javax.swing.UIManager.setLookAndFeel(new FlatDarkLaf());
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new JFrame().setVisible(true);
+                    new PopupBase().setVisible(true);
                 }
             });
         } catch (UnsupportedLookAndFeelException ex) {
              java.util.logging.Logger.getLogger(PopupBase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PopupBase().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JButton jButton1;
-    private JButton jButton2;
-    private JInternalFrame jInternalFrame1;
-    private JLabel jLabel1;
-    private JLayeredPane jLayeredPane1;
-    private JTextField jTextField1;
+    private javax.swing.JButton buttonCancel;
+    private javax.swing.JButton buttonConfirm;
+    private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel labelMainContent;
+    private javax.swing.JLayeredPane layeredPaneContent;
+    private javax.swing.JTextField textFieldPopupHeader;
     // End of variables declaration//GEN-END:variables
 }

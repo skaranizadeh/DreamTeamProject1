@@ -5,7 +5,11 @@ import java.util.List;
 public interface InventoryComponent {
     void display();
     String getId();
-    public void setCounterId(String maxId);
+
+//    private static void setCounterId(int maxId) {
+//        counter = maxId + 1;
+//    }
+
     String getName();
     List<InventoryComponent> getComponents();
     //InventoryComponent getCategory();

@@ -130,7 +130,7 @@ public class Product implements InventoryComponent{
         return productId;
     }
 
-    @Override
+
     public void setCounterId(String maxId) {
         productCounter = Integer.parseInt(maxId.trim());
     }
