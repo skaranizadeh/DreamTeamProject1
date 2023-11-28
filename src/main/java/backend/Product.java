@@ -1,4 +1,6 @@
+package backend;
 import java.util.List;
+
 
 public class Product implements InventoryComponent{
 

@@ -5,6 +5,9 @@
 package frontend;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.Frame;
+import java.awt.Window;
+import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -390,6 +393,14 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
         // TODO add your handling code here:
+//        for (int i = 0; i < Frame.getFrames().length; i++) {
+//            
+//        }
+        System.out.println(Arrays.toString(Frame.getFrames()));
+        new CategoriesGUI().setVisible(true);
+        System.out.println(Arrays.toString(Frame.getFrames()));
+        super.dispose();
+        
     }//GEN-LAST:event_buttonEdit1ActionPerformed
 
     /**
@@ -401,19 +412,12 @@ public class ProductGUI extends javax.swing.JFrame {
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new javax.swing.JFrame().setVisible(true);
+                    new ProductGUI().setVisible(true);
                 }
             });
         } catch (UnsupportedLookAndFeelException ex) {
              java.util.logging.Logger.getLogger(ProductGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductGUI().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
