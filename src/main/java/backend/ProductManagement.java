@@ -1,3 +1,4 @@
+package backend;
 /*
    Dream team project 1
    code version 2.0 all view parts tested
@@ -115,7 +116,7 @@ public class ProductManagement {
     }
 
     // Method to initialize data from CSV files
-    private void initializeData() {
+    public void initializeData() {
         String categoryFile = "categoryData.csv";
         String subcategoryFile = "subcategoryData.csv";
         String productFile = "productData.csv";
@@ -652,13 +653,13 @@ public class ProductManagement {
         return max;
     }
 
-    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        //System.out.println("Current Directory: " + System.getProperty("user.dir"));
-        ProductManagement productManagement = new ProductManagement();
-        productManagement.initializeData();
-
-        productManagement.mainMenu();
-
-    }
+//    public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
+//        //System.out.println("Current Directory: " + System.getProperty("user.dir"));
+//        ProductManagement productManagement = new ProductManagement();
+//        productManagement.initializeData();
+//
+//        productManagement.mainMenu();
+//
+//    }
 }
 
