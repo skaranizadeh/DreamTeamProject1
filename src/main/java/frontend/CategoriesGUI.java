@@ -3,8 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package frontend;
+import backend.*;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.DefaultListModel;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -12,14 +16,39 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author lemon
  */
 public class CategoriesGUI extends javax.swing.JFrame {
+    private ProductManagement productManagement;
+    DefaultListModel<String> cats = new DefaultListModel<>();
+//    DefaultListModel<DefaultListModel<String>> subCats = new DefaultListModel<>();
+//    DefaultListModel<String> subCatNums = new DefaultListModel<>();
 
     /**
      * Creates new form CategoriesGUI
      */
     public CategoriesGUI() {
+        productManagement = new backend.ProductManagement();
+        productManagement.initializeData();
+        int i = 0
+                //, j = 0
+                ;
+        for (HashMap.Entry<String, Category> entry : productManagement.getCategories().entrySet()) {
+            cats.add(i,entry.getValue().getName());
+//            InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[i];
+//            System.out.println(productManagement.getCategories().values().toArray()[i]);
+//            for (InventoryComponent entry1 : selectedCategory.getComponents()){
+//                System.out.println(entry1.getName() + " /J:"+j+"/I:"+i);
+//                subCatNums.add(j, entry1.getName());
+//                j++;
+//            }
+//            subCats.add(i,subCatNums);
+            i++;
+//            j = 0;
+        }
+//        System.out.println(subCats.elementAt(1).toString());
+        
         initComponents();
+ 
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,11 +127,7 @@ public class CategoriesGUI extends javax.swing.JFrame {
 
         listCategories.setBorder(null);
         listCategories.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        listCategories.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Category 1", "Category 2", "Category 3", "Category 4", "Category 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listCategories.setModel(this.cats);
         listCategories.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listCategories.setToolTipText("List of all categories");
         listCategories.setFocusable(false);
@@ -125,15 +150,27 @@ public class CategoriesGUI extends javax.swing.JFrame {
         textFieldHomePageTitle.setOpaque(true);
         textFieldHomePageTitle.setRequestFocusEnabled(false);
 
+        scrollPaneSubcats.setBorder(null);
         scrollPaneSubcats.setToolTipText("");
         scrollPaneSubcats.setFocusable(false);
         scrollPaneSubcats.setRequestFocusEnabled(false);
 
+        listSubcats.setBorder(null);
         listSubcats.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         listSubcats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listSubcats.setToolTipText("List of subcategories contained in the selected category");
         listSubcats.setFocusable(false);
         listSubcats.setRequestFocusEnabled(false);
+        listSubcats.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listSubcatsMouseClicked(evt);
+            }
+        });
+        listSubcats.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listSubcatsValueChanged(evt);
+            }
+        });
         scrollPaneSubcats.setViewportView(listSubcats);
 
         buttonDeleteSubcategory.setBackground(new java.awt.Color(150, 80, 82));
@@ -247,10 +284,44 @@ public class CategoriesGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddSubcategoryActionPerformed
 
     private void listCategoriesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCategoriesValueChanged
-        // TODO add your handling code here:
-        //listSubcats.setListData(categories.listCategories.getSelectedIndex()); set subcategory list to correct subcategories depending on the category selected
+        // TODO add your handling code here: 
+        ArrayList<String> strList = new ArrayList<>();
+        int j = 0;
+        InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+        for (InventoryComponent entry1 : selectedCategory.getComponents()){
+//            System.out.println(entry1.getName() + " /J:"+j);
+            strList.add(j, entry1.getName());
+            j++;
+        }
+        String[] str1 = strList.toArray(new String[0]);
+//        System.out.println(Arrays.toString(str1));
+        
+        listSubcats.setListData(str1);
     }//GEN-LAST:event_listCategoriesValueChanged
 
+    private void listSubcatsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSubcatsValueChanged
+        // TODO add your handling code here:
+//        if (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1) {
+//            System.out.println("double clicked");
+//          }
+
+    }//GEN-LAST:event_listSubcatsValueChanged
+
+    private void listSubcatsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSubcatsMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            // Double-click detected
+            int index = listSubcats.locationToIndex(evt.getPoint());
+            if (listSubcats.getSelectedValue() != null) {
+                new ProductGUI().setVisible(true);
+//                System.out.println(listSubcats.getSelectedValue());
+                super.dispose();
+            }
+        }
+    }//GEN-LAST:event_listSubcatsMouseClicked
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -260,19 +331,13 @@ public class CategoriesGUI extends javax.swing.JFrame {
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new javax.swing.JFrame().setVisible(true);
+                    new CategoriesGUI().setVisible(true);
                 }
             });
         } catch (UnsupportedLookAndFeelException ex) {
              java.util.logging.Logger.getLogger(CategoriesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CategoriesGUI().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
