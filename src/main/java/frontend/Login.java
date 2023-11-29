@@ -7,12 +7,17 @@ package frontend;
 import javax.swing.JOptionPane;
 import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UnsupportedLookAndFeelException;
+import backend.*;
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author shmit
  */
 public class Login extends javax.swing.JFrame {
-
+    Encrypt encrypt = new Encrypt();
+    String hashedPas = "77230fb5224b2316d0b4c7f4e5e5f482";
+    String hashedUser = "21232f297a57a5a743894a0e4a801fc3";
     /**
      * Creates new form Login
      */
@@ -180,13 +185,14 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
+        try{
         if(ID.getText().equals("")){
             JOptionPane.showMessageDialog(this,"ID is Empty");
         }
         else if(Password.getText().equals("")){
             JOptionPane.showMessageDialog(this,"Password is Empty");
         } 
-        else if(ID.getText().contains("admin")&& "dreamteam123".equals(Password.getText())) {
+        else if ((encrypt.encryptString(ID.getText())).equals(hashedUser) && (encrypt.encryptString(Password.getText())).equals(hashedPas)) {
 
             CategoriesGUI categories = new CategoriesGUI();
             categories.show();
@@ -196,6 +202,13 @@ public class Login extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(this,"Wrong ID or Password","Message",JOptionPane.ERROR_MESSAGE);
         }
+        }
+        catch(NoSuchAlgorithmException x)
+        {
+            
+        }
+        
+        
     }//GEN-LAST:event_LoginActionPerformed
 
     private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed

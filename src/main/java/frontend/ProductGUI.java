@@ -11,23 +11,48 @@ import java.util.Arrays;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
+import backend.*;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  *
  * @author yahir
  */
 public class ProductGUI extends javax.swing.JFrame {
-    
-    public static boolean popupOpen = false;
+   private InventoryComponent subcat;
+   DefaultListModel<String> products = new DefaultListModel<>();
     /**
      * Creates new form ProductGUI
      */
     public ProductGUI() {
+        
         initComponents();
         
         
     }
+    
+    public ProductGUI(InventoryComponent subCategory) {
+        subcat = subCategory;
+////        int k = 1;
+////        for(InventoryComponent product : subcat.getComponents()) {
+////            //for (InventoryComponent product : products.values()) {
+////            //if (product.getSubcategory().equals(selectedSubcategory)) {
+////            //System.out.println(k++ + "- " + product.getName());
+////            //}
+//        }
+        int i = 0
+                //, j = 0
+                ;
+        for (InventoryComponent entry : subcat.getComponents()) {
+            products.add(i,entry.getName());
 
+            i++;
+
+        }
+
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,17 +152,17 @@ public class ProductGUI extends javax.swing.JFrame {
         scrollPaneItems.setFocusable(false);
         scrollPaneItems.setRequestFocusEnabled(false);
 
-        listItems.setBorder(null);
         listItems.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        listItems.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listItems.setModel(this.products);
         listItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listItems.setToolTipText("List of products contained within the previously selected subcategory");
         listItems.setFocusable(false);
         listItems.setRequestFocusEnabled(false);
+        listItems.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listItemsValueChanged(evt);
+            }
+        });
         scrollPaneItems.setViewportView(listItems);
 
         layeredPaneDetails.setBackground(new java.awt.Color(70, 73, 75));
@@ -151,7 +176,7 @@ public class ProductGUI extends javax.swing.JFrame {
         textFieldProductName.setBackground(new java.awt.Color(70, 73, 75));
         textFieldProductName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         textFieldProductName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textFieldProductName.setText("[product name]");
+        textFieldProductName.setText("-");
         textFieldProductName.setToolTipText("Product name");
         textFieldProductName.setBorder(null);
         textFieldProductName.setFocusable(false);
@@ -163,7 +188,7 @@ public class ProductGUI extends javax.swing.JFrame {
         labelIdTitle.setText("ID:");
 
         labelId.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelId.setText("[id]");
+        labelId.setText("-");
         labelId.setToolTipText("Product ID");
 
         labelPriceTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -171,7 +196,7 @@ public class ProductGUI extends javax.swing.JFrame {
         labelPriceTitle.setText("Price:");
 
         labelPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelPrice.setText("[purchase price]");
+        labelPrice.setText("-");
         labelPrice.setToolTipText("Product purchase price");
 
         labelDateTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -179,7 +204,7 @@ public class ProductGUI extends javax.swing.JFrame {
         labelDateTitle.setText("Date:");
 
         labelDate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        labelDate.setText("[purchase date]");
+        labelDate.setText("-");
         labelDate.setToolTipText("Product purchase date");
 
         labelDescriptionTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -191,7 +216,6 @@ public class ProductGUI extends javax.swing.JFrame {
         textAreaDescription.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textAreaDescription.setLineWrap(true);
         textAreaDescription.setRows(5);
-        textAreaDescription.setText("[product description]");
         textAreaDescription.setToolTipText("Product description");
         textAreaDescription.setFocusable(false);
         textAreaDescription.setRequestFocusEnabled(false);
@@ -219,20 +243,17 @@ public class ProductGUI extends javax.swing.JFrame {
                         .addGroup(layeredPaneDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layeredPaneDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
-                                    .addGroup(layeredPaneDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(labelIdTitle)
-                                        .addComponent(labelPriceTitle))
-                                    .addGroup(layeredPaneDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
-                                            .addGap(80, 80, 80)
-                                            .addComponent(labelPrice))
-                                        .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
-                                            .addGap(123, 123, 123)
-                                            .addComponent(labelId))))
+                                    .addComponent(labelIdTitle)
+                                    .addGap(125, 125, 125)
+                                    .addComponent(labelId))
                                 .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
                                     .addComponent(labelDateTitle)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(labelDate)))
+                                    .addGap(104, 104, 104)
+                                    .addComponent(labelDate))
+                                .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
+                                    .addComponent(labelPriceTitle)
+                                    .addGap(102, 102, 102)
+                                    .addComponent(labelPrice)))
                             .addComponent(labelDescriptionTitle))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -402,6 +423,18 @@ public class ProductGUI extends javax.swing.JFrame {
         super.dispose();
         
     }//GEN-LAST:event_buttonEdit1ActionPerformed
+
+    private void listItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listItemsValueChanged
+        // TODO add your handling code here:
+        
+        textFieldProductName.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
+        labelId.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getId());
+        labelPrice.setText(Double.toString(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchasePrice()));
+        labelDate.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchaseDate());
+        textAreaDescription.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getDescription());
+        //System.out.println(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
+        
+    }//GEN-LAST:event_listItemsValueChanged
 
     /**
      * @param args the command line arguments

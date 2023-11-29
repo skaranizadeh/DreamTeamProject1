@@ -313,7 +313,9 @@ public class CategoriesGUI extends javax.swing.JFrame {
             // Double-click detected
             int index = listSubcats.locationToIndex(evt.getPoint());
             if (listSubcats.getSelectedValue() != null) {
-                new ProductGUI().setVisible(true);
+                InventoryComponent selectedCategory = (InventoryComponent) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+                InventoryComponent selectedSubcat = selectedCategory.getComponents().get(listSubcats.getSelectedIndex());
+                new ProductGUI(selectedSubcat).setVisible(true);
 //                System.out.println(listSubcats.getSelectedValue());
                 super.dispose();
             }
