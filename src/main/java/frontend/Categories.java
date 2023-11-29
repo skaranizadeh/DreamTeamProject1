@@ -218,6 +218,11 @@ public class Categories extends javax.swing.JFrame {
         textFieldProductsPageTitle.setFocusable(false);
         textFieldProductsPageTitle.setOpaque(true);
         textFieldProductsPageTitle.setRequestFocusEnabled(false);
+        textFieldProductsPageTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldProductsPageTitleActionPerformed(evt);
+            }
+        });
 
         labelItemsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         labelItemsTitle.setText("Categories");
@@ -267,8 +272,8 @@ public class Categories extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(textFieldProductsPageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(textFieldProductsPageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDetailsTitle)
                     .addComponent(labelItemsTitle))
@@ -335,6 +340,10 @@ public class Categories extends javax.swing.JFrame {
     private void formFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_formFocusLost
+
+    private void textFieldProductsPageTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldProductsPageTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldProductsPageTitleActionPerformed
 
     /**
      * @param args the command line arguments

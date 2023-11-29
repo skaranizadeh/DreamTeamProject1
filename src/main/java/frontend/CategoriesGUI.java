@@ -134,6 +134,11 @@ public class CategoriesGUI extends javax.swing.JFrame {
         listSubcats.setToolTipText("List of subcategories contained in the selected category");
         listSubcats.setFocusable(false);
         listSubcats.setRequestFocusEnabled(false);
+        listSubcats.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listSubcatsMouseClicked(evt);
+            }
+        });
         scrollPaneSubcats.setViewportView(listSubcats);
 
         buttonDeleteSubcategory.setBackground(new java.awt.Color(150, 80, 82));
@@ -251,6 +256,18 @@ public class CategoriesGUI extends javax.swing.JFrame {
         //listSubcats.setListData(categories.listCategories.getSelectedIndex()); set subcategory list to correct subcategories depending on the category selected
     }//GEN-LAST:event_listCategoriesValueChanged
 
+    private void listSubcatsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSubcatsMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount()==2)
+        {
+            ProductGUI product = new ProductGUI();
+            product.show();
+            
+            super.dispose();
+            
+        }
+    }//GEN-LAST:event_listSubcatsMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -260,19 +277,15 @@ public class CategoriesGUI extends javax.swing.JFrame {
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new javax.swing.JFrame().setVisible(true);
+                    new CategoriesGUI().setVisible(true);
                 }
             });
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch(UnsupportedLookAndFeelException ex) {
              java.util.logging.Logger.getLogger(CategoriesGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CategoriesGUI().setVisible(true);
-            }
-        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

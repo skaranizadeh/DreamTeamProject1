@@ -55,7 +55,7 @@ public class ProductGUI extends javax.swing.JFrame {
         labelItemsTitle = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         textFieldProductsPageTitle = new javax.swing.JTextField();
-        buttonEdit1 = new javax.swing.JButton();
+        ToCatagories = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -277,19 +277,24 @@ public class ProductGUI extends javax.swing.JFrame {
         textFieldProductsPageTitle.setOpaque(true);
         textFieldProductsPageTitle.setRequestFocusEnabled(false);
 
-        buttonEdit1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        buttonEdit1.setText("<<");
-        buttonEdit1.setBorderPainted(false);
-        buttonEdit1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonEdit1.setFocusPainted(false);
-        buttonEdit1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonEdit1.setMaximumSize(new java.awt.Dimension(98, 32));
-        buttonEdit1.setMinimumSize(new java.awt.Dimension(98, 32));
-        buttonEdit1.setOpaque(true);
-        buttonEdit1.setRequestFocusEnabled(false);
-        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
+        ToCatagories.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ToCatagories.setText("<<");
+        ToCatagories.setBorderPainted(false);
+        ToCatagories.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ToCatagories.setFocusPainted(false);
+        ToCatagories.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ToCatagories.setMaximumSize(new java.awt.Dimension(98, 32));
+        ToCatagories.setMinimumSize(new java.awt.Dimension(98, 32));
+        ToCatagories.setOpaque(true);
+        ToCatagories.setRequestFocusEnabled(false);
+        ToCatagories.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ToCatagoriesMouseClicked(evt);
+            }
+        });
+        ToCatagories.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEdit1ActionPerformed(evt);
+                ToCatagoriesActionPerformed(evt);
             }
         });
 
@@ -299,7 +304,7 @@ public class ProductGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ToCatagories, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textFieldProductsPageTitle)
                 .addGap(88, 88, 88))
@@ -312,7 +317,7 @@ public class ProductGUI extends javax.swing.JFrame {
                     .addComponent(textFieldProductsPageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(buttonEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ToCatagories, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -388,9 +393,20 @@ public class ProductGUI extends javax.swing.JFrame {
         new DeleteCategory("Product", listItems.getSelectedValue()).setVisible(true);
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
+    private void ToCatagoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToCatagoriesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonEdit1ActionPerformed
+    }//GEN-LAST:event_ToCatagoriesActionPerformed
+
+    private void ToCatagoriesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ToCatagoriesMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount()==2)
+        {
+            CategoriesGUI categories = new CategoriesGUI();
+            categories.show();
+            
+            super.dispose();
+        }
+    }//GEN-LAST:event_ToCatagoriesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -401,7 +417,7 @@ public class ProductGUI extends javax.swing.JFrame {
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new javax.swing.JFrame().setVisible(true);
+                    new ProductGUI().setVisible(true);
                 }
             });
         } catch (UnsupportedLookAndFeelException ex) {
@@ -409,18 +425,13 @@ public class ProductGUI extends javax.swing.JFrame {
         }
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductGUI().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ToCatagories;
     private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
-    private javax.swing.JButton buttonEdit1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelDate;
