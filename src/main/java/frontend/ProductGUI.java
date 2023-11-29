@@ -396,9 +396,9 @@ public class ProductGUI extends javax.swing.JFrame {
 //        for (int i = 0; i < Frame.getFrames().length; i++) {
 //            
 //        }
-        System.out.println(Arrays.toString(Frame.getFrames()));
+//        System.out.println(Arrays.toString(Frame.getFrames()));
         new CategoriesGUI().setVisible(true);
-        System.out.println(Arrays.toString(Frame.getFrames()));
+//        System.out.println(Arrays.toString(Frame.getFrames()));
         super.dispose();
         
     }//GEN-LAST:event_buttonEdit1ActionPerformed

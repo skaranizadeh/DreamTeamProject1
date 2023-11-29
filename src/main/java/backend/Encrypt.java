@@ -9,7 +9,7 @@ public class Encrypt {
 	private int maxAttempts = 3;
 	private int usrAttempts = 0;
 	private int maxUsrAttempts = 3;
-	
+
     //using MD5 and BigInteger to encrypt and make hash into 32 length
     public String encryptString(String input) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");

@@ -6,14 +6,9 @@ package frontend;
 import backend.*;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -125,10 +120,12 @@ public class CategoriesGUI extends javax.swing.JFrame {
             }
         });
 
+        scrollPaneCategories.setBorder(null);
         scrollPaneCategories.setToolTipText("");
         scrollPaneCategories.setFocusable(false);
         scrollPaneCategories.setRequestFocusEnabled(false);
 
+        listCategories.setBorder(null);
         listCategories.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         listCategories.setModel(this.cats);
         listCategories.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -287,54 +284,19 @@ public class CategoriesGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonAddSubcategoryActionPerformed
 
     private void listCategoriesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCategoriesValueChanged
-        // TODO add your handling code here:
-//        ArrayList<ArrayList<String>> subStrings = new ArrayList<>();
-//        ArrayList<String> strings = new ArrayList<>();
-//        for (int i = 0; i < this.subCats.size(); i++) {
-//            for (int j = 0; j < this.subCats.getElementAt(i).size(); j++) {
-//                strings.add(this.subCats.getElementAt(i).getElementAt(j));
-//            }
-//            subStrings.add(strings);
-//        }
-//        String[] subStr = strings.toArray(new String[0]);
-//        String[] strs = subStrings.toArray(new String[0]);
-//        String[][] subStr = new String[6][3];
-//        
-//        
-//        subStr[0][0] = "Sub 1.1";
-//        subStr[0][1] = "Sub 1.2";
-//        subStr[0][2] = "Sub 1.3";
-//        subStr[1][0] = "Sub 2.1";
-//        subStr[1][1] = "Sub 2.2";
-//        subStr[1][2] = "Sub 2.3";
-//        subStr[2][0] = "Sub 3.1";
-//        subStr[2][1] = "Sub 3.2";
-//        subStr[2][2] = "Sub 3.3";
-//        subStr[3][0] = "Sub 4.1";
-//        subStr[3][1] = "Sub 4.2";
-//        subStr[3][2] = "Sub 4.3";
-//        subStr[4][0] = "Sub 5.1";
-//        subStr[4][1] = "Sub 5.2";
-//        subStr[4][2] = "Sub 5.3";
-//        subStr[5][0] = "Sub 6.1";
-//        subStr[5][1] = "Sub 6.2";
-//        subStr[5][2] = "Sub 6.3";
-        
+        // TODO add your handling code here: 
         ArrayList<String> strList = new ArrayList<>();
         int j = 0;
         InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
         for (InventoryComponent entry1 : selectedCategory.getComponents()){
-            System.out.println(entry1.getName() + " /J:"+j);
+//            System.out.println(entry1.getName() + " /J:"+j);
             strList.add(j, entry1.getName());
             j++;
         }
         String[] str1 = strList.toArray(new String[0]);
-        System.out.println(Arrays.toString(str1));
+//        System.out.println(Arrays.toString(str1));
         
         listSubcats.setListData(str1);
-//        strings = Arrays.asList(this.subCats.elementAt(listCategories.getSelectedIndex()).toArray());
-        //subStrings[0] = this.subCats.elementAt(listCategories.getSelectedIndex()).elements().toString();
-        //listSubcats.setListData(subStrings.toArray()); //set subcategory list to correct subcategories depending on the category selected
     }//GEN-LAST:event_listCategoriesValueChanged
 
     private void listSubcatsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSubcatsValueChanged
@@ -352,13 +314,9 @@ public class CategoriesGUI extends javax.swing.JFrame {
             int index = listSubcats.locationToIndex(evt.getPoint());
             if (listSubcats.getSelectedValue() != null) {
                 new ProductGUI().setVisible(true);
-                System.out.println(listSubcats.getSelectedValue());
+//                System.out.println(listSubcats.getSelectedValue());
                 super.dispose();
             }
-        } else if (evt.getClickCount() == 3) {
-
-            // Triple-click detected
-            int index = listSubcats.locationToIndex(evt.getPoint());
         }
     }//GEN-LAST:event_listSubcatsMouseClicked
 
