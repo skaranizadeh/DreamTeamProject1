@@ -35,7 +35,7 @@ public class Product implements InventoryComponent{
         this.description = description;
         this.purchasePrice = purchasePrice;
         this.purchaseDate = purchaseDate;
-        this.productId = subcategory.getId() + String.format("%03d", productCounter++);
+        //this.productId = subcategory.getId() + String.format("%03d", productCounter++);
         //this.subcategory = subcategory;
         subcategory.getComponents().add(this);
     }

@@ -315,6 +315,7 @@ public class ProductManagement {
                 case "2":
                     // Delete Inventory
                     // Implement your logic for deleting inventory here
+                	deleteMenu();
                     break;
                 case "3":
                     // Edit Inventory
@@ -591,6 +592,315 @@ public class ProductManagement {
             continue;
         }
     }
+    private void deleteMenu() throws IOException {
+        Scanner sc = new Scanner(System.in);
+        while (!exit) {
+            // Display delete inventory menu
+            System.out.println("*********** Delete Inventory Menu **********");
+            System.out.println("1. Delete Category");
+            System.out.println("2. Delete Subcategory");
+            System.out.println("3. Delete product");
+            System.out.println();
+
+            System.out.print("Enter your item number (p to go back, q to quit): ");
+            String input = sc.nextLine();
+            switch (input) {
+                case "1":
+                    System.out.println("Choose which category you want to delete");
+                    int i = 1;
+                    for (InventoryComponent category : categories.values()) {
+                        System.out.println(i++ + "- " + category.getName());
+                    }
+                    System.out.print("Enter a category name you want to delete (p to go back, q to quit): ");
+                    input = sc.nextLine();
+                    input = input.trim();
+
+                    // User wants to quit
+                    if (input.equalsIgnoreCase("q")) {
+                        exit = true;
+                        break;
+                    } else if (input.equalsIgnoreCase("p")) {
+                        // goes back to the previous menu
+                        return;
+                    }
+
+                    boolean categoryFound = false;
+
+                    // Check if the category exists
+                    for (InventoryComponent category : categories.values()) {
+                        if (category.getName().equalsIgnoreCase(input)) {
+                            categoryFound = true;
+
+                            // Ask for confirmation before deletion
+                            System.out.print("Are you sure you want to delete category " + input + "? (y/n): ");
+                            String confirmation = sc.nextLine().trim();
+
+                            if (confirmation.equalsIgnoreCase("y")) {
+                                // Check for subcategories
+                                List<InventoryComponent> subcategories = category.getComponents();
+                                if (!subcategories.isEmpty()) {
+                                    System.out.println("Category " + input + " has subcategories. Cannot delete.");
+                                } else {
+                                    // Delete the category from the CSV file
+                                    String filePath = "categoryData.csv";
+                                    categories.remove(category.getId());
+                                    String dataToRemove = category.getId() + "," + category.getName();
+                                    deleteDataFromFile(dataToRemove, filePath);
+                                    System.out.println("Category " + input + " deleted successfully.");
+                                }
+                            } else {
+                                System.out.println("Deletion canceled.");
+                            }
+
+                            break;
+                        }
+                    }
+
+                    if (!categoryFound) {
+                        System.out.println("Category " + input + " does not exist.");
+                    }
+
+                    break;
+
+       
+   
+
+             case "2":
+            	 
+            	 System.out.println("Choose which category you want to delete");
+                 int j = 1;
+                 for (InventoryComponent category : categories.values()) {
+                     System.out.println(j++ + "- " + category.getName());
+                 }
+                 System.out.print("Enter a category name you want to delete (p to go back, q to quit): ");
+                 input = sc.nextLine();
+                 input = input.trim();
+
+                 // User wants to quit
+                 if (input.equalsIgnoreCase("q")) {
+                     exit = true;
+                     break;
+                 } else if (input.equalsIgnoreCase("p")) {
+                     // goes back to the previous menu
+                     return;
+                 }
+                 try {
+                     //  parse the user input as an integer
+                     int subcategoryNumber = Integer.parseInt(input);
+                     j = 1;
+                     for (InventoryComponent category : categories.values()) {
+                         if (j++ == subcategoryNumber)
+                             selectedCategory = (Category) category;
+                     }
+                 } catch (NumberFormatException e) {
+                     // User entered non-numeric input
+                     System.out.println("Invalid input. Please enter a valid input (q to quit).");
+                     break;
+                 }
+                 // second list subcategories and ask to select a subcategory from the list
+                 System.out.println("You have selected category " + selectedCategory.getName());
+                 System.out.println("Select a subcategory from the list below: ");
+                 j = 1;
+                 for (InventoryComponent subcategory : selectedCategory.getComponents()) {
+                     System.out.println(j++ + "- " + subcategory.getName());
+                 }
+                 System.out.print("Enter a subcategory number (p to go back, q to quit): ");
+                 input = sc.nextLine();
+
+                 if (input.equalsIgnoreCase("q")) {
+                     // User wants to quit
+
+                     exit = true;
+                     break;
+                 } else if (input.equalsIgnoreCase("p")) {
+                     // goes back to previous menu
+                     return;
+                 }
+
+            	    boolean subcategoryFound = false;
+
+            	    // Check if the subcategory exists
+            	    for (InventoryComponent subcategory : selectedCategory.getComponents()) {
+            	        if (subcategory.getName().equalsIgnoreCase(input)) {
+            	            subcategoryFound = true;
+
+            	            if (!subcategory.getComponents().isEmpty()) {
+            	                System.out.println("Subcategory " + input + " contains products. Cannot delete.");
+            	                return;
+            	            } else {
+            	                // Ask for confirmation before deletion
+            	                System.out.print("Are you sure you want to delete subcategory " + input + "? (y/n): ");
+            	                String confirmation = sc.nextLine().trim();
+
+            	                if (confirmation.equalsIgnoreCase("y")) {
+            	                    // Delete the subcategory from the CSV file
+            	                    String filePath = "subcategoryData.csv";
+            	                    selectedCategory.getComponents().remove(subcategory);
+            	                    String dataToRemove = subcategory.getId() + "," + subcategory.getName();
+            	                    deleteDataFromFile(dataToRemove, filePath);
+            	                    System.out.println("Subcategory " + input + " deleted successfully.");
+            	                } else {
+            	                System.out.println("Deletion canceled.");
+            	            
+            	                }
+            	                if (!subcategoryFound) {
+                        	        System.out.println("Subcategory " + input + " does not exist in the selected category.");
+                        	    }
+
+            	            
+            	        }
+            	            break;
+            	    }
+
+            	    
+
+            	    
+            	    }
+
+                
+                 
+             case "3":
+            	    System.out.println("Choose which category you want to delete");
+            	    int k = 1;
+            	    for (InventoryComponent category : categories.values()) {
+            	        System.out.println(k++ + "- " + category.getName());
+            	    }
+            	    System.out.print("Enter a category number (p to go back, q to quit): ");
+            	    input = sc.nextLine();
+            	    input = input.trim();
+
+            	    // User wants to quit
+            	    if (input.equalsIgnoreCase("q")) {
+            	        exit = true;
+            	        break;
+            	    } else if (input.equalsIgnoreCase("p")) {
+            	        // goes back to the previous menu
+            	        return;
+            	    }
+
+            	    try {
+            	        // parse the user input as an integer
+            	        int categoryNumber = Integer.parseInt(input);
+            	        k = 1;
+            	        for (InventoryComponent category : categories.values()) {
+            	            if (k++ == categoryNumber)
+            	                selectedCategory = (Category) category;
+            	        }
+            	    } catch (NumberFormatException e) {
+            	        // User entered non-numeric input
+            	        System.out.println("Invalid input. Please enter a valid input (q to quit).");
+            	        break;
+            	    }
+
+            	    // second list subcategories and ask to select a subcategory from the list
+            	    System.out.println("You have selected category " + selectedCategory.getName());
+            	    System.out.println("Select a subcategory from the list below: ");
+            	    k = 1;
+            	    for (InventoryComponent subcategory : selectedCategory.getComponents()) {
+            	        System.out.println(k++ + "- " + subcategory.getName());
+            	    }
+            	    System.out.print("Enter a subcategory number (p to go back, q to quit): ");
+            	    input = sc.nextLine();
+
+            	    if (input.equalsIgnoreCase("q")) {
+            	        // User wants to quit
+            	        exit = true;
+            	        break;
+            	    } else if (input.equalsIgnoreCase("p")) {
+            	        // goes back to previous menu
+            	        break;
+            	    }
+
+            	    try {
+            	        // parse the user input as an integer
+            	        int subcategoryNumber = Integer.parseInt(input);
+            	        k = 1;
+            	        for (InventoryComponent subcategory : selectedCategory.getComponents()) {
+            	            if (k++ == subcategoryNumber)
+            	                selectedSubcategory = (Subcategory) subcategory;
+            	        }
+            	        
+            	    } catch (NumberFormatException e) {
+            	        // User entered non-numeric input
+            	        System.out.println("Invalid input. Please enter a valid input (q to quit).");
+            	        break;
+            	    }
+
+            	    // Third, list products and ask to select a product from the list
+            	    System.out.println("You have selected subcategory " + selectedSubcategory.getName());
+            	    System.out.println("Select a product from the list below: ");
+            	    k = 1;
+            	    for (InventoryComponent product : selectedSubcategory.getComponents()) {
+            	        System.out.println(k++ + "- " + product.getName());
+            	    }
+            	    System.out.print("Enter a product name to be deleted (p to go back, q to quit): ");
+            	    input = sc.nextLine();
+            	    input = input.trim();
+            	    
+            	    
+
+            	    if (input.equalsIgnoreCase("q")) {
+            	        // User wants to quit
+            	        exit = true;
+            	        break;
+            	    } else if (input.equalsIgnoreCase("p")) {
+            	        // goes back to previous menu
+            	        break;
+            	    }
+
+            	    boolean productFound = false;
+            	   
+            	    for (InventoryComponent product : selectedSubcategory.getComponents()) {
+            	        if (product.getName().equalsIgnoreCase(input)) {
+            	            productFound = true;
+            	        	
+        	                // Ask for confirmation before deletion
+        	                System.out.print("Are you sure you want to delete product " + input + "? (y/n): ");
+        	                String confirmation = sc.nextLine().trim();
+
+        	                 if (confirmation.equalsIgnoreCase("y")) {
+        	                    // Delete the product from the CSV file
+        	                    String filePath = "productData.csv";
+        	                    selectedSubcategory.getComponents().remove(product);
+        	                    String dataToRemove = String.format("%s,%s,%s,%s,%s", product.getId(), product.getName(),
+                                        product.getDescription(), product.getPurchasePrice(), product.getPurchaseDate());
+        	                    deleteDataFromFile(dataToRemove, filePath);
+        	                   // System.out.println("Product " + input + " deleted successfully.");
+        	                    
+        	                } else {
+        	                System.out.println("Deletion canceled.");
+        	            }   
+        	        }
+            	        break;
+            	                 	       
+            	    }
+
+        	    if (!productFound) {
+        	        System.out.println("Product " + input + " does not exist in the selected subcategory.");
+        	        
+        	    }
+        	  
+
+        	    
+            	    
+            
+        
+    
+
+            	    
+             case "q":
+            	 exit = true;
+            	 
+             case "p":
+            	 return;
+            	 
+             default:
+            	 System.out.println("Invalid choice. Please enter a valid option.");
+            	 return;
+             
+             }
+         }
+    }
 
     private void mainMenu() throws NoSuchAlgorithmException, IOException {
         boolean isLoggedIn = login();
@@ -640,6 +950,40 @@ public class ProductManagement {
             e.printStackTrace();
         }
     }
+    		//deleting data from the file
+    private static void deleteDataFromFile(String dataToRemove, String filePath) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
+             BufferedWriter writer = new BufferedWriter(new FileWriter("tempFile.csv", true))) {
+
+            String currentLine;
+
+            // Read each line from the original file
+            while ((currentLine = reader.readLine()) != null) {
+                // Check if the line contains the data to be removed
+                if (!currentLine.equals(dataToRemove)) {
+                    // If not, write it to the temporary file
+                    writer.write(currentLine);
+                    writer.newLine();
+                	
+                	
+                }
+               
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Rename the temporary file to the original file
+        File tempFile = new File("tempFile.csv");
+        File originalFile = new File(filePath);
+        if (tempFile.renameTo(originalFile)) {
+            System.out.println("Data removed successfully!");
+        } else {
+            System.out.println("Failed to remove data.");
+        }
+    }
+  
 
     // check the id of components and return the biggest id number. start is starting the digit index
     // in the id string and end is the ending digit index
