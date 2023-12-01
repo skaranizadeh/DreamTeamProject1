@@ -5,14 +5,7 @@
 package frontend;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.awt.AWTException;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Robot;
-import javax.swing.JInternalFrame;
 import javax.swing.UnsupportedLookAndFeelException;
-
-
 
 /**
  *
@@ -59,13 +52,7 @@ public class DeleteCategory extends javax.swing.JFrame {
         setName("DelCatFrame"); // NOI18N
         setUndecorated(true);
         setResizable(false);
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
+        setSize(new java.awt.Dimension(640, 480));
 
         CatDelTitle.setBorder(null);
         CatDelTitle.setClosable(true);
@@ -75,31 +62,6 @@ public class DeleteCategory extends javax.swing.JFrame {
         CatDelTitle.setOpaque(true);
         CatDelTitle.setPreferredSize(new java.awt.Dimension(640, 480));
         CatDelTitle.setVisible(true);
-        CatDelTitle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseMoved(evt);
-            }
-        });
-        CatDelTitle.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-                CatDelTitleInternalFrameClosed(evt);
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
 
         textFieldDeleteHeader.setEditable(false);
         textFieldDeleteHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -108,11 +70,6 @@ public class DeleteCategory extends javax.swing.JFrame {
         textFieldDeleteHeader.setBorder(null);
         textFieldDeleteHeader.setFocusable(false);
         textFieldDeleteHeader.setName("popupTitle"); // NOI18N
-        textFieldDeleteHeader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldDeleteHeaderActionPerformed(evt);
-            }
-        });
 
         buttonDelete.setBackground(new java.awt.Color(150, 80, 82));
         buttonDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -138,11 +95,6 @@ public class DeleteCategory extends javax.swing.JFrame {
         buttonCancel.setFocusable(false);
         buttonCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonCancel.setPreferredSize(new java.awt.Dimension(85, 32));
-        buttonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonCancelMouseClicked(evt);
-            }
-        });
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
@@ -229,91 +181,18 @@ public class DeleteCategory extends javax.swing.JFrame {
             .addComponent(CatDelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        CatDelTitle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseMoved(evt);
-            }
-
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseDragged(evt);
-            }
-        });
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        // TODO add your handling code here:;
-        this.setFocusableWindowState(true);
-    }//GEN-LAST:event_formWindowLostFocus
-
-    private void CatDelTitleInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_CatDelTitleInternalFrameClosed
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_CatDelTitleInternalFrameClosed
-
-    private void textFieldDeleteHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldDeleteHeaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldDeleteHeaderActionPerformed
+        super.dispose();
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonDeleteActionPerformed
-
-    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonCancelActionPerformed
-
-    private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_buttonCancelMouseClicked
-
-    private void CatDelTitleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatDelTitleMouseDragged
-        // TODO add your handling code here:
-//        Point newPosition = evt.getPoint();
-//
-//        // Restrict mouse movement within the internal frame
-//        int maxX = this.getWidth() - 1;
-//        int maxY = this.getHeight() - 1;
-//
-//        newPosition.x = Math.min(Math.max(0, newPosition.x), maxX);
-//        newPosition.y = Math.min(Math.max(0, newPosition.y), maxY);
-// 
-//        // Set the new cursor position without moving the internal frame
-//        try {
-//            Robot robot = new Robot();
-//            robot.mouseMove((int) this.getLocation().x + newPosition.x,
-//                            (int) this.getLocation().y + newPosition.y);
-//        } catch (AWTException ex) {
-//            ex.printStackTrace();
-//        }
-        
-    }//GEN-LAST:event_CatDelTitleMouseDragged
-
-    private void CatDelTitleMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatDelTitleMouseMoved
-        // TODO add your handling code here:
-//        JInternalFrame internalFrame = (JInternalFrame) evt.getSource();
-//        
-//        Point newPosition = evt.getPoint();
-//
-//        // Restrict mouse movement within the internal frame
-//        int maxX = internalFrame.getWidth() - 1;
-//        int maxY = internalFrame.getHeight() - 1;
-//
-//        newPosition.x = Math.min(Math.max(0, newPosition.x), maxX);
-//        newPosition.y = Math.min(Math.max(0, newPosition.y), maxY);
-// 
-//        // Set the new cursor position without moving the internal frame
-//        try {
-//            Robot robot = new Robot();
-//            robot.mouseMove((int) internalFrame.getLocation().x + newPosition.x,
-//                            (int) internalFrame.getLocation().y + newPosition.y);
-//        } catch (AWTException ex) {
-//            ex.printStackTrace();
-//        }
-    }//GEN-LAST:event_CatDelTitleMouseMoved
 
     /**
      * @param args the command line arguments

@@ -218,11 +218,11 @@ public class PopupBase extends javax.swing.JFrame {
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         // TODO add your handling code here:
+        super.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
         // TODO add your handling code here:
-        System.exit(0);
     }//GEN-LAST:event_buttonCancelMouseClicked
 
     /**

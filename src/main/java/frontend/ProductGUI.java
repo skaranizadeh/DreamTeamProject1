@@ -124,6 +124,11 @@ public class ProductGUI extends javax.swing.JFrame {
         buttonDelete.setMinimumSize(new java.awt.Dimension(98, 32));
         buttonDelete.setOpaque(true);
         buttonDelete.setRequestFocusEnabled(false);
+        buttonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                buttonDeleteMouseReleased(evt);
+            }
+        });
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDeleteActionPerformed(evt);
@@ -241,19 +246,18 @@ public class ProductGUI extends javax.swing.JFrame {
                     .addComponent(textFieldProductName, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
                         .addGroup(layeredPaneDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layeredPaneDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
-                                    .addComponent(labelIdTitle)
-                                    .addGap(125, 125, 125)
-                                    .addComponent(labelId))
-                                .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
-                                    .addComponent(labelDateTitle)
-                                    .addGap(104, 104, 104)
-                                    .addComponent(labelDate))
-                                .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
-                                    .addComponent(labelPriceTitle)
-                                    .addGap(102, 102, 102)
-                                    .addComponent(labelPrice)))
+                            .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
+                                .addComponent(labelIdTitle)
+                                .addGap(125, 125, 125)
+                                .addComponent(labelId))
+                            .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
+                                .addComponent(labelDateTitle)
+                                .addGap(104, 104, 104)
+                                .addComponent(labelDate))
+                            .addGroup(layeredPaneDetailsLayout.createSequentialGroup()
+                                .addComponent(labelPriceTitle)
+                                .addGap(102, 102, 102)
+                                .addComponent(labelPrice))
                             .addComponent(labelDescriptionTitle))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -409,7 +413,6 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
-        new DeleteCategory("Product", listItems.getSelectedValue()).setVisible(true);
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
@@ -435,6 +438,11 @@ public class ProductGUI extends javax.swing.JFrame {
         //System.out.println(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
         
     }//GEN-LAST:event_listItemsValueChanged
+
+    private void buttonDeleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDeleteMouseReleased
+        // TODO add your handling code here:
+        new DeleteCategory("Product", listItems.getSelectedValue()).setVisible(true);
+    }//GEN-LAST:event_buttonDeleteMouseReleased
 
     /**
      * @param args the command line arguments

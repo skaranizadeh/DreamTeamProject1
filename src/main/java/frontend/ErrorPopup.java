@@ -181,7 +181,7 @@ public class ErrorPopup extends javax.swing.JFrame {
 
     private void buttonAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCatActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        super.dispose();
     }//GEN-LAST:event_buttonAddCatActionPerformed
 
     private void formattedTextFieldCatNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formattedTextFieldCatNameFocusLost
@@ -192,7 +192,7 @@ public class ErrorPopup extends javax.swing.JFrame {
 
     private void internalFrameAddCatsInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_internalFrameAddCatsInternalFrameClosed
         // TODO add your handling code here:
-        this.dispose();
+        super.dispose();
     }//GEN-LAST:event_internalFrameAddCatsInternalFrameClosed
 
     /**
