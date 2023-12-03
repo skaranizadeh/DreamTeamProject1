@@ -1,10 +1,11 @@
 package backend;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Subcategory implements InventoryComponent {
 
-    private static int subcategoryCounter = 1;
+    private static int subcategoryCcounter = 1;
     private String subcategoryId;
     private String  subcategoryName;
     private List<InventoryComponent> products = new ArrayList<>();
@@ -13,7 +14,7 @@ public class Subcategory implements InventoryComponent {
     // Constructors
     public Subcategory(String subcategoryName, InventoryComponent category) {
         this.subcategoryName = subcategoryName;
-        this.subcategoryId = category.getId() + String.format("%03d", subcategoryCounter++);
+        this.subcategoryId = category.getId() + String.format("%03d", subcategoryCcounter++);
         //this.category = category;
         category.getComponents().add(this);
     }
@@ -23,15 +24,15 @@ public class Subcategory implements InventoryComponent {
         this.subcategoryName = subcategoryName;
         //this.category = category;
         category.getComponents().add(this);
-        subcategoryCounter++;
+        subcategoryCcounter++;
     }
 
     public static int getSubcategoryCounter() {
-        return subcategoryCounter;
+        return subcategoryCcounter;
     }
 
     public static void setSubcategoryCounter(int subcategoryCounter) {
-        Subcategory.subcategoryCounter = subcategoryCounter;
+        Subcategory.subcategoryCcounter = subcategoryCounter;
     }
 
     @Override
@@ -117,14 +118,19 @@ public class Subcategory implements InventoryComponent {
         return subcategoryId;
     }
 
-    @Override
-    public void setCounterId(String maxId) {
-        subcategoryCounter = Integer.parseInt(maxId.trim());
+
+    private static void setCounterId(int maxId) {
+        subcategoryCcounter = maxId + 1;
     }
 
     @Override
     public List<InventoryComponent> getComponents() {
         return products;
+    }
+
+    public static Subcategory addSubcategory(String subcategoryName, InventoryComponent category, int maxId) {
+        setCounterId(maxId);
+        return new Subcategory(subcategoryName, category);
     }
 
 //    public void addSubcategoryChild(InventoryComponent product) {

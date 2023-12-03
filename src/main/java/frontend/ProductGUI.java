@@ -5,23 +5,19 @@
 package frontend;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.awt.Frame;
-import java.awt.Window;
-import java.util.Arrays;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 import backend.*;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  *
  * @author yahir
  */
 public class ProductGUI extends javax.swing.JFrame {
+    
    private InventoryComponent subcat;
    DefaultListModel<String> products = new DefaultListModel<>();
+   
     /**
      * Creates new form ProductGUI
      */
@@ -29,30 +25,19 @@ public class ProductGUI extends javax.swing.JFrame {
         
         initComponents();
         
-        
     }
     
     public ProductGUI(InventoryComponent subCategory) {
+        
         subcat = subCategory;
-////        int k = 1;
-////        for(InventoryComponent product : subcat.getComponents()) {
-////            //for (InventoryComponent product : products.values()) {
-////            //if (product.getSubcategory().equals(selectedSubcategory)) {
-////            //System.out.println(k++ + "- " + product.getName());
-////            //}
-//        }
-        int i = 0
-                //, j = 0
-                ;
+        int i = 0;
         for (InventoryComponent entry : subcat.getComponents()) {
             products.add(i,entry.getName());
-
             i++;
-
         }
-
         initComponents();
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,7 +47,6 @@ public class ProductGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSeparator1 = new javax.swing.JSeparator();
         labelDetailsTitle = new javax.swing.JLabel();
         buttonAdd = new javax.swing.JButton();
         buttonDelete = new javax.swing.JButton();
@@ -81,9 +65,9 @@ public class ProductGUI extends javax.swing.JFrame {
         scrollPaneDescription = new javax.swing.JScrollPane();
         textAreaDescription = new javax.swing.JTextArea();
         labelItemsTitle = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        panelTitleContainer = new javax.swing.JPanel();
         textFieldProductsPageTitle = new javax.swing.JTextField();
-        buttonEdit1 = new javax.swing.JButton();
+        buttonBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -97,7 +81,7 @@ public class ProductGUI extends javax.swing.JFrame {
         buttonAdd.setBackground(new java.awt.Color(78, 110, 82));
         buttonAdd.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonAdd.setText("Add");
-        buttonAdd.setToolTipText("Add an product");
+        buttonAdd.setToolTipText("");
         buttonAdd.setBorderPainted(false);
         buttonAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonAdd.setFocusPainted(false);
@@ -115,7 +99,7 @@ public class ProductGUI extends javax.swing.JFrame {
         buttonDelete.setBackground(new java.awt.Color(150, 80, 82));
         buttonDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonDelete.setText("Delete");
-        buttonDelete.setToolTipText("Delete the selected product");
+        buttonDelete.setToolTipText("");
         buttonDelete.setBorderPainted(false);
         buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonDelete.setFocusPainted(false);
@@ -124,11 +108,6 @@ public class ProductGUI extends javax.swing.JFrame {
         buttonDelete.setMinimumSize(new java.awt.Dimension(98, 32));
         buttonDelete.setOpaque(true);
         buttonDelete.setRequestFocusEnabled(false);
-        buttonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                buttonDeleteMouseReleased(evt);
-            }
-        });
         buttonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonDeleteActionPerformed(evt);
@@ -137,7 +116,7 @@ public class ProductGUI extends javax.swing.JFrame {
 
         buttonEdit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonEdit.setText("Edit");
-        buttonEdit.setToolTipText("Edit the product details");
+        buttonEdit.setToolTipText("");
         buttonEdit.setBorderPainted(false);
         buttonEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonEdit.setFocusPainted(false);
@@ -160,7 +139,7 @@ public class ProductGUI extends javax.swing.JFrame {
         listItems.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         listItems.setModel(this.products);
         listItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listItems.setToolTipText("List of products contained within the previously selected subcategory");
+        listItems.setToolTipText("");
         listItems.setFocusable(false);
         listItems.setRequestFocusEnabled(false);
         listItems.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -292,7 +271,7 @@ public class ProductGUI extends javax.swing.JFrame {
         labelItemsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         labelItemsTitle.setText("Items");
 
-        jPanel1.setBackground(new java.awt.Color(30, 140, 170));
+        panelTitleContainer.setBackground(new java.awt.Color(30, 140, 170));
 
         textFieldProductsPageTitle.setEditable(false);
         textFieldProductsPageTitle.setBackground(new java.awt.Color(30, 140, 170));
@@ -305,42 +284,43 @@ public class ProductGUI extends javax.swing.JFrame {
         textFieldProductsPageTitle.setOpaque(true);
         textFieldProductsPageTitle.setRequestFocusEnabled(false);
 
-        buttonEdit1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        buttonEdit1.setText("<<");
-        buttonEdit1.setBorderPainted(false);
-        buttonEdit1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonEdit1.setFocusPainted(false);
-        buttonEdit1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonEdit1.setMaximumSize(new java.awt.Dimension(98, 32));
-        buttonEdit1.setMinimumSize(new java.awt.Dimension(98, 32));
-        buttonEdit1.setOpaque(true);
-        buttonEdit1.setRequestFocusEnabled(false);
-        buttonEdit1.addActionListener(new java.awt.event.ActionListener() {
+        buttonBack.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonBack.setText("<<");
+        buttonBack.setToolTipText("Back to Categories page");
+        buttonBack.setBorderPainted(false);
+        buttonBack.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonBack.setFocusPainted(false);
+        buttonBack.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonBack.setMaximumSize(new java.awt.Dimension(98, 32));
+        buttonBack.setMinimumSize(new java.awt.Dimension(98, 32));
+        buttonBack.setOpaque(true);
+        buttonBack.setRequestFocusEnabled(false);
+        buttonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonEdit1ActionPerformed(evt);
+                buttonBackActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelTitleContainerLayout = new javax.swing.GroupLayout(panelTitleContainer);
+        panelTitleContainer.setLayout(panelTitleContainerLayout);
+        panelTitleContainerLayout.setHorizontalGroup(
+            panelTitleContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTitleContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(textFieldProductsPageTitle)
                 .addGap(88, 88, 88))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelTitleContainerLayout.setVerticalGroup(
+            panelTitleContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTitleContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelTitleContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textFieldProductsPageTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelTitleContainerLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(buttonEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -371,12 +351,12 @@ public class ProductGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(labelDetailsTitle)
                 .addGap(171, 171, 171))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelTitleContainer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelTitleContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelDetailsTitle)
@@ -399,50 +379,34 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        
         new AddProduct().setVisible(true);
             
-   
     }//GEN-LAST:event_buttonAddActionPerformed
 
-    
-    
     private void buttonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonEditActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
+        new DeleteObject("Product", listItems.getSelectedValue()).setVisible(true);
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
-    private void buttonEdit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEdit1ActionPerformed
+    private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
         // TODO add your handling code here:
-//        for (int i = 0; i < Frame.getFrames().length; i++) {
-//            
-//        }
-//        System.out.println(Arrays.toString(Frame.getFrames()));
         new CategoriesGUI().setVisible(true);
-//        System.out.println(Arrays.toString(Frame.getFrames()));
         super.dispose();
         
-    }//GEN-LAST:event_buttonEdit1ActionPerformed
+    }//GEN-LAST:event_buttonBackActionPerformed
 
     private void listItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listItemsValueChanged
         // TODO add your handling code here:
-        
         textFieldProductName.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
         labelId.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getId());
         labelPrice.setText(Double.toString(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchasePrice()));
         labelDate.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchaseDate());
         textAreaDescription.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getDescription());
-        //System.out.println(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
-        
     }//GEN-LAST:event_listItemsValueChanged
-
-    private void buttonDeleteMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDeleteMouseReleased
-        // TODO add your handling code here:
-        new DeleteCategory("Product", listItems.getSelectedValue()).setVisible(true);
-    }//GEN-LAST:event_buttonDeleteMouseReleased
 
     /**
      * @param args the command line arguments
@@ -463,11 +427,9 @@ public class ProductGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdd;
+    private javax.swing.JButton buttonBack;
     private javax.swing.JButton buttonDelete;
     private javax.swing.JButton buttonEdit;
-    private javax.swing.JButton buttonEdit1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelDate;
     private javax.swing.JLabel labelDateTitle;
     private javax.swing.JLabel labelDescriptionTitle;
@@ -479,6 +441,7 @@ public class ProductGUI extends javax.swing.JFrame {
     private javax.swing.JLabel labelPriceTitle;
     private javax.swing.JLayeredPane layeredPaneDetails;
     private javax.swing.JList<String> listItems;
+    private javax.swing.JPanel panelTitleContainer;
     private javax.swing.JScrollPane scrollPaneDescription;
     private javax.swing.JScrollPane scrollPaneItems;
     private javax.swing.JTextArea textAreaDescription;

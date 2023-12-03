@@ -22,8 +22,8 @@ public class ErrorPopup extends javax.swing.JFrame {
     }
     
     public ErrorPopup(String error) {
-        initComponents();
         errorMessage = error;
+        initComponents();
     }
 
     /**
@@ -35,30 +35,32 @@ public class ErrorPopup extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        internalFrameAddCats = new javax.swing.JInternalFrame();
-        textFieldAddCatsHeader = new javax.swing.JTextField();
-        buttonAddCat = new javax.swing.JButton();
-        formattedTextFieldCatName = new javax.swing.JFormattedTextField();
+        internalFrameError = new javax.swing.JInternalFrame();
+        textFieldErrorHeader = new javax.swing.JTextField();
+        buttonOkay = new javax.swing.JButton();
+        scrollPaneErrorMessage = new javax.swing.JScrollPane();
+        editorPaneErrorMessage = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setLocationByPlatform(true);
         setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(480, 300));
 
-        internalFrameAddCats.setBorder(null);
-        internalFrameAddCats.setClosable(true);
-        internalFrameAddCats.setTitle("Error");
-        internalFrameAddCats.setFrameIcon(null);
-        internalFrameAddCats.setMaximumSize(new java.awt.Dimension(480, 300));
-        internalFrameAddCats.setOpaque(true);
-        internalFrameAddCats.setPreferredSize(new java.awt.Dimension(480, 300));
-        internalFrameAddCats.setVisible(true);
-        internalFrameAddCats.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+        internalFrameError.setBorder(null);
+        internalFrameError.setClosable(true);
+        internalFrameError.setTitle("Error");
+        internalFrameError.setFrameIcon(null);
+        internalFrameError.setMaximumSize(new java.awt.Dimension(480, 300));
+        internalFrameError.setOpaque(true);
+        internalFrameError.setPreferredSize(new java.awt.Dimension(480, 300));
+        internalFrameError.setVisible(true);
+        internalFrameError.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-                internalFrameAddCatsInternalFrameClosed(evt);
+                internalFrameErrorInternalFrameClosed(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -72,81 +74,67 @@ public class ErrorPopup extends javax.swing.JFrame {
             }
         });
 
-        textFieldAddCatsHeader.setEditable(false);
-        textFieldAddCatsHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        textFieldAddCatsHeader.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textFieldAddCatsHeader.setText("Error:");
-        textFieldAddCatsHeader.setBorder(null);
-        textFieldAddCatsHeader.setFocusable(false);
-        textFieldAddCatsHeader.setName("popupTitle"); // NOI18N
-        textFieldAddCatsHeader.addActionListener(new java.awt.event.ActionListener() {
+        textFieldErrorHeader.setEditable(false);
+        textFieldErrorHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        textFieldErrorHeader.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textFieldErrorHeader.setText("Error:");
+        textFieldErrorHeader.setBorder(null);
+        textFieldErrorHeader.setFocusable(false);
+        textFieldErrorHeader.setName("popupTitle"); // NOI18N
+
+        buttonOkay.setBackground(new java.awt.Color(78, 80, 82));
+        buttonOkay.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        buttonOkay.setText("Okay");
+        buttonOkay.setBorderPainted(false);
+        buttonOkay.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buttonOkay.setFocusPainted(false);
+        buttonOkay.setFocusable(false);
+        buttonOkay.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        buttonOkay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAddCatsHeaderActionPerformed(evt);
+                buttonOkayActionPerformed(evt);
             }
         });
 
-        buttonAddCat.setBackground(new java.awt.Color(78, 80, 82));
-        buttonAddCat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        buttonAddCat.setText("Okay");
-        buttonAddCat.setBorderPainted(false);
-        buttonAddCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buttonAddCat.setFocusPainted(false);
-        buttonAddCat.setFocusable(false);
-        buttonAddCat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buttonAddCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddCatActionPerformed(evt);
-            }
-        });
+        scrollPaneErrorMessage.setBackground(new java.awt.Color(30, 30, 30));
+        scrollPaneErrorMessage.setBorder(null);
 
-        formattedTextFieldCatName.setEditable(false);
-        formattedTextFieldCatName.setBorder(null);
-        formattedTextFieldCatName.setForeground(new java.awt.Color(190, 120, 120));
-        formattedTextFieldCatName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        formattedTextFieldCatName.setText(errorMessage);
-        formattedTextFieldCatName.setToolTipText("Insert name here");
-        formattedTextFieldCatName.setActionCommand("<Not Set>");
-        formattedTextFieldCatName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        formattedTextFieldCatName.setDisabledTextColor(new java.awt.Color(120, 120, 120));
-        formattedTextFieldCatName.setFocusLostBehavior(javax.swing.JFormattedTextField.REVERT);
-        formattedTextFieldCatName.setFocusTraversalPolicyProvider(true);
-        formattedTextFieldCatName.setFocusable(false);
-        formattedTextFieldCatName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        formattedTextFieldCatName.setMargin(new java.awt.Insets(6, 6, 6, 6));
-        formattedTextFieldCatName.setName(""); // NOI18N
-        formattedTextFieldCatName.setOpaque(true);
-        formattedTextFieldCatName.setRequestFocusEnabled(false);
-        formattedTextFieldCatName.setSelectedTextColor(new java.awt.Color(140, 140, 140));
-        formattedTextFieldCatName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                formattedTextFieldCatNameFocusLost(evt);
-            }
-        });
+        editorPaneErrorMessage.setEditable(false);
+        editorPaneErrorMessage.setBackground(new java.awt.Color(30, 30, 30));
+        editorPaneErrorMessage.setBorder(null);
+        editorPaneErrorMessage.setContentType("text/html"); // NOI18N
+        editorPaneErrorMessage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editorPaneErrorMessage.setForeground(new java.awt.Color(190, 120, 120));
+        editorPaneErrorMessage.setText("<p align=\"center\">" + this.errorMessage + "</p>");
+        editorPaneErrorMessage.setFocusable(false);
+        editorPaneErrorMessage.setOpaque(false);
+        editorPaneErrorMessage.setRequestFocusEnabled(false);
+        scrollPaneErrorMessage.setViewportView(editorPaneErrorMessage);
 
-        javax.swing.GroupLayout internalFrameAddCatsLayout = new javax.swing.GroupLayout(internalFrameAddCats.getContentPane());
-        internalFrameAddCats.getContentPane().setLayout(internalFrameAddCatsLayout);
-        internalFrameAddCatsLayout.setHorizontalGroup(
-            internalFrameAddCatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textFieldAddCatsHeader, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
-                .addGroup(internalFrameAddCatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
+        javax.swing.GroupLayout internalFrameErrorLayout = new javax.swing.GroupLayout(internalFrameError.getContentPane());
+        internalFrameError.getContentPane().setLayout(internalFrameErrorLayout);
+        internalFrameErrorLayout.setHorizontalGroup(
+            internalFrameErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(textFieldErrorHeader, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(internalFrameErrorLayout.createSequentialGroup()
+                .addGroup(internalFrameErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(internalFrameErrorLayout.createSequentialGroup()
                         .addGap(182, 182, 182)
-                        .addComponent(buttonAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
+                        .addComponent(buttonOkay, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(internalFrameErrorLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(formattedTextFieldCatName, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(scrollPaneErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
-        internalFrameAddCatsLayout.setVerticalGroup(
-            internalFrameAddCatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(internalFrameAddCatsLayout.createSequentialGroup()
+        internalFrameErrorLayout.setVerticalGroup(
+            internalFrameErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(internalFrameErrorLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addComponent(textFieldAddCatsHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textFieldErrorHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formattedTextFieldCatName, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                .addComponent(scrollPaneErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonAddCat, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonOkay, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
 
@@ -158,7 +146,7 @@ public class ErrorPopup extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(internalFrameAddCats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(internalFrameError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -167,7 +155,7 @@ public class ErrorPopup extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(internalFrameAddCats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(internalFrameError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
@@ -175,25 +163,15 @@ public class ErrorPopup extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textFieldAddCatsHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAddCatsHeaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAddCatsHeaderActionPerformed
-
-    private void buttonAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCatActionPerformed
+    private void buttonOkayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkayActionPerformed
         // TODO add your handling code here:
         super.dispose();
-    }//GEN-LAST:event_buttonAddCatActionPerformed
+    }//GEN-LAST:event_buttonOkayActionPerformed
 
-    private void formattedTextFieldCatNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formattedTextFieldCatNameFocusLost
-        // TODO add your handling code here:
-        // if not empty, and focus lost, replace with default text. otherwise,
-        // it has user entered text, so dont delete it and keep the text there. (do nothing)
-    }//GEN-LAST:event_formattedTextFieldCatNameFocusLost
-
-    private void internalFrameAddCatsInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_internalFrameAddCatsInternalFrameClosed
+    private void internalFrameErrorInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_internalFrameErrorInternalFrameClosed
         // TODO add your handling code here:
         super.dispose();
-    }//GEN-LAST:event_internalFrameAddCatsInternalFrameClosed
+    }//GEN-LAST:event_internalFrameErrorInternalFrameClosed
 
     /**
      * @param args the command line arguments
@@ -213,9 +191,10 @@ public class ErrorPopup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonAddCat;
-    private javax.swing.JFormattedTextField formattedTextFieldCatName;
-    private javax.swing.JInternalFrame internalFrameAddCats;
-    private javax.swing.JTextField textFieldAddCatsHeader;
+    private javax.swing.JButton buttonOkay;
+    private javax.swing.JEditorPane editorPaneErrorMessage;
+    private javax.swing.JInternalFrame internalFrameError;
+    private javax.swing.JScrollPane scrollPaneErrorMessage;
+    private javax.swing.JTextField textFieldErrorHeader;
     // End of variables declaration//GEN-END:variables
 }

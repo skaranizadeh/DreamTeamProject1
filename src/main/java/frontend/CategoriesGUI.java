@@ -18,8 +18,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class CategoriesGUI extends javax.swing.JFrame {
     private ProductManagement productManagement;
     DefaultListModel<String> cats = new DefaultListModel<>();
-//    DefaultListModel<DefaultListModel<String>> subCats = new DefaultListModel<>();
-//    DefaultListModel<String> subCatNums = new DefaultListModel<>();
 
     /**
      * Creates new form CategoriesGUI
@@ -27,26 +25,12 @@ public class CategoriesGUI extends javax.swing.JFrame {
     public CategoriesGUI() {
         productManagement = new backend.ProductManagement();
         productManagement.initializeData();
-        int i = 0
-                //, j = 0
-                ;
+        int i = 0;
         for (HashMap.Entry<String, Category> entry : productManagement.getCategories().entrySet()) {
             cats.add(i,entry.getValue().getName());
-//            InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[i];
-//            System.out.println(productManagement.getCategories().values().toArray()[i]);
-//            for (InventoryComponent entry1 : selectedCategory.getComponents()){
-//                System.out.println(entry1.getName() + " /J:"+j+"/I:"+i);
-//                subCatNums.add(j, entry1.getName());
-//                j++;
-//            }
-//            subCats.add(i,subCatNums);
             i++;
-//            j = 0;
         }
-//        System.out.println(subCats.elementAt(1).toString());
-        
         initComponents();
- 
     }
     
     /**
@@ -129,7 +113,6 @@ public class CategoriesGUI extends javax.swing.JFrame {
         listCategories.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         listCategories.setModel(this.cats);
         listCategories.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listCategories.setToolTipText("List of all categories");
         listCategories.setFocusable(false);
         listCategories.setRequestFocusEnabled(false);
         listCategories.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -158,17 +141,12 @@ public class CategoriesGUI extends javax.swing.JFrame {
         listSubcats.setBorder(null);
         listSubcats.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         listSubcats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listSubcats.setToolTipText("List of subcategories contained in the selected category");
+        listSubcats.setToolTipText("");
         listSubcats.setFocusable(false);
         listSubcats.setRequestFocusEnabled(false);
         listSubcats.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listSubcatsMouseClicked(evt);
-            }
-        });
-        listSubcats.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listSubcatsValueChanged(evt);
             }
         });
         scrollPaneSubcats.setViewportView(listSubcats);
@@ -270,12 +248,12 @@ public class CategoriesGUI extends javax.swing.JFrame {
 
     private void buttonDeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteCatActionPerformed
         // TODO add your handling code here:
-        new DeleteCategory("Category", listCategories.getSelectedValue()).setVisible(true);
+        new DeleteObject("Category", listCategories.getSelectedValue()).setVisible(true);
     }//GEN-LAST:event_buttonDeleteCatActionPerformed
 
     private void buttonDeleteSubcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteSubcategoryActionPerformed
         // TODO add your handling code here:
-        new DeleteCategory("Subcategory", listSubcats.getSelectedValue()).setVisible(true);
+        new DeleteObject("Subcategory", listSubcats.getSelectedValue()).setVisible(true);
     }//GEN-LAST:event_buttonDeleteSubcategoryActionPerformed
 
     private void buttonAddSubcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddSubcategoryActionPerformed
@@ -289,23 +267,12 @@ public class CategoriesGUI extends javax.swing.JFrame {
         int j = 0;
         InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
         for (InventoryComponent entry1 : selectedCategory.getComponents()){
-//            System.out.println(entry1.getName() + " /J:"+j);
             strList.add(j, entry1.getName());
             j++;
         }
         String[] str1 = strList.toArray(new String[0]);
-//        System.out.println(Arrays.toString(str1));
-        
         listSubcats.setListData(str1);
     }//GEN-LAST:event_listCategoriesValueChanged
-
-    private void listSubcatsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSubcatsValueChanged
-        // TODO add your handling code here:
-//        if (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1) {
-//            System.out.println("double clicked");
-//          }
-
-    }//GEN-LAST:event_listSubcatsValueChanged
 
     private void listSubcatsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSubcatsMouseClicked
         // TODO add your handling code here:
@@ -316,14 +283,11 @@ public class CategoriesGUI extends javax.swing.JFrame {
                 InventoryComponent selectedCategory = (InventoryComponent) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
                 InventoryComponent selectedSubcat = selectedCategory.getComponents().get(listSubcats.getSelectedIndex());
                 new ProductGUI(selectedSubcat).setVisible(true);
-//                System.out.println(listSubcats.getSelectedValue());
                 super.dispose();
             }
         }
     }//GEN-LAST:event_listSubcatsMouseClicked
 
-    
-    
     /**
      * @param args the command line arguments
      */

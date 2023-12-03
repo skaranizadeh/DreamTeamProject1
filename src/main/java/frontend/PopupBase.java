@@ -6,7 +6,6 @@ package frontend;
 
 import com.formdev.flatlaf.*;
 import javax.swing.*;
-import javax.swing.text.*;
 
 /**
  *
@@ -45,14 +44,6 @@ public class PopupBase extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(640, 480));
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jInternalFrame1.setBorder(null);
         jInternalFrame1.setClosable(true);
@@ -87,11 +78,6 @@ public class PopupBase extends javax.swing.JFrame {
         textFieldPopupHeader.setBorder(null);
         textFieldPopupHeader.setFocusable(false);
         textFieldPopupHeader.setName("popupTitle"); // NOI18N
-        textFieldPopupHeader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldPopupHeaderActionPerformed(evt);
-            }
-        });
 
         buttonConfirm.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonConfirm.setText("Confirm");
@@ -114,11 +100,6 @@ public class PopupBase extends javax.swing.JFrame {
         buttonCancel.setFocusable(false);
         buttonCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonCancel.setPreferredSize(new java.awt.Dimension(85, 32));
-        buttonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonCancelMouseClicked(evt);
-            }
-        });
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
@@ -193,24 +174,25 @@ public class PopupBase extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jInternalFrame1);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        // TODO add your handling code here:;
-    }//GEN-LAST:event_formWindowLostFocus
-
     private void jInternalFrame1InternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrame1InternalFrameClosed
         // TODO add your handling code here:
-        System.exit(0);
+        super.dispose();
     }//GEN-LAST:event_jInternalFrame1InternalFrameClosed
-
-    private void textFieldPopupHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldPopupHeaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldPopupHeaderActionPerformed
 
     private void buttonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmActionPerformed
         // TODO add your handling code here:
@@ -220,10 +202,6 @@ public class PopupBase extends javax.swing.JFrame {
         // TODO add your handling code here:
         super.dispose();
     }//GEN-LAST:event_buttonCancelActionPerformed
-
-    private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonCancelMouseClicked
 
     /**
      * @param args the command line arguments
