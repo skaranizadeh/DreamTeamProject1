@@ -5,30 +5,23 @@
 package frontend;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.awt.AWTException;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Robot;
-import javax.swing.JInternalFrame;
 import javax.swing.UnsupportedLookAndFeelException;
-
-
 
 /**
  *
  * @author mrswi
  */
-public class DeleteCategory extends javax.swing.JFrame {
+public class DeleteObject extends javax.swing.JFrame {
     
     private String catType = "Subcategory";
     private String catName = "Shoes";
     /**
      * Creates new form DeleteCategory
      */
-    public DeleteCategory() {
+    public DeleteObject() {
         initComponents();
     }
-    public DeleteCategory(String deleteType, String deleteName) {
+    public DeleteObject(String deleteType, String deleteName) {
         catType = deleteType;
         catName = deleteName;
         initComponents();
@@ -43,7 +36,7 @@ public class DeleteCategory extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CatDelTitle = new javax.swing.JInternalFrame();
+        internalFrameDelete = new javax.swing.JInternalFrame();
         textFieldDeleteHeader = new javax.swing.JTextField();
         buttonDelete = new javax.swing.JButton();
         buttonCancel = new javax.swing.JButton();
@@ -59,47 +52,16 @@ public class DeleteCategory extends javax.swing.JFrame {
         setName("DelCatFrame"); // NOI18N
         setUndecorated(true);
         setResizable(false);
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
+        setSize(new java.awt.Dimension(640, 480));
 
-        CatDelTitle.setBorder(null);
-        CatDelTitle.setClosable(true);
-        CatDelTitle.setTitle("Confirm Delete");
-        CatDelTitle.setFrameIcon(null);
-        CatDelTitle.setMaximumSize(new java.awt.Dimension(640, 480));
-        CatDelTitle.setOpaque(true);
-        CatDelTitle.setPreferredSize(new java.awt.Dimension(640, 480));
-        CatDelTitle.setVisible(true);
-        CatDelTitle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseDragged(evt);
-            }
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseMoved(evt);
-            }
-        });
-        CatDelTitle.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-                CatDelTitleInternalFrameClosed(evt);
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
+        internalFrameDelete.setBorder(null);
+        internalFrameDelete.setClosable(true);
+        internalFrameDelete.setTitle("Confirm Delete");
+        internalFrameDelete.setFrameIcon(null);
+        internalFrameDelete.setMaximumSize(new java.awt.Dimension(640, 480));
+        internalFrameDelete.setOpaque(true);
+        internalFrameDelete.setPreferredSize(new java.awt.Dimension(640, 480));
+        internalFrameDelete.setVisible(true);
 
         textFieldDeleteHeader.setEditable(false);
         textFieldDeleteHeader.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -108,16 +70,11 @@ public class DeleteCategory extends javax.swing.JFrame {
         textFieldDeleteHeader.setBorder(null);
         textFieldDeleteHeader.setFocusable(false);
         textFieldDeleteHeader.setName("popupTitle"); // NOI18N
-        textFieldDeleteHeader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldDeleteHeaderActionPerformed(evt);
-            }
-        });
 
         buttonDelete.setBackground(new java.awt.Color(150, 80, 82));
         buttonDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonDelete.setText("Delete");
-        buttonDelete.setToolTipText("Confirm deletion");
+        buttonDelete.setToolTipText("");
         buttonDelete.setBorderPainted(false);
         buttonDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonDelete.setFocusPainted(false);
@@ -131,18 +88,13 @@ public class DeleteCategory extends javax.swing.JFrame {
 
         buttonCancel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonCancel.setText("Cancel");
-        buttonCancel.setToolTipText("Cancel deletion");
+        buttonCancel.setToolTipText("");
         buttonCancel.setBorderPainted(false);
         buttonCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonCancel.setFocusPainted(false);
         buttonCancel.setFocusable(false);
         buttonCancel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonCancel.setPreferredSize(new java.awt.Dimension(85, 32));
-        buttonCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonCancelMouseClicked(evt);
-            }
-        });
         buttonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelActionPerformed(evt);
@@ -186,33 +138,33 @@ public class DeleteCategory extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout CatDelTitleLayout = new javax.swing.GroupLayout(CatDelTitle.getContentPane());
-        CatDelTitle.getContentPane().setLayout(CatDelTitleLayout);
-        CatDelTitleLayout.setHorizontalGroup(
-            CatDelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CatDelTitleLayout.createSequentialGroup()
+        javax.swing.GroupLayout internalFrameDeleteLayout = new javax.swing.GroupLayout(internalFrameDelete.getContentPane());
+        internalFrameDelete.getContentPane().setLayout(internalFrameDeleteLayout);
+        internalFrameDeleteLayout.setHorizontalGroup(
+            internalFrameDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, internalFrameDeleteLayout.createSequentialGroup()
                 .addComponent(textFieldDeleteHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(CatDelTitleLayout.createSequentialGroup()
+            .addGroup(internalFrameDeleteLayout.createSequentialGroup()
                 .addGap(169, 169, 169)
                 .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CatDelTitleLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, internalFrameDeleteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(layeredPaneDeleteContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
-        CatDelTitleLayout.setVerticalGroup(
-            CatDelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CatDelTitleLayout.createSequentialGroup()
+        internalFrameDeleteLayout.setVerticalGroup(
+            internalFrameDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(internalFrameDeleteLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addComponent(textFieldDeleteHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
                 .addComponent(layeredPaneDeleteContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addGroup(CatDelTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(internalFrameDeleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -222,98 +174,25 @@ public class DeleteCategory extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CatDelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(internalFrameDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CatDelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(internalFrameDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        CatDelTitle.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseMoved(evt);
-            }
-
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                CatDelTitleMouseDragged(evt);
-            }
-        });
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        // TODO add your handling code here:;
-        this.setFocusableWindowState(true);
-    }//GEN-LAST:event_formWindowLostFocus
-
-    private void CatDelTitleInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_CatDelTitleInternalFrameClosed
+    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_CatDelTitleInternalFrameClosed
-
-    private void textFieldDeleteHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldDeleteHeaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldDeleteHeaderActionPerformed
+        super.dispose();
+    }//GEN-LAST:event_buttonCancelActionPerformed
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonDeleteActionPerformed
-
-    private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonCancelActionPerformed
-
-    private void buttonCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_buttonCancelMouseClicked
-
-    private void CatDelTitleMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatDelTitleMouseDragged
-        // TODO add your handling code here:
-//        Point newPosition = evt.getPoint();
-//
-//        // Restrict mouse movement within the internal frame
-//        int maxX = this.getWidth() - 1;
-//        int maxY = this.getHeight() - 1;
-//
-//        newPosition.x = Math.min(Math.max(0, newPosition.x), maxX);
-//        newPosition.y = Math.min(Math.max(0, newPosition.y), maxY);
-// 
-//        // Set the new cursor position without moving the internal frame
-//        try {
-//            Robot robot = new Robot();
-//            robot.mouseMove((int) this.getLocation().x + newPosition.x,
-//                            (int) this.getLocation().y + newPosition.y);
-//        } catch (AWTException ex) {
-//            ex.printStackTrace();
-//        }
-        
-    }//GEN-LAST:event_CatDelTitleMouseDragged
-
-    private void CatDelTitleMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CatDelTitleMouseMoved
-        // TODO add your handling code here:
-//        JInternalFrame internalFrame = (JInternalFrame) evt.getSource();
-//        
-//        Point newPosition = evt.getPoint();
-//
-//        // Restrict mouse movement within the internal frame
-//        int maxX = internalFrame.getWidth() - 1;
-//        int maxY = internalFrame.getHeight() - 1;
-//
-//        newPosition.x = Math.min(Math.max(0, newPosition.x), maxX);
-//        newPosition.y = Math.min(Math.max(0, newPosition.y), maxY);
-// 
-//        // Set the new cursor position without moving the internal frame
-//        try {
-//            Robot robot = new Robot();
-//            robot.mouseMove((int) internalFrame.getLocation().x + newPosition.x,
-//                            (int) internalFrame.getLocation().y + newPosition.y);
-//        } catch (AWTException ex) {
-//            ex.printStackTrace();
-//        }
-    }//GEN-LAST:event_CatDelTitleMouseMoved
 
     /**
      * @param args the command line arguments
@@ -324,18 +203,18 @@ public class DeleteCategory extends javax.swing.JFrame {
             /* Create and display the form */
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new DeleteCategory().setVisible(true);
+                    new DeleteObject().setVisible(true);
                 }
             });
         } catch (UnsupportedLookAndFeelException ex) {
-             java.util.logging.Logger.getLogger(DeleteCategory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+             java.util.logging.Logger.getLogger(DeleteObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JInternalFrame CatDelTitle;
     private javax.swing.JButton buttonCancel;
     private javax.swing.JButton buttonDelete;
+    private javax.swing.JInternalFrame internalFrameDelete;
     private javax.swing.JLabel labelDeleteText;
     private javax.swing.JLayeredPane layeredPaneDeleteContent;
     private javax.swing.JTextField textFieldDeleteHeader;

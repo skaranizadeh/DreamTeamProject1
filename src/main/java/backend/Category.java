@@ -1,4 +1,5 @@
 package backend;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class Category implements InventoryComponent{
         return categoryId;
     }
 
-    @Override
+
     public void setCounterId(String maxId) {
         categoryCounter = Integer.parseInt(maxId.trim());
     }

@@ -5,8 +5,8 @@
 package frontend;
 
 import com.formdev.flatlaf.*;
+import java.awt.Color;
 import javax.swing.*;
-import javax.swing.text.*;
 
 /**
  *
@@ -15,6 +15,7 @@ import javax.swing.text.*;
 public class AddCategories extends javax.swing.JFrame {
     
     private String catType = "Category";
+    boolean firstRun = true;
     /**
      * Creates new form AddCategories
      */
@@ -49,19 +50,6 @@ public class AddCategories extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         setSize(new java.awt.Dimension(480, 300));
-        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
-            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
-            }
-            public void windowLostFocus(java.awt.event.WindowEvent evt) {
-                formWindowLostFocus(evt);
-            }
-        });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });
-        getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         internalFrameAddCats.setBorder(null);
         internalFrameAddCats.setClosable(true);
@@ -96,16 +84,10 @@ public class AddCategories extends javax.swing.JFrame {
         textFieldAddCatsHeader.setBorder(null);
         textFieldAddCatsHeader.setFocusable(false);
         textFieldAddCatsHeader.setName("popupTitle"); // NOI18N
-        textFieldAddCatsHeader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAddCatsHeaderActionPerformed(evt);
-            }
-        });
 
         buttonAddCat.setBackground(new java.awt.Color(78, 110, 82));
         buttonAddCat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonAddCat.setText("Add");
-        buttonAddCat.setToolTipText("Add a new " + catType);
         buttonAddCat.setBorderPainted(false);
         buttonAddCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonAddCat.setFocusPainted(false);
@@ -119,18 +101,12 @@ public class AddCategories extends javax.swing.JFrame {
 
         buttonCancelAddCat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonCancelAddCat.setText("Cancel");
-        buttonCancelAddCat.setToolTipText("Cancel the addition of a new " + catType);
         buttonCancelAddCat.setBorderPainted(false);
         buttonCancelAddCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonCancelAddCat.setFocusPainted(false);
         buttonCancelAddCat.setFocusable(false);
         buttonCancelAddCat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonCancelAddCat.setPreferredSize(new java.awt.Dimension(85, 32));
-        buttonCancelAddCat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonCancelAddCatMouseClicked(evt);
-            }
-        });
         buttonCancelAddCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelAddCatActionPerformed(evt);
@@ -138,11 +114,12 @@ public class AddCategories extends javax.swing.JFrame {
         });
 
         formattedTextFieldCatName.setBorder(null);
-        formattedTextFieldCatName.setForeground(new java.awt.Color(190, 120, 120));
+        formattedTextFieldCatName.setForeground(new java.awt.Color(120, 120, 120));
         formattedTextFieldCatName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         formattedTextFieldCatName.setText(catType + " Name");
-        formattedTextFieldCatName.setToolTipText("Insert name here");
+        formattedTextFieldCatName.setToolTipText("");
         formattedTextFieldCatName.setActionCommand("<Not Set>");
+        formattedTextFieldCatName.setCaretPosition(formattedTextFieldCatName.getText().length() / 2);
         formattedTextFieldCatName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         formattedTextFieldCatName.setDisabledTextColor(new java.awt.Color(120, 120, 120));
         formattedTextFieldCatName.setFocusLostBehavior(javax.swing.JFormattedTextField.REVERT);
@@ -153,9 +130,9 @@ public class AddCategories extends javax.swing.JFrame {
         formattedTextFieldCatName.setOpaque(true);
         formattedTextFieldCatName.setRequestFocusEnabled(false);
         formattedTextFieldCatName.setSelectedTextColor(new java.awt.Color(140, 140, 140));
-        formattedTextFieldCatName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                formattedTextFieldCatNameFocusLost(evt);
+        formattedTextFieldCatName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formattedTextFieldCatNameKeyTyped(evt);
             }
         });
 
@@ -189,47 +166,58 @@ public class AddCategories extends javax.swing.JFrame {
                 .addGap(25, 25, 25))
         );
 
-        getContentPane().add(internalFrameAddCats);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(internalFrameAddCats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(internalFrameAddCats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-        // TODO add your handling code here:;
-    }//GEN-LAST:event_formWindowLostFocus
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowActivated
-
-    private void textFieldAddCatsHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAddCatsHeaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAddCatsHeaderActionPerformed
-
     private void buttonAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCatActionPerformed
         // TODO add your handling code here:
+        if (firstRun || formattedTextFieldCatName.getText().isBlank()) {
+            new ErrorPopup("Please make sure you enter a <b>" + catType + " Name</b> for the new " + catType + ".").setVisible(true);
+        } else {
+            // TODO add category and subcategory functionality goes here
+        }
     }//GEN-LAST:event_buttonAddCatActionPerformed
 
-    private void buttonCancelAddCatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelAddCatMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_buttonCancelAddCatMouseClicked
-
     private void buttonCancelAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelAddCatActionPerformed
-        // TODO add your handling code here:
+        super.dispose();
     }//GEN-LAST:event_buttonCancelAddCatActionPerformed
 
     private void internalFrameAddCatsInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_internalFrameAddCatsInternalFrameClosed
-        // TODO add your handling code here:
-        this.dispose();
+        super.dispose();
     }//GEN-LAST:event_internalFrameAddCatsInternalFrameClosed
 
-    private void formattedTextFieldCatNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formattedTextFieldCatNameFocusLost
+    private void formattedTextFieldCatNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formattedTextFieldCatNameKeyTyped
         // TODO add your handling code here:
-        // if not empty, and focus lost, replace with default text. otherwise,
-        // it has user entered text, so dont delete it and keep the text there. (do nothing)
-    }//GEN-LAST:event_formattedTextFieldCatNameFocusLost
+        if (firstRun) {
+            if (evt.paramString().contains("Delete") || evt.paramString().contains("Backspace")){
+                formattedTextFieldCatName.setForeground(new Color(120,120,120));
+                formattedTextFieldCatName.setText(catType + " Name");
+                formattedTextFieldCatName.setCaretPosition(formattedTextFieldCatName.getText().length() / 2);
+                firstRun = true;
+            } else {
+                formattedTextFieldCatName.setForeground(Color.lightGray);
+                formattedTextFieldCatName.setText("");
+                firstRun = false;
+            }
+        } else if (formattedTextFieldCatName.getText().equals("")){
+            formattedTextFieldCatName.setForeground(new Color(120,120,120));
+            formattedTextFieldCatName.setText(catType + " Name");
+            formattedTextFieldCatName.setCaretPosition(formattedTextFieldCatName.getText().length() / 2);
+            firstRun = true;
+        }
+    }//GEN-LAST:event_formattedTextFieldCatNameKeyTyped
 
     /**
      * @param args the command line arguments

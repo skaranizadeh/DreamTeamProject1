@@ -5,6 +5,7 @@
 package frontend;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.Color;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -13,6 +14,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class AddProduct extends javax.swing.JFrame {
 
+    private boolean[] firstRun = {true, true, true, true};
+    
     /**
      * Creates new form AddProduct
      */
@@ -32,13 +35,13 @@ public class AddProduct extends javax.swing.JFrame {
         internalFrameAddItem = new javax.swing.JInternalFrame();
         textFieldAddItemHeader = new javax.swing.JTextField();
         layeredPaneAddItemContent = new javax.swing.JLayeredPane();
-        jLabel1 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelProductNameTitle = new javax.swing.JLabel();
+        formattedTextFieldProductName = new javax.swing.JFormattedTextField();
+        labelPriceTitle = new javax.swing.JLabel();
+        formattedTextFieldPrice = new javax.swing.JFormattedTextField();
+        labelDateTitle = new javax.swing.JLabel();
+        formattedTextFieldDate = new javax.swing.JFormattedTextField();
+        labelDescription = new javax.swing.JLabel();
         scrollPaneDescription = new javax.swing.JScrollPane();
         textAreaDescription = new javax.swing.JTextArea();
         buttonAddItem = new javax.swing.JButton();
@@ -83,78 +86,108 @@ public class AddProduct extends javax.swing.JFrame {
         textFieldAddItemHeader.setBorder(null);
         textFieldAddItemHeader.setFocusable(false);
         textFieldAddItemHeader.setName("popupTitle"); // NOI18N
-        textFieldAddItemHeader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldAddItemHeaderActionPerformed(evt);
-            }
-        });
 
         layeredPaneAddItemContent.setBackground(new java.awt.Color(76, 76, 76));
         layeredPaneAddItemContent.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(50, 50, 50), 1, true));
         layeredPaneAddItemContent.setFocusable(false);
         layeredPaneAddItemContent.setOpaque(true);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Product Name:");
+        labelProductNameTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelProductNameTitle.setText("Product Name:");
 
-        jFormattedTextField1.setBorder(null);
-        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField1.setText("Product Name");
-        jFormattedTextField1.setToolTipText("Enter the new product's name");
-        jFormattedTextField1.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        jFormattedTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Purchase Price:");
-
-        jFormattedTextField2.setBorder(null);
-        jFormattedTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField2.setText("Purchase Price");
-        jFormattedTextField2.setToolTipText("Enter the new product's purchase price");
-        jFormattedTextField2.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        jFormattedTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jFormattedTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField2ActionPerformed(evt);
+        formattedTextFieldProductName.setBorder(null);
+        formattedTextFieldProductName.setForeground(new java.awt.Color(130, 130, 130));
+        formattedTextFieldProductName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formattedTextFieldProductName.setText("Product Name");
+        formattedTextFieldProductName.setToolTipText("");
+        formattedTextFieldProductName.setCaretPosition(6);
+        formattedTextFieldProductName.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        formattedTextFieldProductName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        formattedTextFieldProductName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formattedTextFieldProductNameMousePressed(evt);
+            }
+        });
+        formattedTextFieldProductName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formattedTextFieldProductNameKeyTyped(evt);
             }
         });
 
-        jFormattedTextField3.setBorder(null);
-        jFormattedTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField3.setText("Purchase Date");
-        jFormattedTextField3.setToolTipText("Enter the new product's purchase date");
-        jFormattedTextField3.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
-        jFormattedTextField3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField3ActionPerformed(evt);
+        labelPriceTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelPriceTitle.setText("Purchase Price:");
+
+        formattedTextFieldPrice.setBorder(null);
+        formattedTextFieldPrice.setForeground(new java.awt.Color(130, 130, 130));
+        formattedTextFieldPrice.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formattedTextFieldPrice.setText("Purchase Price");
+        formattedTextFieldPrice.setToolTipText("");
+        formattedTextFieldPrice.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        formattedTextFieldPrice.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        formattedTextFieldPrice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formattedTextFieldPriceMousePressed(evt);
+            }
+        });
+        formattedTextFieldPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formattedTextFieldPriceKeyTyped(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Purchase Date:");
+        labelDateTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelDateTitle.setText("Purchase Date:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("Description:");
+        formattedTextFieldDate.setBorder(null);
+        formattedTextFieldDate.setForeground(new java.awt.Color(130, 130, 130));
+        formattedTextFieldDate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        formattedTextFieldDate.setText("Purchase Date");
+        formattedTextFieldDate.setToolTipText("");
+        formattedTextFieldDate.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        formattedTextFieldDate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        formattedTextFieldDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formattedTextFieldDateMousePressed(evt);
+            }
+        });
+        formattedTextFieldDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formattedTextFieldDateKeyTyped(evt);
+            }
+        });
+
+        labelDescription.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelDescription.setText("Description:");
 
         scrollPaneDescription.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         textAreaDescription.setColumns(20);
         textAreaDescription.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textAreaDescription.setForeground(new java.awt.Color(130, 130, 130));
         textAreaDescription.setLineWrap(true);
         textAreaDescription.setRows(3);
-        textAreaDescription.setText("Product description");
-        textAreaDescription.setToolTipText("Enter the new product's description");
+        textAreaDescription.setText("Product Description");
+        textAreaDescription.setToolTipText("");
         textAreaDescription.setWrapStyleWord(true);
+        textAreaDescription.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                textAreaDescriptionMousePressed(evt);
+            }
+        });
+        textAreaDescription.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textAreaDescriptionKeyTyped(evt);
+            }
+        });
         scrollPaneDescription.setViewportView(textAreaDescription);
 
-        layeredPaneAddItemContent.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layeredPaneAddItemContent.setLayer(jFormattedTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layeredPaneAddItemContent.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layeredPaneAddItemContent.setLayer(jFormattedTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layeredPaneAddItemContent.setLayer(jFormattedTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layeredPaneAddItemContent.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layeredPaneAddItemContent.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPaneAddItemContent.setLayer(labelProductNameTitle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPaneAddItemContent.setLayer(formattedTextFieldProductName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPaneAddItemContent.setLayer(labelPriceTitle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPaneAddItemContent.setLayer(formattedTextFieldPrice, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPaneAddItemContent.setLayer(labelDateTitle, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPaneAddItemContent.setLayer(formattedTextFieldDate, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layeredPaneAddItemContent.setLayer(labelDescription, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layeredPaneAddItemContent.setLayer(scrollPaneDescription, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layeredPaneAddItemContentLayout = new javax.swing.GroupLayout(layeredPaneAddItemContent);
@@ -165,23 +198,23 @@ public class AddProduct extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layeredPaneAddItemContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layeredPaneAddItemContentLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelPriceTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(96, 96, 96)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(formattedTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layeredPaneAddItemContentLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelProductNameTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(110, 110, 110)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(formattedTextFieldProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layeredPaneAddItemContentLayout.createSequentialGroup()
                         .addGroup(layeredPaneAddItemContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layeredPaneAddItemContentLayout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelDateTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(82, 82, 82))
                             .addGroup(layeredPaneAddItemContentLayout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layeredPaneAddItemContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(formattedTextFieldDate, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                             .addComponent(scrollPaneDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addGap(35, 35, 35))
         );
@@ -190,20 +223,20 @@ public class AddProduct extends javax.swing.JFrame {
             .addGroup(layeredPaneAddItemContentLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layeredPaneAddItemContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelProductNameTitle)
+                    .addComponent(formattedTextFieldProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layeredPaneAddItemContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelPriceTitle)
+                    .addComponent(formattedTextFieldPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layeredPaneAddItemContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelDateTitle)
+                    .addComponent(formattedTextFieldDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layeredPaneAddItemContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layeredPaneAddItemContentLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(labelDescription)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(scrollPaneDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
                 .addContainerGap())
@@ -212,7 +245,7 @@ public class AddProduct extends javax.swing.JFrame {
         buttonAddItem.setBackground(new java.awt.Color(78, 110, 82));
         buttonAddItem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonAddItem.setText("Add");
-        buttonAddItem.setToolTipText("Add a new product to the subcategory");
+        buttonAddItem.setToolTipText("");
         buttonAddItem.setBorderPainted(false);
         buttonAddItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonAddItem.setFocusPainted(false);
@@ -226,18 +259,13 @@ public class AddProduct extends javax.swing.JFrame {
 
         buttonCancelAddItem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         buttonCancelAddItem.setText("Cancel");
-        buttonCancelAddItem.setToolTipText("Cancel the addition of a new product");
+        buttonCancelAddItem.setToolTipText("");
         buttonCancelAddItem.setBorderPainted(false);
         buttonCancelAddItem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttonCancelAddItem.setFocusPainted(false);
         buttonCancelAddItem.setFocusable(false);
         buttonCancelAddItem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         buttonCancelAddItem.setPreferredSize(new java.awt.Dimension(85, 32));
-        buttonCancelAddItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonCancelAddItemMouseClicked(evt);
-            }
-        });
         buttonCancelAddItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCancelAddItemActionPerformed(evt);
@@ -290,35 +318,140 @@ public class AddProduct extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textFieldAddItemHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldAddItemHeaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldAddItemHeaderActionPerformed
-
     private void buttonAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddItemActionPerformed
         // TODO add your handling code here:
+        if (firstRun[0] || formattedTextFieldProductName.getText().isBlank()) {
+            new ErrorPopup("Please make sure you enter a <b>Product Name</b> for the new Product.").setVisible(true);
+        } else if (firstRun[1] || formattedTextFieldPrice.getText().isBlank()) {
+            new ErrorPopup("Please make sure you enter a <b>Purchase Price</b> for the new Product.").setVisible(true);
+        } else if (firstRun[2] || formattedTextFieldDate.getText().isBlank()) {
+            new ErrorPopup("Please make sure you enter a <b>Purchase Date</b> for the new Product.").setVisible(true);
+        } else if (firstRun[3] || textAreaDescription.getText().isBlank()) {
+            new ErrorPopup("Please make sure you enter a <b>Description</b> for the new Product.").setVisible(true);
+        } else {
+            // TODO add product functionality goes here
+            
+        }
+        
     }//GEN-LAST:event_buttonAddItemActionPerformed
-
-    private void buttonCancelAddItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonCancelAddItemMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_buttonCancelAddItemMouseClicked
 
     private void buttonCancelAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelAddItemActionPerformed
         // TODO add your handling code here:
+        super.dispose();
     }//GEN-LAST:event_buttonCancelAddItemActionPerformed
 
     private void internalFrameAddItemInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_internalFrameAddItemInternalFrameClosed
         // TODO add your handling code here:
-        this.dispose();
+        super.dispose();
     }//GEN-LAST:event_internalFrameAddItemInternalFrameClosed
 
-    private void jFormattedTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField2ActionPerformed
+    private void formattedTextFieldProductNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formattedTextFieldProductNameKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField2ActionPerformed
+        if (firstRun[0]) {
+            if (evt.paramString().contains("Delete") || evt.paramString().contains("Backspace")){
+                formattedTextFieldProductName.setForeground(new Color(130,130,130));
+                formattedTextFieldProductName.setText("Product Name");
+                formattedTextFieldProductName.setCaretPosition(6);
+                firstRun[0] = true;
+            } else {
+                formattedTextFieldProductName.setForeground(Color.lightGray);
+                formattedTextFieldProductName.setText("");
+                firstRun[0] = false;
+            }
+        } else if (formattedTextFieldProductName.getText().equals("")){
+            formattedTextFieldProductName.setForeground(new Color(130,130,130));
+            formattedTextFieldProductName.setText("Product Name");
+            formattedTextFieldProductName.setCaretPosition(6);
+            firstRun[0] = true;
+        }
+    }//GEN-LAST:event_formattedTextFieldProductNameKeyTyped
 
-    private void jFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField3ActionPerformed
+    private void formattedTextFieldPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formattedTextFieldPriceKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField3ActionPerformed
+        if (firstRun[1]) {
+            if (evt.paramString().contains("Delete") || evt.paramString().contains("Backspace")){
+                formattedTextFieldPrice.setForeground(new Color(130,130,130));
+                formattedTextFieldPrice.setText("Purchase Price");
+                formattedTextFieldPrice.setCaretPosition(7);
+                firstRun[1] = true;
+            } else {
+                formattedTextFieldPrice.setForeground(Color.lightGray);
+                formattedTextFieldPrice.setText("");
+                firstRun[1] = false;
+            }
+        } else if (formattedTextFieldPrice.getText().equals("")){
+            formattedTextFieldPrice.setForeground(new Color(130,130,130));
+            formattedTextFieldPrice.setText("Purchase Price");
+            formattedTextFieldPrice.setCaretPosition(7);
+            firstRun[1] = true;
+        }
+    }//GEN-LAST:event_formattedTextFieldPriceKeyTyped
+
+    private void formattedTextFieldDateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formattedTextFieldDateKeyTyped
+        // TODO add your handling code here:
+         if (firstRun[2]) {
+            if (evt.paramString().contains("Delete") || evt.paramString().contains("Backspace")){
+                formattedTextFieldDate.setForeground(new Color(130,130,130));
+                formattedTextFieldDate.setText("Purchase Date");
+                formattedTextFieldDate.setCaretPosition(6);
+                firstRun[2] = true;
+            } else {
+                formattedTextFieldDate.setForeground(Color.lightGray);
+                formattedTextFieldDate.setText("");
+                firstRun[2] = false;
+            }
+        } else if (formattedTextFieldDate.getText().equals("")){
+            formattedTextFieldDate.setForeground(new Color(130,130,130));
+            formattedTextFieldDate.setText("Purchase Date");
+            formattedTextFieldDate.setCaretPosition(6);
+            firstRun[2] = true;
+        }
+    }//GEN-LAST:event_formattedTextFieldDateKeyTyped
+
+    private void textAreaDescriptionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textAreaDescriptionKeyTyped
+        // TODO add your handling code here:
+        if (firstRun[3]) {
+            if (evt.paramString().contains("Delete") || evt.paramString().contains("Backspace")){
+                textAreaDescription.setForeground(new Color(130,130,130));
+                textAreaDescription.setText("Product Description");
+                textAreaDescription.setCaretPosition(0);
+                firstRun[3] = true;
+            } else {
+                textAreaDescription.setForeground(Color.lightGray);
+                textAreaDescription.setText("");
+                firstRun[3] = false;
+            }
+        } else if (textAreaDescription.getText().equals("")){
+            textAreaDescription.setForeground(new Color(130,130,130));
+            textAreaDescription.setText("Product Description");
+            textAreaDescription.setCaretPosition(0);
+            firstRun[3] = true;
+        }
+    }//GEN-LAST:event_textAreaDescriptionKeyTyped
+
+    private void formattedTextFieldProductNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formattedTextFieldProductNameMousePressed
+        // TODO add your handling code here:
+        if (firstRun[0]) 
+            formattedTextFieldProductName.setCaretPosition(6);
+    }//GEN-LAST:event_formattedTextFieldProductNameMousePressed
+
+    private void formattedTextFieldPriceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formattedTextFieldPriceMousePressed
+        // TODO add your handling code here:
+        if (firstRun[1]) 
+            formattedTextFieldPrice.setCaretPosition(7);
+    }//GEN-LAST:event_formattedTextFieldPriceMousePressed
+
+    private void formattedTextFieldDateMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formattedTextFieldDateMousePressed
+        // TODO add your handling code here:
+        if (firstRun[2]) 
+            formattedTextFieldDate.setCaretPosition(6);
+    }//GEN-LAST:event_formattedTextFieldDateMousePressed
+
+    private void textAreaDescriptionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textAreaDescriptionMousePressed
+        // TODO add your handling code here:
+        if (firstRun[3]) 
+            textAreaDescription.setCaretPosition(0);
+    }//GEN-LAST:event_textAreaDescriptionMousePressed
 
     /**
      * @param args the command line arguments
@@ -340,14 +473,14 @@ public class AddProduct extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddItem;
     private javax.swing.JButton buttonCancelAddItem;
+    private javax.swing.JFormattedTextField formattedTextFieldDate;
+    private javax.swing.JFormattedTextField formattedTextFieldPrice;
+    private javax.swing.JFormattedTextField formattedTextFieldProductName;
     private javax.swing.JInternalFrame internalFrameAddItem;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel labelDateTitle;
+    private javax.swing.JLabel labelDescription;
+    private javax.swing.JLabel labelPriceTitle;
+    private javax.swing.JLabel labelProductNameTitle;
     private javax.swing.JLayeredPane layeredPaneAddItemContent;
     private javax.swing.JScrollPane scrollPaneDescription;
     private javax.swing.JTextArea textAreaDescription;

@@ -1,6 +1,6 @@
 package backend;
-import java.util.List;
 
+import java.util.List;
 
 public class Product implements InventoryComponent{
 
@@ -35,7 +35,7 @@ public class Product implements InventoryComponent{
         this.description = description;
         this.purchasePrice = purchasePrice;
         this.purchaseDate = purchaseDate;
-        this.productId = subcategory.getId() + String.format("%03d", productCounter++);
+        //this.productId = subcategory.getId() + String.format("%03d", productCounter++);
         //this.subcategory = subcategory;
         subcategory.getComponents().add(this);
     }
@@ -130,9 +130,9 @@ public class Product implements InventoryComponent{
         return productId;
     }
 
-    @Override
-    public void setCounterId(String maxId) {
-        productCounter = Integer.parseInt(maxId.trim());
+
+    private static void setCounterId(int maxId) {
+        productCounter = maxId + 1;
     }
 
     @Override
@@ -140,6 +140,11 @@ public class Product implements InventoryComponent{
 
         // Not applicable for product
         throw new UnsupportedOperationException("Cannot edit a Product directly.");
+    }
+
+    public static Product addProduct(String productName, String description, double purchasePrice, String purchaseDate, InventoryComponent subcategory, int maxId) {
+        setCounterId(maxId);
+        return new Product(productName, description, purchasePrice, purchaseDate, subcategory);
     }
 
 //    @Override
