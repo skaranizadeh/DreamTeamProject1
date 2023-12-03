@@ -4,8 +4,15 @@
  */
 package frontend;
 
+import backend.Category;
+import backend.InventoryComponent;
+import backend.Product;
+import backend.ProductManagement;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -15,11 +22,19 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class AddProduct extends javax.swing.JFrame {
 
     private boolean[] firstRun = {true, true, true, true};
+    private ProductManagement productManagement;
+    private InventoryComponent subcat;
     
     /**
      * Creates new form AddProduct
      */
     public AddProduct() {
+        initComponents();
+    }
+    
+    public AddProduct(InventoryComponent subcategory, ProductManagement mainClass){
+        subcat = subcategory;
+        productManagement = mainClass;
         initComponents();
     }
 
@@ -320,6 +335,8 @@ public class AddProduct extends javax.swing.JFrame {
 
     private void buttonAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddItemActionPerformed
         // TODO add your handling code here:
+        boolean added = false;
+        boolean duplicate = false;
         if (firstRun[0] || formattedTextFieldProductName.getText().isBlank()) {
             new ErrorPopup("Please make sure you enter a <b>Product Name</b> for the new Product.").setVisible(true);
         } else if (firstRun[1] || formattedTextFieldPrice.getText().isBlank()) {
@@ -331,6 +348,46 @@ public class AddProduct extends javax.swing.JFrame {
         } else {
             // TODO add product functionality goes here
             
+            for (InventoryComponent product : subcat.getComponents()) {
+                if (product.getName().equalsIgnoreCase(formattedTextFieldProductName.getText().trim())) {
+                    new ErrorPopup("Duplicate <b>Product Name</b> for the new Product. Please enter a new name").setVisible(true);
+                    duplicate = true;
+                    break;
+                }
+            }
+            try {
+               Double.parseDouble(formattedTextFieldPrice.getText().trim());
+           }
+           catch (NumberFormatException e) {
+               new ErrorPopup("Invalid <b>price</b> for the new Product. Please enter a valid price.").setVisible(true);
+               duplicate = true;
+           }
+//if(product.getName().equalsIgnoreCase(formattedTextFieldPrice.getTex)){
+                
+            
+            if(!duplicate){
+                 Product newProduct = Product.addProduct(formattedTextFieldProductName.getText().trim(),
+                        textAreaDescription.getText().trim(),
+                        Double.parseDouble(formattedTextFieldPrice.getText().trim()),
+                        formattedTextFieldDate.getText().trim(),
+                        subcat,
+                        productManagement.findMaxId(subcat.getComponents(), 6, 9));
+                String filePath = "productData.csv";
+                String newData = String.format("%s,%s,%s,%s,%s", newProduct.getId(), newProduct.getName(),
+                        newProduct.getDescription(), newProduct.getPurchasePrice(), newProduct.getPurchaseDate());
+                added = true;
+                try {
+                    productManagement.writeDataToFile(newData, filePath);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+                }
+               
+
+            }
+        // TODO add category and subcategory functionality goes here
+        }
+        if(added){
+        super.dispose();
         }
         
     }//GEN-LAST:event_buttonAddItemActionPerformed

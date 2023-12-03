@@ -3,10 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package frontend;
-
+import backend.ProductManagement;
+import backend.Category;
+import backend.InventoryComponent;
 import com.formdev.flatlaf.*;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import backend.Subcategory;
 
 /**
  *
@@ -15,15 +21,26 @@ import javax.swing.*;
 public class AddCategories extends javax.swing.JFrame {
     
     private String catType = "Category";
-    boolean firstRun = true;
+    private boolean firstRun = true;
+    private ProductManagement productManagement;
+    private int selectedCatIndex = -1; 
+    
     /**
      * Creates new form AddCategories
      */
     public AddCategories() {
         initComponents();
     }
-    public AddCategories(String type) {
+    public AddCategories(String type, ProductManagement mainClass) {
         catType = type;
+        productManagement = mainClass;
+        initComponents();
+    }
+    
+    public AddCategories(String type, ProductManagement mainClass, int categories) {
+        selectedCatIndex = categories;
+        catType = type;
+        productManagement = mainClass;
         initComponents();
     }
 
@@ -130,6 +147,11 @@ public class AddCategories extends javax.swing.JFrame {
         formattedTextFieldCatName.setOpaque(true);
         formattedTextFieldCatName.setRequestFocusEnabled(false);
         formattedTextFieldCatName.setSelectedTextColor(new java.awt.Color(140, 140, 140));
+        formattedTextFieldCatName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formattedTextFieldCatNameMousePressed(evt);
+            }
+        });
         formattedTextFieldCatName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 formattedTextFieldCatNameKeyTyped(evt);
@@ -183,10 +205,62 @@ public class AddCategories extends javax.swing.JFrame {
 
     private void buttonAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCatActionPerformed
         // TODO add your handling code here:
+        boolean duplicate = false;
+        boolean added = false;
         if (firstRun || formattedTextFieldCatName.getText().isBlank()) {
             new ErrorPopup("Please make sure you enter a <b>" + catType + " Name</b> for the new " + catType + ".").setVisible(true);
         } else {
+            if(catType.equals("Category")){
+                for (InventoryComponent category : productManagement.getCategories().values()) {
+                    if (category.getName().equalsIgnoreCase(formattedTextFieldCatName.getText().trim())) {
+                        new ErrorPopup("Duplicate <b>" + catType + " Name</b> for the new " + catType + ". Please Enter a new name").setVisible(true);
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if(!duplicate){
+                    InventoryComponent newCategory = new Category(formattedTextFieldCatName.getText());
+                    String filePath = "categoryData.csv";
+                    String newData = String.format("%s,%s", newCategory.getId(), newCategory.getName());
+                    //InventoryComponent newCategory = new Category(input);
+                    productManagement.addCat(newCategory);
+                    added = true;
+                    try {
+                        productManagement.writeDataToFile(newData, filePath);
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddCategories.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        
+                }
             // TODO add category and subcategory functionality goes here
+            }
+            if(catType.equals("Subcategory")){
+                InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[selectedCatIndex];
+                for (InventoryComponent entry1 : selectedCategory.getComponents()) {
+                    if (entry1.getName().equalsIgnoreCase(formattedTextFieldCatName.getText().trim())) {
+                        new ErrorPopup("Duplicate <b>" + catType + " Name</b> for the new " + catType + ". Please Enter a new name").setVisible(true);
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if(!duplicate){
+                    Subcategory newSubcategory = Subcategory.addSubcategory(formattedTextFieldCatName.getText(), selectedCategory, productManagement.findMaxId(selectedCategory.getComponents(), 3, 6));
+                    String filePath = "subcategoryData.csv";
+                    String newData = String.format("%s,%s", newSubcategory.getId(), newSubcategory.getName());
+                    productManagement.addSubCat(newSubcategory);
+                    added = true;
+                    try {
+                        productManagement.writeDataToFile(newData, filePath);
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddCategories.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        
+                }
+            // TODO add category and subcategory functionality goes here
+            }
+        }
+        if(added){
+            super.dispose();
         }
     }//GEN-LAST:event_buttonAddCatActionPerformed
 
@@ -218,6 +292,12 @@ public class AddCategories extends javax.swing.JFrame {
             firstRun = true;
         }
     }//GEN-LAST:event_formattedTextFieldCatNameKeyTyped
+
+    private void formattedTextFieldCatNameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formattedTextFieldCatNameMousePressed
+        // TODO add your handling code here:
+        if (firstRun) 
+            formattedTextFieldCatName.setCaretPosition(formattedTextFieldCatName.getText().length() / 2);
+    }//GEN-LAST:event_formattedTextFieldCatNameMousePressed
 
     /**
      * @param args the command line arguments

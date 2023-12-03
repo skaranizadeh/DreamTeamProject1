@@ -19,6 +19,14 @@ public class ProductManagement {
     public ProductManagement() {
         this.encrypt = new Encrypt();
     }
+    
+    public void addCat(InventoryComponent newCategory){
+        categories.put(newCategory.getId(), (Category) newCategory);
+    }
+    
+    public void addSubCat(InventoryComponent newSubCategory){
+        subcategories.put(newSubCategory.getId(), (Subcategory) newSubCategory);
+}
 
     // Method to read data from the category CSV file
     private void readCategoryData(String csvFile, String csvSplitBy) {
@@ -939,7 +947,7 @@ public class ProductManagement {
         //System.out.println("Exiting the Product Management System. Goodbye!");
     }
 
-    private static void writeDataToFile(String newData, String filePath) throws IOException {
+    public void writeDataToFile(String newData, String filePath) throws IOException {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             // append data to file
             writer.write(newData);
@@ -987,7 +995,7 @@ public class ProductManagement {
 
     // check the id of components and return the biggest id number. start is starting the digit index
     // in the id string and end is the ending digit index
-    private int findMaxId(List<InventoryComponent> arrayList, int start, int end) {
+    public int findMaxId(List<InventoryComponent> arrayList, int start, int end) {
         int max = 0;
 
         if (arrayList == null || arrayList.isEmpty())

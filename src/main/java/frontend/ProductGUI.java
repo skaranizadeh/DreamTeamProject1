@@ -8,6 +8,8 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.DefaultListModel;
 import javax.swing.UnsupportedLookAndFeelException;
 import backend.*;
+import java.awt.Font;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,8 +18,8 @@ import backend.*;
 public class ProductGUI extends javax.swing.JFrame {
     
    private InventoryComponent subcat;
-   DefaultListModel<String> products = new DefaultListModel<>();
-   
+   private DefaultListModel<String> products = new DefaultListModel<>();
+   private ProductManagement productManagement;
     /**
      * Creates new form ProductGUI
      */
@@ -27,13 +29,14 @@ public class ProductGUI extends javax.swing.JFrame {
         
     }
     
-    public ProductGUI(InventoryComponent subCategory) {
-        
+    public ProductGUI(InventoryComponent subCategory, ProductManagement mainClass) {
+        productManagement = mainClass;
         subcat = subCategory;
         int i = 0;
         for (InventoryComponent entry : subcat.getComponents()) {
             products.add(i,entry.getName());
             i++;
+            
         }
         initComponents();
     }
@@ -74,6 +77,13 @@ public class ProductGUI extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         labelDetailsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         labelDetailsTitle.setText("Details");
@@ -379,7 +389,7 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
         // TODO add your handling code here:
-        new AddProduct().setVisible(true);
+        new AddProduct(subcat,productManagement).setVisible(true);
             
     }//GEN-LAST:event_buttonAddActionPerformed
 
@@ -401,12 +411,38 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void listItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listItemsValueChanged
         // TODO add your handling code here:
-        textFieldProductName.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
-        labelId.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getId());
-        labelPrice.setText(Double.toString(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchasePrice()));
-        labelDate.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchaseDate());
-        textAreaDescription.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getDescription());
+        if(listItems.getSelectedIndex() != -1){
+            textFieldProductName.setFont(textFieldProductName.getFont().deriveFont(24f));
+            textFieldProductName.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
+            labelId.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getId());
+            labelPrice.setText(Double.toString(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchasePrice()));
+            labelDate.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchaseDate());
+            textAreaDescription.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getDescription());
+        
+            if (textFieldProductName.getText().length() > 25) {
+                textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 40 - textFieldProductName.getText().length() / 2));
+            }
+        }
+        
     }//GEN-LAST:event_listItemsValueChanged
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        //if(listItems.getSelectedIndex() != -1){
+            ArrayList<String> strList = new ArrayList<>();
+            int j = 0;
+           
+            for (InventoryComponent entry1 :subcat.getComponents()){
+                strList.add(j, entry1.getName());
+                j++;
+            }
+            String[] str1 = strList.toArray(new String[0]);
+            listItems.setListData(str1);
+            
+
+            
+      //  }
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments

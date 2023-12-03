@@ -17,8 +17,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class CategoriesGUI extends javax.swing.JFrame {
     private ProductManagement productManagement;
-    DefaultListModel<String> cats = new DefaultListModel<>();
-
+    private DefaultListModel<String> cats = new DefaultListModel<>();
+    private int lastCatIndex = -1;
+    
     /**
      * Creates new form CategoriesGUI
      */
@@ -61,6 +62,13 @@ public class CategoriesGUI extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         labelSubcatsTitle.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         labelSubcatsTitle.setText("Subcategories");
@@ -243,7 +251,8 @@ public class CategoriesGUI extends javax.swing.JFrame {
 
     private void buttonAddCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddCatActionPerformed
         // TODO add your handling code here:
-        new AddCategories("Category").setVisible(true);
+        new AddCategories("Category", productManagement).setVisible(true);
+        
     }//GEN-LAST:event_buttonAddCatActionPerformed
 
     private void buttonDeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteCatActionPerformed
@@ -258,20 +267,29 @@ public class CategoriesGUI extends javax.swing.JFrame {
 
     private void buttonAddSubcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddSubcategoryActionPerformed
         // TODO add your handling code here:
-        new AddCategories("Subcategory").setVisible(true);
+        if(listCategories.getSelectedIndex() == -1){
+            new ErrorPopup("Make sure you <b>select a category</b> before adding a subcategory.").setVisible(true);
+        }
+        else{
+            new AddCategories("Subcategory",productManagement,listCategories.getSelectedIndex()).setVisible(true);
+        }
     }//GEN-LAST:event_buttonAddSubcategoryActionPerformed
 
     private void listCategoriesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCategoriesValueChanged
         // TODO add your handling code here: 
-        ArrayList<String> strList = new ArrayList<>();
-        int j = 0;
-        InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
-        for (InventoryComponent entry1 : selectedCategory.getComponents()){
-            strList.add(j, entry1.getName());
-            j++;
+        if(listCategories.getSelectedIndex() != -1){
+            
+            lastCatIndex = listCategories.getSelectedIndex();
+            ArrayList<String> strList = new ArrayList<>();
+            int j = 0;
+            InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+            for (InventoryComponent entry1 : selectedCategory.getComponents()){
+                strList.add(j, entry1.getName());
+                j++;
+            }
+            String[] str1 = strList.toArray(new String[0]);
+            listSubcats.setListData(str1);
         }
-        String[] str1 = strList.toArray(new String[0]);
-        listSubcats.setListData(str1);
     }//GEN-LAST:event_listCategoriesValueChanged
 
     private void listSubcatsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSubcatsMouseClicked
@@ -282,11 +300,43 @@ public class CategoriesGUI extends javax.swing.JFrame {
             if (listSubcats.getSelectedValue() != null) {
                 InventoryComponent selectedCategory = (InventoryComponent) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
                 InventoryComponent selectedSubcat = selectedCategory.getComponents().get(listSubcats.getSelectedIndex());
-                new ProductGUI(selectedSubcat).setVisible(true);
+                new ProductGUI(selectedSubcat, productManagement).setVisible(true);
                 super.dispose();
             }
+            
         }
     }//GEN-LAST:event_listSubcatsMouseClicked
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+                // TODO add your handling code here: 
+        if(listCategories.getSelectedIndex() != -1){
+            ArrayList<String> strList = new ArrayList<>();
+            int j = 0;
+            
+            InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+            
+            for (InventoryComponent entry1 : selectedCategory.getComponents()){
+                strList.add(j, entry1.getName());
+                j++;
+            }
+            String[] str1 = strList.toArray(new String[0]);
+            listSubcats.setListData(str1);
+            
+
+            ArrayList<String> catList = new ArrayList<>();
+            j = 0;
+
+            for (InventoryComponent entry1 : productManagement.getCategories().values()){
+                catList.add(j, entry1.getName());
+                j++;
+            }
+            String[] str2 = catList.toArray(new String[0]);
+            listCategories.setListData(str2);
+            
+        }
+        listCategories.setSelectedIndex(lastCatIndex);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
