@@ -15,9 +15,9 @@ import java.security.NoSuchAlgorithmException;
  * @author shmit
  */
 public class Login extends javax.swing.JFrame {
-    Encrypt encrypt = new Encrypt();
-    String hashedPas = "77230fb5224b2316d0b4c7f4e5e5f482";
-    String hashedUser = "21232f297a57a5a743894a0e4a801fc3";
+    private Encrypt encrypt = new Encrypt();
+    private String hashedPas = "77230fb5224b2316d0b4c7f4e5e5f482";
+    private String hashedUser = "21232f297a57a5a743894a0e4a801fc3";
     /**
      * Creates new form Login
      */

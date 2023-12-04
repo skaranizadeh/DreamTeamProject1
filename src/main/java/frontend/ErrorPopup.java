@@ -13,7 +13,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class ErrorPopup extends javax.swing.JFrame {
 
-    String errorMessage = "Placeholder error message.";
+    private String errorMessage = "Placeholder error message.";
     /**
      * Creates new form ErrorPopup
      */
@@ -100,10 +100,9 @@ public class ErrorPopup extends javax.swing.JFrame {
         scrollPaneErrorMessage.setBorder(null);
 
         editorPaneErrorMessage.setEditable(false);
-        editorPaneErrorMessage.setBackground(new java.awt.Color(30, 30, 30));
         editorPaneErrorMessage.setBorder(null);
         editorPaneErrorMessage.setContentType("text/html"); // NOI18N
-        editorPaneErrorMessage.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        editorPaneErrorMessage.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         editorPaneErrorMessage.setForeground(new java.awt.Color(190, 120, 120));
         editorPaneErrorMessage.setText("<p align=\"center\">" + this.errorMessage + "</p>");
         editorPaneErrorMessage.setFocusable(false);

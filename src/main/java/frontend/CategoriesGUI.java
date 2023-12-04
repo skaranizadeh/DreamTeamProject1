@@ -19,6 +19,7 @@ public class CategoriesGUI extends javax.swing.JFrame {
     private ProductManagement productManagement;
     private DefaultListModel<String> cats = new DefaultListModel<>();
     private int lastCatIndex = -1;
+    private static boolean deletePushed = false;
     
     /**
      * Creates new form CategoriesGUI
@@ -32,6 +33,10 @@ public class CategoriesGUI extends javax.swing.JFrame {
             i++;
         }
         initComponents();
+    }
+    
+    public static void setDeletePushed(boolean val) {
+        deletePushed = val;
     }
     
     /**
@@ -257,18 +262,31 @@ public class CategoriesGUI extends javax.swing.JFrame {
 
     private void buttonDeleteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteCatActionPerformed
         // TODO add your handling code here:
-        new DeleteObject("Category", listCategories.getSelectedValue()).setVisible(true);
+        if (listCategories.getSelectedIndex() == -1) {
+            new ErrorPopup("Please <b>select a category</b> to delete.").setVisible(true);
+        } else {
+            InventoryComponent selectedCategory = (InventoryComponent) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+            InventoryComponent selectedSubcat = null;
+            new DeleteObject("Category", listCategories.getSelectedValue(), productManagement, selectedSubcat, selectedCategory).setVisible(true);
+        }
     }//GEN-LAST:event_buttonDeleteCatActionPerformed
 
     private void buttonDeleteSubcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteSubcategoryActionPerformed
-        // TODO add your handling code here:
-        new DeleteObject("Subcategory", listSubcats.getSelectedValue()).setVisible(true);
+        // TODO add your handling code here:    
+        if (listSubcats.getSelectedIndex() == -1) {
+            new ErrorPopup("Please <b>select a subcategory</b> to delete.").setVisible(true);
+        } else {
+            InventoryComponent selectedCategory = (InventoryComponent) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+            InventoryComponent selectedSubcat = selectedCategory.getComponents().get(listSubcats.getSelectedIndex());
+            new DeleteObject("Subcategory", listSubcats.getSelectedValue(), productManagement, selectedSubcat, selectedCategory).setVisible(true);
+        }
+       
     }//GEN-LAST:event_buttonDeleteSubcategoryActionPerformed
 
     private void buttonAddSubcategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddSubcategoryActionPerformed
         // TODO add your handling code here:
         if(listCategories.getSelectedIndex() == -1){
-            new ErrorPopup("Make sure you <b>select a category</b> before adding a subcategory.").setVisible(true);
+            new ErrorPopup("Pleaase <b>select a category</b> before adding a subcategory.").setVisible(true);
         }
         else{
             new AddCategories("Subcategory",productManagement,listCategories.getSelectedIndex()).setVisible(true);
@@ -300,7 +318,7 @@ public class CategoriesGUI extends javax.swing.JFrame {
             if (listSubcats.getSelectedValue() != null) {
                 InventoryComponent selectedCategory = (InventoryComponent) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
                 InventoryComponent selectedSubcat = selectedCategory.getComponents().get(listSubcats.getSelectedIndex());
-                new ProductGUI(selectedSubcat, productManagement).setVisible(true);
+                new ProductGUI(selectedSubcat, productManagement, selectedCategory).setVisible(true);
                 super.dispose();
             }
             
@@ -309,33 +327,44 @@ public class CategoriesGUI extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-                // TODO add your handling code here: 
-        if(listCategories.getSelectedIndex() != -1){
+        if(listCategories.getSelectedIndex() != -1 && listSubcats.getSelectedIndex() != -1){
             ArrayList<String> strList = new ArrayList<>();
             int j = 0;
-            
-            InventoryComponent selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+            InventoryComponent selectedCategory;
+            if (deletePushed) {
+                if (listCategories.getSelectedIndex() == 0) {
+                    selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
+                }
+                else
+                    selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex() - 1];
+            }
+            else
+                selectedCategory = (Category) productManagement.getCategories().values().toArray()[listCategories.getSelectedIndex()];
             
             for (InventoryComponent entry1 : selectedCategory.getComponents()){
                 strList.add(j, entry1.getName());
                 j++;
             }
             String[] str1 = strList.toArray(new String[0]);
-            listSubcats.setListData(str1);
-            
-
-            ArrayList<String> catList = new ArrayList<>();
-            j = 0;
-
-            for (InventoryComponent entry1 : productManagement.getCategories().values()){
-                catList.add(j, entry1.getName());
-                j++;
-            }
-            String[] str2 = catList.toArray(new String[0]);
-            listCategories.setListData(str2);
+            String[] empty = {};
+            if (listSubcats.getLastVisibleIndex() == 0) listSubcats.setListData(empty);
+            else listSubcats.setListData(str1);
+            deletePushed = false;
             
         }
-        listCategories.setSelectedIndex(lastCatIndex);
+        ArrayList<String> catList = new ArrayList<>();
+        int j = 0;
+
+        for (InventoryComponent entry1 : productManagement.getCategories().values()){
+            catList.add(j, entry1.getName());
+            j++;
+        }
+        String[] str2 = catList.toArray(new String[0]);
+        listCategories.setListData(str2);
+        if (!deletePushed) {
+            listCategories.setSelectedIndex(lastCatIndex);
+        }
+        deletePushed = false;
     }//GEN-LAST:event_formWindowGainedFocus
 
     /**

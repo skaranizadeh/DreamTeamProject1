@@ -1,4 +1,3 @@
-﻿Product ID,Product Name,Description,Purchase Price,Purchase Date
 001001001,Smart TV,4K Ultra HD,799.99,2023-10-01
 001001002,LED TV,Full HD,599.99,2023-09-15
 001001003,OLED TV,Curved Screen,1499.99,2023-09-20
@@ -27,3 +26,6 @@
 006002003,Becoming,by Michelle Obama,16.99,03/29/2023
 006003001,Brave New World,by Aldous Huxley,15.99,09/10/2023
 006003002,Dune,by Frank Herbert,12.45,07/07/2023
+006002004,This is a very long product name.,14,234.0,1234
+006002005,This is a suuuuuuuuuuper long product name, the longest!,234,234.0,1234
+006002005,sssssuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu,234,324.0,234

@@ -20,6 +20,8 @@ public class ProductGUI extends javax.swing.JFrame {
    private InventoryComponent subcat;
    private DefaultListModel<String> products = new DefaultListModel<>();
    private ProductManagement productManagement;
+   private int lastItemIndex = -1;
+   private InventoryComponent category;
     /**
      * Creates new form ProductGUI
      */
@@ -29,9 +31,10 @@ public class ProductGUI extends javax.swing.JFrame {
         
     }
     
-    public ProductGUI(InventoryComponent subCategory, ProductManagement mainClass) {
+    public ProductGUI(InventoryComponent subCategory, ProductManagement mainClass, InventoryComponent cat) {
         productManagement = mainClass;
         subcat = subCategory;
+        category = cat;
         int i = 0;
         for (InventoryComponent entry : subcat.getComponents()) {
             products.add(i,entry.getName());
@@ -399,7 +402,11 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
-        new DeleteObject("Product", listItems.getSelectedValue()).setVisible(true);
+        if (listItems.getSelectedIndex() == -1) {
+            new ErrorPopup("Please <b>select a product</b> to delete.").setVisible(true);
+        } else {
+            new DeleteObject("Product", listItems.getSelectedValue(), productManagement, subcat, category).setVisible(true);
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     private void buttonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBackActionPerformed
@@ -412,6 +419,8 @@ public class ProductGUI extends javax.swing.JFrame {
     private void listItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listItemsValueChanged
         // TODO add your handling code here:
         if(listItems.getSelectedIndex() != -1){
+            
+            lastItemIndex = listItems.getSelectedIndex();
             textFieldProductName.setFont(textFieldProductName.getFont().deriveFont(24f));
             textFieldProductName.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getName());
             labelId.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getId());
@@ -420,7 +429,12 @@ public class ProductGUI extends javax.swing.JFrame {
             textAreaDescription.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getDescription());
         
             if (textFieldProductName.getText().length() > 25) {
-                textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 40 - textFieldProductName.getText().length() / 2));
+                if (textFieldProductName.getText().length() > 55)
+                    textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 55 - textFieldProductName.getText().length() / 2));
+                else if (textFieldProductName.getText().length() > 35)
+                    textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 40 - textFieldProductName.getText().length() / 2));
+                else
+                    textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 30 - textFieldProductName.getText().length() / 2));
             }
         }
         
@@ -428,20 +442,22 @@ public class ProductGUI extends javax.swing.JFrame {
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         // TODO add your handling code here:
-        //if(listItems.getSelectedIndex() != -1){
-            ArrayList<String> strList = new ArrayList<>();
-            int j = 0;
-           
-            for (InventoryComponent entry1 :subcat.getComponents()){
-                strList.add(j, entry1.getName());
-                j++;
-            }
-            String[] str1 = strList.toArray(new String[0]);
-            listItems.setListData(str1);
-            
+        ArrayList<String> strList = new ArrayList<>();
+        int j = 0;
 
-            
-      //  }
+        for (InventoryComponent entry1 :subcat.getComponents()){
+            strList.add(j, entry1.getName());
+            j++;
+        }
+        String[] str1 = strList.toArray(new String[0]);
+        listItems.setListData(str1);
+        
+        textFieldProductName.setFont(textFieldProductName.getFont().deriveFont(24f));
+        textFieldProductName.setText("-");
+        labelId.setText("-");
+        labelPrice.setText("-");
+        labelDate.setText("-");
+        textAreaDescription.setText("");
     }//GEN-LAST:event_formWindowGainedFocus
 
     /**

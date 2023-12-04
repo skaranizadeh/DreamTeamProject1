@@ -4,7 +4,13 @@
  */
 package frontend;
 
+import backend.InventoryComponent;
+import backend.ProductManagement;
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -15,15 +21,21 @@ public class DeleteObject extends javax.swing.JFrame {
     
     private String catType = "Subcategory";
     private String catName = "Shoes";
+    private ProductManagement productManagement;
+    private InventoryComponent subcat;
+    private InventoryComponent category;
     /**
      * Creates new form DeleteCategory
      */
     public DeleteObject() {
         initComponents();
     }
-    public DeleteObject(String deleteType, String deleteName) {
+    public DeleteObject(String deleteType, String deleteName, ProductManagement mainClass, InventoryComponent subcategory, InventoryComponent cat) {
         catType = deleteType;
+        subcat = subcategory;
+        productManagement = mainClass;
         catName = deleteName;
+        category = cat;
         initComponents();
     }
 
@@ -192,6 +204,88 @@ public class DeleteObject extends javax.swing.JFrame {
 
     private void buttonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDeleteActionPerformed
         // TODO add your handling code here:
+        switch (catType) {
+            case "Category":
+
+                // Check if the category exists
+                for (InventoryComponent category : productManagement.getCategories().values()) {
+                    if (category.getName().equals(catName.trim())) {
+
+                        // Check for subcategories
+                        if (!category.getComponents().isEmpty()) {
+                            new ErrorPopup("The <b>selected category contains subcategories</b>. Please make sure the category is empty.").setVisible(true);
+                            super.dispose();
+                        } else {
+                            // Delete the category from the CSV file
+                            CategoriesGUI.setDeletePushed(true);
+                            String filePath = "categoryData.csv";
+                            productManagement.getCategories().remove(category.getId());
+
+                            String dataToRemove = category.getId() + "," + category.getName();
+                            try {
+                                productManagement.deleteDataFromFile(dataToRemove, filePath);
+                            } catch (IOException ex) {
+                                Logger.getLogger(DeleteObject.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            super.dispose();
+                        }
+                        break;
+                    }
+                }
+                
+                break;
+                
+            case "Subcategory":
+
+                // Check if the subcategory exists
+                for (InventoryComponent subcategory : category.getComponents()) {
+                    if (subcategory.getName().equalsIgnoreCase(catName)) {
+                        if (!subcategory.getComponents().isEmpty()) {
+                            new ErrorPopup("The <b>selected subcategory contains products</b>. Please make sure the subcategory is empty.").setVisible(true);
+                            super.dispose();
+                        } else {
+                            // Delete the subcategory from the CSV file
+                            CategoriesGUI.setDeletePushed(true);
+                            String filePath = "subcategoryData.csv";
+                            category.getComponents().remove(subcategory);
+                            
+                            String dataToRemove = subcategory.getId() + "," + subcategory.getName();
+                            try {
+                                productManagement.deleteDataFromFile(dataToRemove, filePath);
+                            } catch (IOException ex) {
+                                Logger.getLogger(DeleteObject.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            super.dispose();
+                        }
+                        break;
+                    }
+                }
+                break;
+                
+            case "Product":
+            	   
+                for (InventoryComponent product : subcat.getComponents()) {
+                    if (product.getName().equalsIgnoreCase(catName)) {
+                        // Delete the product from the CSV file
+                        String filePath = "productData.csv";
+                        subcat.getComponents().remove(product);
+                        String dataToRemove = String.format("%s,%s,%s,%s,%s", product.getId(), product.getName(),
+                            product.getDescription(), product.getPurchasePrice(), product.getPurchaseDate());
+                        try {
+                            productManagement.deleteDataFromFile(dataToRemove, filePath);
+                        } catch (IOException ex) {
+                            Logger.getLogger(DeleteObject.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        super.dispose();
+                        break;
+                    }
+                }
+                break;
+                
+            default:
+                System.out.println("No object type selected to delete. Exiting program...");
+                System.exit(0);
+        }
     }//GEN-LAST:event_buttonDeleteActionPerformed
 
     /**

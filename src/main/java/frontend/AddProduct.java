@@ -338,39 +338,33 @@ public class AddProduct extends javax.swing.JFrame {
         boolean added = false;
         boolean duplicate = false;
         if (firstRun[0] || formattedTextFieldProductName.getText().isBlank()) {
-            new ErrorPopup("Please make sure you enter a <b>Product Name</b> for the new Product.").setVisible(true);
+            new ErrorPopup("Please enter a <b>Product Name</b> for the new Product.").setVisible(true);
         } else if (firstRun[1] || formattedTextFieldPrice.getText().isBlank()) {
-            new ErrorPopup("Please make sure you enter a <b>Purchase Price</b> for the new Product.").setVisible(true);
+            new ErrorPopup("Please enter a <b>Purchase Price</b> for the new Product.").setVisible(true);
         } else if (firstRun[2] || formattedTextFieldDate.getText().isBlank()) {
-            new ErrorPopup("Please make sure you enter a <b>Purchase Date</b> for the new Product.").setVisible(true);
+            new ErrorPopup("Please enter a <b>Purchase Date</b> for the new Product.").setVisible(true);
         } else if (firstRun[3] || textAreaDescription.getText().isBlank()) {
-            new ErrorPopup("Please make sure you enter a <b>Description</b> for the new Product.").setVisible(true);
-        } else {
-            // TODO add product functionality goes here
-            
+            new ErrorPopup("Please enter a <b>Description</b> for the new Product.").setVisible(true);
+        } else {            
             for (InventoryComponent product : subcat.getComponents()) {
                 if (product.getName().equalsIgnoreCase(formattedTextFieldProductName.getText().trim())) {
-                    new ErrorPopup("Duplicate <b>Product Name</b> for the new Product. Please enter a new name").setVisible(true);
+                    new ErrorPopup("Duplicate <b>Product Name</b> for the new Product. Please enter a different name.").setVisible(true);
                     duplicate = true;
                     break;
                 }
             }
             try {
                Double.parseDouble(formattedTextFieldPrice.getText().trim());
-           }
-           catch (NumberFormatException e) {
-               new ErrorPopup("Invalid <b>price</b> for the new Product. Please enter a valid price.").setVisible(true);
-               duplicate = true;
-           }
-//if(product.getName().equalsIgnoreCase(formattedTextFieldPrice.getTex)){
-                
-            
+            }
+            catch (NumberFormatException e) {
+                new ErrorPopup("Invalid <b>price</b> for the new Product. Please enter a valid price.").setVisible(true);
+                duplicate = true;
+            }
             if(!duplicate){
                  Product newProduct = Product.addProduct(formattedTextFieldProductName.getText().trim(),
                         textAreaDescription.getText().trim(),
                         Double.parseDouble(formattedTextFieldPrice.getText().trim()),
-                        formattedTextFieldDate.getText().trim(),
-                        subcat,
+                        formattedTextFieldDate.getText().trim(), subcat,
                         productManagement.findMaxId(subcat.getComponents(), 6, 9));
                 String filePath = "productData.csv";
                 String newData = String.format("%s,%s,%s,%s,%s", newProduct.getId(), newProduct.getName(),
@@ -381,13 +375,11 @@ public class AddProduct extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               
-
             }
         // TODO add category and subcategory functionality goes here
         }
         if(added){
-        super.dispose();
+            super.dispose();
         }
         
     }//GEN-LAST:event_buttonAddItemActionPerformed

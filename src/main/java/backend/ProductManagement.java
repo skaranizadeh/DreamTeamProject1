@@ -31,7 +31,7 @@ public class ProductManagement {
     // Method to read data from the category CSV file
     private void readCategoryData(String csvFile, String csvSplitBy) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            br.readLine(); // skip the first line
+//            br.readLine(); // skip the first line
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -60,7 +60,7 @@ public class ProductManagement {
     // Method to read data from the subcategory CSV file
     private void readSubcategoryData(String csvFile, String csvSplitBy) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            br.readLine(); // skip the first line
+//            br.readLine(); // skip the first line
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -89,7 +89,7 @@ public class ProductManagement {
     // Method to read data from the product CSV file
     private void readProductData(String csvFile, String csvSplitBy) {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-            br.readLine(); // skip the first line
+//            br.readLine(); // skip the first line
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -953,13 +953,13 @@ public class ProductManagement {
             writer.write(newData);
             //add new line for next data entry
             writer.newLine();
-            System.out.println("data saved successfully!!!!!!!!!!!!");
+            //System.out.println("data saved successfully!!!!!!!!!!!!");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     		//deleting data from the file
-    private static void deleteDataFromFile(String dataToRemove, String filePath) throws IOException {
+    public void deleteDataFromFile(String dataToRemove, String filePath) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
              BufferedWriter writer = new BufferedWriter(new FileWriter("tempFile.csv", true))) {
 
@@ -985,10 +985,11 @@ public class ProductManagement {
         // Rename the temporary file to the original file
         File tempFile = new File("tempFile.csv");
         File originalFile = new File(filePath);
+        originalFile.delete();
         if (tempFile.renameTo(originalFile)) {
-            System.out.println("Data removed successfully!");
+//            System.out.println("Data removed successfully!");
         } else {
-            System.out.println("Failed to remove data.");
+//            System.out.println("Failed to remove data.");
         }
     }
   

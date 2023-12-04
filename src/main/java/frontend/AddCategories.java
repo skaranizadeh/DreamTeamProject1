@@ -208,12 +208,12 @@ public class AddCategories extends javax.swing.JFrame {
         boolean duplicate = false;
         boolean added = false;
         if (firstRun || formattedTextFieldCatName.getText().isBlank()) {
-            new ErrorPopup("Please make sure you enter a <b>" + catType + " Name</b> for the new " + catType + ".").setVisible(true);
+            new ErrorPopup("Please enter a <b>" + catType + " Name</b> for the new " + catType + ".").setVisible(true);
         } else {
             if(catType.equals("Category")){
                 for (InventoryComponent category : productManagement.getCategories().values()) {
                     if (category.getName().equalsIgnoreCase(formattedTextFieldCatName.getText().trim())) {
-                        new ErrorPopup("Duplicate <b>" + catType + " Name</b> for the new " + catType + ". Please Enter a new name").setVisible(true);
+                        new ErrorPopup("Duplicate <b>" + catType + " Name</b> for the new " + catType + ". Please Enter a different name.").setVisible(true);
                         duplicate = true;
                         break;
                     }
@@ -244,7 +244,8 @@ public class AddCategories extends javax.swing.JFrame {
                     }
                 }
                 if(!duplicate){
-                    Subcategory newSubcategory = Subcategory.addSubcategory(formattedTextFieldCatName.getText(), selectedCategory, productManagement.findMaxId(selectedCategory.getComponents(), 3, 6));
+                    Subcategory newSubcategory = Subcategory.addSubcategory(formattedTextFieldCatName.getText(),
+                           selectedCategory, productManagement.findMaxId(selectedCategory.getComponents(), 3, 6));
                     String filePath = "subcategoryData.csv";
                     String newData = String.format("%s,%s", newSubcategory.getId(), newSubcategory.getName());
                     productManagement.addSubCat(newSubcategory);
