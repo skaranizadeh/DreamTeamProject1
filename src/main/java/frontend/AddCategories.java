@@ -219,7 +219,7 @@ public class AddCategories extends javax.swing.JFrame {
                     }
                 }
                 if(!duplicate){
-                    InventoryComponent newCategory = new Category(formattedTextFieldCatName.getText());
+                    InventoryComponent newCategory = new Category(formattedTextFieldCatName.getText().trim());
                     String filePath = "categoryData.csv";
                     String newData = String.format("%s,%s", newCategory.getId(), newCategory.getName());
                     //InventoryComponent newCategory = new Category(input);
@@ -244,7 +244,7 @@ public class AddCategories extends javax.swing.JFrame {
                     }
                 }
                 if(!duplicate){
-                    Subcategory newSubcategory = Subcategory.addSubcategory(formattedTextFieldCatName.getText(),
+                    Subcategory newSubcategory = Subcategory.addSubcategory(formattedTextFieldCatName.getText().trim(),
                            selectedCategory, productManagement.findMaxId(selectedCategory.getComponents(), 3, 6));
                     String filePath = "subcategoryData.csv";
                     String newData = String.format("%s,%s", newSubcategory.getId(), newSubcategory.getName());

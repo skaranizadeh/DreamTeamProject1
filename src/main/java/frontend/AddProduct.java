@@ -4,7 +4,6 @@
  */
 package frontend;
 
-import backend.Category;
 import backend.InventoryComponent;
 import backend.Product;
 import backend.ProductManagement;

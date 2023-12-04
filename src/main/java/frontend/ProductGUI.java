@@ -428,13 +428,14 @@ public class ProductGUI extends javax.swing.JFrame {
             labelDate.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getPurchaseDate());
             textAreaDescription.setText(subcat.getComponents().get(listItems.getSelectedIndex()).getDescription());
         
-            if (textFieldProductName.getText().length() > 25) {
-                if (textFieldProductName.getText().length() > 55)
-                    textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 55 - textFieldProductName.getText().length() / 2));
-                else if (textFieldProductName.getText().length() > 35)
-                    textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 40 - textFieldProductName.getText().length() / 2));
-                else
-                    textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 30 - textFieldProductName.getText().length() / 2));
+            if (textFieldProductName.getText().length() > 55) {
+                textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 10));
+            } else if (textFieldProductName.getText().length() > 45) {
+                textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 12));
+            } else if (textFieldProductName.getText().length() > 35) {
+                textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 14));
+            } else if (textFieldProductName.getText().length() > 25) {
+                textFieldProductName.setFont(new Font(textFieldProductName.getFont().getFamily(), textFieldProductName.getFont().getStyle(), 17));
             }
         }
         
